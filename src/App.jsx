@@ -1,35 +1,68 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { Fragment, useEffect } from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import { authenticate } from "./store/actions/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { Home } from "./common/pages/Home";
+import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0)
+export const App = () => {
+  const auth = useSelector((state) => state.auth);
+  const isLoggedIn = auth.isLoggedIn;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const tryLogin = async () => {
+      const strAuthData = localStorage.getItem("auth");
+      const parsedAuthData = JSON.parse(strAuthData);
+
+      if (!parsedAuthData) {
+        localStorage.clear();
+        return <Navigate to="/" />;
+      }
+
+      const { user, token, expiresIn, expirationTime, isLoggedIn } =
+        parsedAuthData;
+      if (!user || !token) {
+        localStorage.clear();
+        return <Navigate to="/" />;
+      }
+
+      const expiryTime = new Date(expirationTime);
+      const currentTime = new Date(Date.now());
+      const isExpired = expiryTime < currentTime;
+
+      if (isExpired) {
+        localStorage.clear();
+        return <Navigate to="/" />;
+      }
+
+      await dispatch(authenticate(parsedAuthData));
+    };
+    tryLogin();
+  }, [dispatch]);
+
+  const nonAuthRouter = createBrowserRouter([
+    {
+      path: "/",
+      element: <Home />,
+    },
+  ]);
+
+  // const authRouter = createBrowserRouter([
+  //   {
+  //     path: "/logged-path",
+  //     element: <loogedInComponent />,
+  //   },
+  // ]);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <Fragment>
+      <div className="bg-green-500">
+        {!isLoggedIn && <RouterProvider router={nonAuthRouter} />}
+        {/* {isLoggedIn && <RouterProvider router={authRouter} />} */}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
-
-export default App
+    </Fragment>
+  );
+};
