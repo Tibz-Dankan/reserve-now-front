@@ -4,6 +4,7 @@ import { Navigate } from "react-router-dom";
 import { authenticate } from "./store/actions/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { Home } from "./common/pages/Home";
+import { SignIn } from "./modules/auth/pages/Signin";
 import "./App.css";
 
 export const App = () => {
@@ -48,6 +49,10 @@ export const App = () => {
       path: "/",
       element: <Home />,
     },
+    {
+      path: "/signin",
+      element: <SignIn />,
+    },
   ]);
 
   // const authRouter = createBrowserRouter([
@@ -59,7 +64,7 @@ export const App = () => {
 
   return (
     <Fragment>
-      <div className="bg-green-500">
+      <div>
         {!isLoggedIn && <RouterProvider router={nonAuthRouter} />}
         {/* {isLoggedIn && <RouterProvider router={authRouter} />} */}
       </div>
