@@ -76,7 +76,7 @@ export const App = () => {
 
   return (
     <Fragment>
-      <div>
+      <div className="bg-green-500">
         {!isLoggedIn && <RouterProvider router={nonAuthRouter} />}
         {/* {isLoggedIn && <RouterProvider router={authRouter} />} */}
       </div>
