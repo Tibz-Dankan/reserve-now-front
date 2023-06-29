@@ -16,6 +16,7 @@ export const SignIn = () => {
       //  dispatch success notification
     },
     onError: (error) => {
+      console.log(error.message);
       //  dispatch error message
       // throw an error message
     },

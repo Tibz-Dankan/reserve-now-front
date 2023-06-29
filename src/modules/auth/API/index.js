@@ -2,7 +2,7 @@ import { url } from "../../../store";
 
 // signin
 export const signIn = async ({ email, password }) => {
-  const response = await fetch(`${url}/api/users/login`, {
+  const response = await fetch(`${url}/api/v1/users/signin`, {
     method: "POST",
     body: JSON.stringify({
       email,
@@ -12,8 +12,8 @@ export const signIn = async ({ email, password }) => {
       "Content-type": "application/json",
     },
   });
+
   if (!response.ok) {
-    console.log(response);
     const error = await response.json();
     throw new Error(error.message);
   }

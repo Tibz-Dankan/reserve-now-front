@@ -29,7 +29,7 @@ export const App = () => {
         localStorage.clear();
         return <Navigate to="/" />;
       }
-
+      // TODO: to convert expirationTime into browser's time zone
       const expiryTime = new Date(expirationTime);
       const currentTime = new Date(Date.now());
       const isExpired = expiryTime < currentTime;
@@ -50,8 +50,20 @@ export const App = () => {
       element: <Home />,
     },
     {
+      path: "/home",
+      element: <Home />,
+    },
+    {
       path: "/signin",
       element: <SignIn />,
+    },
+    {
+      path: "/login",
+      element: <Navigate to="/signin" />,
+    },
+    {
+      path: "*",
+      element: <Navigate to="/" />,
     },
   ]);
 
