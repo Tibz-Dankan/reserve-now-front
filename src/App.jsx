@@ -5,6 +5,7 @@ import { authenticate } from "./store/actions/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { Home } from "./common/pages/Home";
 import { SignIn } from "./modules/auth/pages/Signin";
+import { Booking } from "./modules/booking/Pages/Booking";
 import "./App.css";
 
 export const App = () => {
@@ -67,18 +68,26 @@ export const App = () => {
     },
   ]);
 
-  // const authRouter = createBrowserRouter([
-  //   {
-  //     path: "/logged-path",
-  //     element: <loogedInComponent />,
-  //   },
-  // ]);
+  const authRouter = createBrowserRouter([
+    {
+      path: "/",
+      element: <Booking />,
+    },
+    {
+      path: "/booking",
+      element: <Booking />,
+    },
+    {
+      path: "*",
+      element: <Booking />,
+    },
+  ]);
 
   return (
     <Fragment>
       <div className="bg-green-500">
         {!isLoggedIn && <RouterProvider router={nonAuthRouter} />}
-        {/* {isLoggedIn && <RouterProvider router={authRouter} />} */}
+        {isLoggedIn && <RouterProvider router={authRouter} />}
       </div>
     </Fragment>
   );

@@ -12,12 +12,14 @@ export const SignIn = () => {
   const { isLoading, data, mutate } = useMutation({
     mutationFn: signIn,
     onSuccess: (auth) => {
+      console.log(auth);
       dispatch(authenticate(auth));
       //  dispatch success notification
     },
     onError: (error) => {
+      console.log("error.message");
       console.log(error.message);
-      //  dispatch error message
+      //  dispatch error notification to show error message
       // throw an error message
     },
   });
@@ -31,6 +33,11 @@ export const SignIn = () => {
     const password = passwordRef.current.value;
 
     if (!email || !password) return;
+    console.log("email");
+    console.log(email);
+    console.log("password");
+    console.log(password);
+
     mutate({ email, password });
   };
 
