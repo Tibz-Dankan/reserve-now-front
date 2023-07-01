@@ -3,6 +3,10 @@ import { useMutation } from "@tanstack/react-query";
 import { useDispatch } from "react-redux";
 import { signIn } from "../API";
 import { authenticate } from "../../../store/actions/auth";
+import {
+  showCardNotification,
+  hideCardNotification,
+} from "../../../store/actions/notification";
 
 export const SignIn = () => {
   const emailRef = useRef(null);
@@ -12,20 +16,21 @@ export const SignIn = () => {
   const { isLoading, data, mutate } = useMutation({
     mutationFn: signIn,
     onSuccess: (auth) => {
-      console.log(auth);
       dispatch(authenticate(auth));
-      //  dispatch success notification
+      dispatch(
+        showCardNotification({ type: "success", message: auth.message })
+      );
+      setTimeout(() => {
+        dispatch(hideCardNotification());
+      }, 5000);
     },
     onError: (error) => {
-      console.log("error.message");
-      console.log(error.message);
-      //  dispatch error notification to show error message
-      // throw an error message
+      dispatch(showCardNotification({ type: "error", message: error.message }));
+      setTimeout(() => {
+        dispatch(hideCardNotification());
+      }, 5000);
     },
   });
-
-  console.log("data auth");
-  console.log(data);
 
   const signInHandler = (event) => {
     event.preventDefault();
