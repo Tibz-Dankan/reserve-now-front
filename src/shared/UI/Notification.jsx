@@ -26,7 +26,7 @@ export const Notification = (props) => {
 
   return (
     <Card
-      className={`${bgColor} text-lg z-50 fixed top-5  right-5 flex items-center rounded w-72 animate-slideInDown`}
+      className={`${bgColor} text-lg z-50 fixed top-5  right-5 flex items-center rounded w-72 animate-slideDown`}
     >
       <svg
         className="w-3 h-3 fill-white absolute right-2 top-2"
