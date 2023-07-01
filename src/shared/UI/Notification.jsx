@@ -1,58 +1,60 @@
 import React from "react";
-import Card from "../Card/Card";
+import { Card } from "./Card";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { IconContext } from "react-icons";
 import { MdCancel, MdInfo, MdWarning } from "react-icons/md";
 import { FaWindowClose } from "react-icons/fa";
-import styles from "./Notification.module.scss";
 
-const Notification = (props) => {
+export const Notification = (props) => {
   const type = props.type;
   let bgColor;
 
   const icon = () => {
     if (type === "success") {
-      bgColor = "bg-success";
+      bgColor = "bg-green-500";
       return <BsCheckCircleFill />;
     } else if (type === "error") {
-      bgColor = "bg-error";
+      bgColor = "bg-red-500";
       return <MdCancel />;
     } else if (type === "info") {
-      bgColor = "bg-info";
+      bgColor = "bg-blue-500";
       return <MdInfo />;
     } else if (type === "warning") {
-      bgColor = "bg-warning";
+      bgColor = "bg-yellow-400";
       return <MdWarning />;
     } else {
-      bgColor = "bg-info";
+      bgColor = "bg-blue-500";
       return <MdInfo />;
     }
   };
   icon();
 
   return (
-    <Card styles={`${styles["card"]} ${styles[bgColor]}`}>
-      <span className={styles["close"]} onClick={props.onClose}>
+    <Card
+      className={`${bgColor} text-lg z-50 fixed top-5 right-5 flex items-center rounded w-72`}
+    >
+      <span
+        className="w-3 h-3 fill-white absolute right-4 top-1"
+        onClick={props.onClose}
+      >
         <IconContext.Provider
-          value={{ size: "2rem", color: "hsl(0, 0%, 100%)" }}
+          value={{ size: "20px", color: "hsl(0, 0%, 100%)" }}
         >
           <FaWindowClose />
         </IconContext.Provider>
       </span>
-      <div className={styles["icon__container"]}>
-        <span className={styles["icon"]}>
+      <div className="pt-3">
+        <span className="grid place-items-center ">
           <IconContext.Provider
-            value={{ size: "2rem", color: "hsl(0, 0%, 100%)" }}
+            value={{ size: "20px", color: "hsl(0, 0%, 100%)" }}
           >
             {icon()}
           </IconContext.Provider>
         </span>
       </div>
-      <div className={styles["content__container"]}>
-        <span style={{ fontSize: "1.4rem" }}> {props.message}</span>
+      <div className="flex items-center p-1 mt-1 ml-2 max-w-[230] text-white">
+        <span className="text-sm"> {props.message}</span>
       </div>
     </Card>
   );
 };
-
-export default Notification;
