@@ -5,6 +5,7 @@ import { authenticate } from "./store/actions/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { Home } from "./common/pages/Home";
 import { SignIn } from "./modules/auth/pages/Signin";
+import { SignUp } from "./modules/auth/pages/SignUp";
 import { Booking } from "./modules/booking/Pages/Booking";
 import "./App.css";
 
@@ -59,8 +60,16 @@ export const App = () => {
       element: <SignIn />,
     },
     {
+      path: "/signup",
+      element: <SignUp />,
+    },
+    {
       path: "/login",
       element: <Navigate to="/signin" />,
+    },
+    {
+      path: "/register",
+      element: <Navigate to="/signup" />,
     },
     {
       path: "*",

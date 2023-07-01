@@ -21,3 +21,23 @@ export const signIn = async ({ email, password }) => {
 };
 
 // signup
+export const signUp = async ({ name, email, password, country }) => {
+  const response = await fetch(`${url}/api/v1/users/signup`, {
+    method: "POST",
+    body: JSON.stringify({
+      name,
+      email,
+      password,
+      country,
+    }),
+    headers: {
+      "Content-type": "application/json",
+    },
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message);
+  }
+  return await response.json();
+};
