@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { authSlice } from "./reducers/auth";
+import { notificationSlice } from "./reducers/notification";
 
 export const store = configureStore({
   reducer: {
     auth: authSlice.reducer,
+    notification: notificationSlice.reducer,
   },
 });
 
@@ -16,3 +18,4 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
 
 export { url };
 export const authActions = authSlice.actions;
+export const notificationActions = notificationSlice.actions;

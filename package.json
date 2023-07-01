@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mui/material": "^5.13.6",
     "@netlify/classnames-template-literals": "^1.0.3",
     "@reduxjs/toolkit": "^1.9.5",
     "@tanstack/react-query": "^4.29.17",
