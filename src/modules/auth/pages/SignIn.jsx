@@ -8,6 +8,7 @@ import {
   hideCardNotification,
 } from "../../../store/actions/notification";
 import { Loader } from "../../../shared/UI/Loader";
+import { Button } from "../../../shared/UI/Button";
 
 export const SignIn = () => {
   const emailRef = useRef(null);
@@ -64,7 +65,7 @@ export const SignIn = () => {
               placeholder="Enter password"
               required
             />
-            {!isLoading && <button type="submit">Sign Up</button>}
+            {!isLoading && <Button type="submit">Signin</Button>}
             {isLoading && <Loader />}
           </form>
           <div>some cool image on the side</div>
