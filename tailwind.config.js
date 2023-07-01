@@ -27,6 +27,15 @@ export default {
         "gray-dark-3": "#1f2937",
         "gray-dark-4": "#111827",
       },
+      animation: {
+        slideInDown: "slideInDown 0.5s ease-out forwards",
+      },
+      keyframes: {
+        slideInDown: {
+          "0%": { opacity: "0", transform: "translateY(-300px)" },
+          "100%": { opacity: "1", transform: "translateY(0px)" },
+        },
+      },
     },
   },
   plugins: [],
