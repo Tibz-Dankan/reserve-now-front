@@ -7,6 +7,7 @@ import {
   showCardNotification,
   hideCardNotification,
 } from "../../../store/actions/notification";
+import { Loader } from "../../../shared/UI/Loader";
 
 export const SignIn = () => {
   const emailRef = useRef(null);
@@ -64,7 +65,7 @@ export const SignIn = () => {
               required
             />
             {!isLoading && <button type="submit">Sign Up</button>}
-            {isLoading && <span>signing in...</span>}
+            {isLoading && <Loader />}
           </form>
           <div>some cool image on the side</div>
         </div>
