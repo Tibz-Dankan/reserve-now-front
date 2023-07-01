@@ -29,11 +29,16 @@ export default {
       },
       animation: {
         slideDown: "slideDown 0.5s ease-out forwards",
+        moveInRight: "moveInRight 0.35s ease-out",
       },
       keyframes: {
         slideDown: {
           "0%": { opacity: "0", transform: "translateY(-300px)" },
           "100%": { opacity: "1", transform: "translateY(0px)" },
+        },
+        moveInRight: {
+          "0%": { opacity: "0", transform: "translateX(300px)" },
+          "100%": { opacity: "1", transform: "translateX(0px)" },
         },
       },
     },
