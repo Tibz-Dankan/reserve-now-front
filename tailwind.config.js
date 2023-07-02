@@ -18,6 +18,7 @@ export default {
         "primary-light": "#b197fc",
         secondary: "#4c6ef5",
         "secondary-light": "#91a7ff",
+        "secondary-dark": "#364fc7",
         "gray-light-1": "#f3f4f6",
         "gray-light-2": "#e5e7eb",
         "gray-light-3": "#d1d5db",
@@ -26,6 +27,7 @@ export default {
         "gray-dark-2": "#374151",
         "gray-dark-3": "#1f2937",
         "gray-dark-4": "#111827",
+        "gray-opacity": "rgba(0, 0, 0, 0.15)",
       },
       animation: {
         slideDown: "slideDown 0.5s ease-out forwards",

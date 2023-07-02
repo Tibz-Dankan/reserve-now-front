@@ -1,42 +1,39 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* Colors used where from open color(https://yeun.github.io/open-color) and converted into hsl from https://convertacolor.com */
+
+/*
+  FONT SIZE SYSTEM(px)
+  10 /  12 / 14 / 16 / 18 / 20 / 24 / 24 / 36 / 44 / 52 / 62 / 74 / 86 / 98 
+
+  SPACING SYSTEM(px)
+  2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128 
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
+
+/* @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap"); */
+
+* {
+  margin: 0;
+  padding: 0;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+body {
+  /* font-weight: 400; */
+  /* line-height: 1.6; */
+  font-family: "Inter", sans-serif;
+  /* font-family: "Rubik", sans-serif; */
+  /* font-size: 62.5%; */
+  /* background-size: cover;
+  background-repeat: no-repeat;
+  background-color: var(--color-grey-dark-4); */
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+html {
+  /* font-size: 62.5%; */
+  box-sizing: border-box;
 }
