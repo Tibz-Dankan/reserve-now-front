@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useRef, useState } from "react";
 import sprite from "../../assets/icons/sprite.svg";
 import { openSidebar } from "../../store/actions/sidebar";
 
@@ -13,6 +13,21 @@ export const Header = (props) => {
 
   const openSidebarHandler = () => dispatch(openSidebar());
   const logoutHandler = async () => await dispatch(logOut());
+
+  // const [isOpenDropDown, setIsOpenDropDown] = useState(false);
+  // const dropDownContentRef = useRef();
+  // const dropDownOpenRef = useRef();
+
+  // window.addEventListener("click", (event) => {
+  //   console.log("clicked");
+  //   console.log(isOpenDropDown);
+  //   if (
+  //     event.target !== dropDownContentRef.current &&
+  //     event.target !== dropDownOpenRef.current
+  //   ) {
+  //     setIsOpenDropDown(false);
+  //   }
+  // });
 
   return (
     <Fragment>
@@ -46,10 +61,23 @@ export const Header = (props) => {
             </svg>
           </div>
           <div className="flex items-center">
-            <svg className="w-[30px] h-[30px] fill-gray-dark-3">
+            <svg
+              className="w-[30px] h-[30px] fill-gray-dark-3"
+              // onClick={() => setIsOpenDropDown(true)}
+            >
               <use href={`${sprite}#icon-person-circle`}></use>
             </svg>
             <span className="ml-2 mr-8">{user.name}</span>
+            {/* {isOpenDropDown && (
+              <div className="absolute top-11 right-10 w-auto h-auto bg-green-400">
+                <span>Drop down content here</span>
+                <span>Drop down content here</span>
+                <span>Drop down content here</span>
+                <span>Drop down content here</span>
+                <span>Drop down content here</span>
+                <span>Drop down content here</span>
+              </div>
+            )} */}
           </div>
           <div>
             <svg
