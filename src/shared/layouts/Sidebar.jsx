@@ -18,7 +18,7 @@ export const Sidebar = () => {
   useEffect(() => {
     const setDefaultSidebarVisibility = () => {
       const layout = layoutElements();
-      const mediumScreenWidth = "768px";
+      const mediumScreenWidth = "768";
       const windowWidth = window.innerWidth;
 
       if (windowWidth > mediumScreenWidth) {
@@ -28,7 +28,6 @@ export const Sidebar = () => {
         layout.sidebar.style.left = "-256px";
         layout.headerMainFooter.style.marginLeft = "0px";
       }
-      console.log("set sidebar default view");
     };
     setDefaultSidebarVisibility();
   }, []);
