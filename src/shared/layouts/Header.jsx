@@ -33,7 +33,9 @@ export const Header = (props) => {
             </div>
           )}
           <div>
-            <span>{props.title}</span>
+            <span className="bg-primary-light py-1 px-2 rounded border-b-4 border-primary">
+              {props.title}
+            </span>
           </div>
         </div>
 
