@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import sprite from "../../assets/icons/sprite.svg";
+import { openSidebar } from "../../store/actions/sidebar";
 
 import { useSelector, useDispatch } from "react-redux";
 import { logOut } from "../../store/actions/auth";
@@ -9,9 +10,8 @@ export const Header = (props) => {
 
   const dispatch = useDispatch();
 
-  const logoutHandler = async () => {
-    await dispatch(logOut());
-  };
+  const openSidebarHandler = () => dispatch(openSidebar());
+  const logoutHandler = async () => await dispatch(logOut());
 
   return (
     <Fragment>
@@ -21,7 +21,10 @@ export const Header = (props) => {
       >
         <div className="flex items-center">
           <div className="flex items-center mr-4">
-            <svg className="w-[30px] h-[30px] fill-gray-dark-3 mr-4">
+            <svg
+              className="w-[30px] h-[30px] fill-gray-dark-3 mr-4"
+              onClick={() => openSidebarHandler()}
+            >
               <use href={`${sprite}#icon-menu`}></use>
             </svg>
             <span>ReserveNow</span>

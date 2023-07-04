@@ -8,7 +8,7 @@ export const MasterLayout = (props) => {
     <Fragment>
       <div className="bg flex items-start min-h-[100vh] relative">
         <Sidebar />
-        <div id="header-main-footer" className="flex-1 ml-[256px]">
+        <div id="header-main-footer" className="flex-1">
           <Header title={props.title} />
           <main className="min-h-[80vh] pt-4 flex justify-center">
             {props.children}

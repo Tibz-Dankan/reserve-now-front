@@ -1,20 +1,69 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import sprite from "../../assets/icons/sprite.svg";
 import { Link } from "react-router-dom";
+import {
+  closeSidebar,
+  autoCloseSidebar,
+  autoOpenSidebar,
+  layoutElements,
+} from "../../store/actions/sidebar";
+
+import { useDispatch, useSelector } from "react-redux";
 
 export const Sidebar = () => {
+  const isOpenSidebar = useSelector((state) => state.sidebar.isOpen);
+  const dispatch = useDispatch();
+  const closeSidebarHandler = () => dispatch(closeSidebar());
+
+  useEffect(() => {
+    const setDefaultSidebarVisibility = () => {
+      const layout = layoutElements();
+      const mediumScreenWidth = "768px";
+      const windowWidth = window.innerWidth;
+
+      if (windowWidth > mediumScreenWidth) {
+        layout.sidebar.style.left = "0px";
+        layout.headerMainFooter.style.marginLeft = "256px";
+      } else {
+        layout.sidebar.style.left = "-256px";
+        layout.headerMainFooter.style.marginLeft = "0px";
+      }
+      console.log("set sidebar default view");
+    };
+    setDefaultSidebarVisibility();
+  }, []);
+
+  useEffect(() => {
+    const widthResizeHandler = () => {
+      const isBelow768px = window.matchMedia("(max-width: 768px)").matches;
+      const isAbove768px = window.matchMedia("(min-width: 768px)").matches;
+      if (isOpenSidebar && isBelow768px) {
+        dispatch(autoCloseSidebar());
+      }
+      if (!isOpenSidebar && isAbove768px) {
+        dispatch(autoOpenSidebar());
+      }
+    };
+    window.addEventListener("resize", widthResizeHandler);
+
+    return () => window.removeEventListener("resize", widthResizeHandler);
+  }, [window.innerWidth, isOpenSidebar, dispatch]);
+
   return (
     <Fragment>
       <aside
         id="sidebar"
-        className="bg-primary-dark w-[256px] h-[100vh] fixed top-0 left-0"
+        className="bg-primary-dark w-[256px] h-[100vh] fixed top-0"
       >
         <div
           className="px-4 py-[21.5px] w-full text-[20px] text-gray-light-2
             shadow-md mb-2 flex items-center justify-start relative"
         >
           <span className="ml-8 ">ReserveNow</span>
-          <svg className="w-[20px] h-[20px] fill-gray-light-2 absolute right-5 top-[35%]">
+          <svg
+            className="w-[20px] h-[20px] fill-gray-light-2 absolute right-5 top-[35%]"
+            onClick={() => closeSidebarHandler()}
+          >
             <use href={`${sprite}#icon-chevron-left`}></use>
           </svg>
         </div>
