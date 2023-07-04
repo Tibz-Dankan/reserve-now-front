@@ -17,14 +17,14 @@ export const Header = (props) => {
   return (
     <Fragment>
       <header
-        className="flex items-center justify-between shadow-md px-8 py-[21px] 
+        className="flex items-center justify-between shadow-sm border-b-[1px] border-gray-opacity px-8 py-[16px] 
         sticky top-0 z-10 bg-gray-light-1"
       >
         <div className="flex items-center">
           {!isOpenSidebar && (
-            <div className="flex items-center mr-4">
+            <div className="flex items-center mr-4 w-full text-[18px] font-bold text-gray-dark-2">
               <svg
-                className="w-[30px] h-[30px] fill-gray-dark-3 mr-4"
+                className="w-[24px] h-[24px] fill-gray-dark-2 mr-4"
                 onClick={() => openSidebarHandler()}
               >
                 <use href={`${sprite}#icon-menu`}></use>
@@ -33,7 +33,7 @@ export const Header = (props) => {
             </div>
           )}
           <div>
-            <span className="bg-primary-light py-1 px-2 rounded border-b-4 border-primary">
+            <span className="bg-primary-light text-gray-dark-3 py-1 px-2 rounded-md border-b-4 border-primary">
               {props.title}
             </span>
           </div>
@@ -41,7 +41,7 @@ export const Header = (props) => {
 
         <div className="flex items-center">
           <div className="mr-8">
-            <svg className="w-[30px] h-[30px] fill-gray-dark-3">
+            <svg className="w-[24px] h-[24px] fill-gray-dark-3">
               <use href={`${sprite}#icon-notification`}></use>
             </svg>
           </div>
@@ -53,10 +53,10 @@ export const Header = (props) => {
           </div>
           <div>
             <svg
-              className="w-[30px] h-[30px] fill-gray-dark-3"
+              className="w-[24px] h-[24px] fill-gray-dark-3"
               onClick={() => logoutHandler()}
             >
-              <use href={`${sprite}#icon-sign-out-rectangle`}></use>
+              <use href={`${sprite}#icon-sign-out-circle`}></use>
             </svg>
           </div>
         </div>

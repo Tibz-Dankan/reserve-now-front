@@ -57,12 +57,12 @@ export const Sidebar = () => {
         }`}
       >
         <div
-          className="px-4 py-[21.5px] w-full text-[20px] text-gray-light-2
-            shadow-md mb-2 flex items-center justify-start relative"
+          className="px-4 pt-[18px] pb-[20px] w-full text-[18px] font-bold text-gray-light-2
+           border-b-[1px] border-gray-opacity mb-2 flex items-center justify-center relative"
         >
-          <span className="ml-8 ">ReserveNow</span>
+          <span className="mr-6">ReserveNow</span>
           <svg
-            className="w-[20px] h-[20px] fill-gray-light-2 absolute right-5 top-[35%]"
+            className="w-[24px] h-[24px] fill-gray-light-2 absolute right-5 top-[30%]"
             onClick={() => closeSidebarHandler()}
           >
             <use href={`${sprite}#icon-chevron-left`}></use>
@@ -73,7 +73,7 @@ export const Sidebar = () => {
           <ul className="border-b-[1px] border-gray-opacity pb-4 mb-4">
             <li>
               <Link to="/booking" className="px-4 py-2 flex items-center gap-8">
-                <svg className="w-[30px] h-[30px] fill-gray-light-2">
+                <svg className="w-[24px] h-[24px] fill-gray-light-2">
                   <use href={`${sprite}#icon-booking`}></use>
                 </svg>
                 <span>Booking</span>
@@ -81,7 +81,7 @@ export const Sidebar = () => {
             </li>
             <li>
               <Link to="/chat" className="px-4 py-2 flex items-center gap-8">
-                <svg className="w-[30px] h-[30px] fill-gray-light-2">
+                <svg className="w-[24px] h-[24px] fill-gray-light-2">
                   <use href={`${sprite}#icon-chat`}></use>
                 </svg>
                 <span>Chat</span>
@@ -89,7 +89,7 @@ export const Sidebar = () => {
             </li>
             <li>
               <Link to="/rooms" className="px-4 py-2 flex items-center gap-8">
-                <svg className="w-[30px] h-[30px] fill-gray-light-2">
+                <svg className="w-[24px] h-[24px] fill-gray-light-2">
                   <use href={`${sprite}#icon-booking`}></use>
                 </svg>
                 <span>Rooms</span>
@@ -97,7 +97,7 @@ export const Sidebar = () => {
             </li>
             <li>
               <Link to="/billing" className="px-4 py-2 flex items-center gap-8">
-                <svg className="w-[30px] h-[30px] fill-gray-light-2">
+                <svg className="w-[24px] h-[24px] fill-gray-light-2">
                   <use href={`${sprite}#icon-billing`}></use>
                 </svg>
                 <span>Billing</span>
@@ -111,7 +111,7 @@ export const Sidebar = () => {
                 to="/notification"
                 className="px-4 py-2 flex items-center gap-8"
               >
-                <svg className="w-[30px] h-[30px] fill-gray-light-2">
+                <svg className="w-[24px] h-[24px] fill-gray-light-2">
                   <use href={`${sprite}#icon-notification`}></use>
                 </svg>
                 <span>Notification</span>
@@ -119,7 +119,7 @@ export const Sidebar = () => {
             </li>
             <li>
               <Link to="/account" className="px-4 py-2 flex items-center gap-8">
-                <svg className="w-[30px] h-[30px] fill-gray-light-2">
+                <svg className="w-[24px] h-[24px] fill-gray-light-2">
                   <use href={`${sprite}#icon-account`}></use>
                 </svg>
                 <span>Account</span>
