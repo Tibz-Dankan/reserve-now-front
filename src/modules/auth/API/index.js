@@ -2,7 +2,7 @@ import { url } from "../../../store";
 
 // signin
 export const signIn = async ({ email, password }) => {
-  const response = await fetch(`${url}/api/v1/users/signin`, {
+  const response = await fetch(`${url}/users/signin`, {
     method: "POST",
     body: JSON.stringify({
       email,
@@ -22,7 +22,7 @@ export const signIn = async ({ email, password }) => {
 
 // signup
 export const signUp = async ({ name, email, password, country }) => {
-  const response = await fetch(`${url}/api/v1/users/signup`, {
+  const response = await fetch(`${url}/users/signup`, {
     method: "POST",
     body: JSON.stringify({
       name,
