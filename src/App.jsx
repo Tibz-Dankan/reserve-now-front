@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect } from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { authenticate } from "./store/actions/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { notificationActions } from "./store";
@@ -67,103 +66,75 @@ export const App = () => {
     tryLogin();
   }, [dispatch]);
 
-  const nonAuthRouter = createBrowserRouter([
-    {
-      path: "/",
-      element: <Home />,
-    },
-    {
-      path: "/home",
-      element: <Home />,
-    },
-    {
-      path: "/signin",
-      element: (
-        <div>
-          {/* {notification.showAlert && (
-            <Alert
-              severity={notification.alertType}
-              onClose={closeAlertHandler}
-              style={{ zIndex: 1000000 }}
-            >
-              <span className="inline text-base mx-0 my-auto">
-                {notification.alertMessage}
-              </span>
-            </Alert>
-          )} */}
-          {notification.showCardNotification && (
-            <Notification
-              type={notification.cardNotificationType}
-              title={notification.cardNotificationTitle}
-              message={notification.cardMessage}
-              onClose={closeCardHandler}
-            />
-          )}
-          <SignIn />,
-        </div>
-      ),
-    },
-    {
-      path: "/signup",
-      element: (
-        <div>
-          {/* {notification.showAlert && (
-            <Alert
-              severity={notification.alertType}
-              onClose={closeAlertHandler}
-              style={{ zIndex: 1000000 }}
-            >
-              <span className="inline text-base mx-0 my-auto">
-                {notification.alertMessage}
-              </span>
-            </Alert>
-          )} */}
-          {notification.showCardNotification && (
-            <Notification
-              type={notification.cardNotificationType}
-              title={notification.cardNotificationTitle}
-              message={notification.cardMessage}
-              onClose={closeCardHandler}
-            />
-          )}
-          <SignUp />,
-        </div>
-      ),
-    },
-    {
-      path: "/login",
-      element: <Navigate to="/signin" />,
-    },
-    {
-      path: "/register",
-      element: <Navigate to="/signup" />,
-    },
-    {
-      path: "*",
-      element: <Navigate to="/" />,
-    },
-  ]);
-
-  const authRouter = createBrowserRouter([
-    {
-      path: "/",
-      element: <Booking />,
-    },
-    {
-      path: "/booking",
-      element: <Booking />,
-    },
-    {
-      path: "*",
-      element: <Booking />,
-    },
-  ]);
-
   return (
     <Fragment>
-      <div className="text-base bg-gray-light-1 overflow-x-hidden">
-        {!isLoggedIn && <RouterProvider router={nonAuthRouter} />}
-        {isLoggedIn && <RouterProvider router={authRouter} />}
+      <div className="app">
+        <BrowserRouter>
+          {!isLoggedIn && (
+            <Routes>
+              <Fragment>
+                <Route path="/" element={<Home />} />
+                <Route path="/home" element={<Home />} />
+                <Route
+                  path="signup"
+                  element={
+                    <div>
+                      {notification.showCardNotification && (
+                        <Notification
+                          type={notification.cardNotificationType}
+                          message={notification.cardMessage}
+                          onClose={closeCardHandler}
+                        />
+                      )}
+                      <SignUp />
+                    </div>
+                  }
+                />
+                <Route
+                  path="signin"
+                  element={
+                    <div>
+                      {notification.showCardNotification && (
+                        <Notification
+                          type={notification.cardNotificationType}
+                          message={notification.cardMessage}
+                          onClose={closeCardHandler}
+                        />
+                      )}
+                      <SignIn />
+                    </div>
+                  }
+                />
+                <Route
+                  path="register"
+                  element={<Navigate to="/signup" replace />}
+                />
+                <Route
+                  path="login"
+                  element={<Navigate to="/signin" replace />}
+                />
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Fragment>
+            </Routes>
+          )}
+
+          {isLoggedIn && (
+            <Fragment>
+              {notification.showCardNotification && (
+                <Notification
+                  type={notification.cardNotificationType}
+                  message={notification.cardMessage}
+                  onClose={closeCardHandler}
+                />
+              )}
+              <Routes>
+                <Route path="/" element={<Booking />} />
+                <Route path="booking" element={<Booking />} />
+                <Route path="*" element={<Navigate to="/booking" replace />} />
+              </Routes>
+            </Fragment>
+          )}
+        </BrowserRouter>
       </div>
     </Fragment>
   );
