@@ -7,6 +7,7 @@ import { logOut } from "../../store/actions/auth";
 
 export const Header = (props) => {
   const user = useSelector((state) => state.auth.user);
+  const isOpenSidebar = useSelector((state) => state.sidebar.isOpen);
 
   const dispatch = useDispatch();
 
@@ -20,15 +21,17 @@ export const Header = (props) => {
         sticky top-0 z-10 bg-gray-light-1"
       >
         <div className="flex items-center">
-          <div className="flex items-center mr-4">
-            <svg
-              className="w-[30px] h-[30px] fill-gray-dark-3 mr-4"
-              onClick={() => openSidebarHandler()}
-            >
-              <use href={`${sprite}#icon-menu`}></use>
-            </svg>
-            <span>ReserveNow</span>
-          </div>
+          {!isOpenSidebar && (
+            <div className="flex items-center mr-4">
+              <svg
+                className="w-[30px] h-[30px] fill-gray-dark-3 mr-4"
+                onClick={() => openSidebarHandler()}
+              >
+                <use href={`${sprite}#icon-menu`}></use>
+              </svg>
+              <span>ReserveNow</span>
+            </div>
+          )}
           <div>
             <span>{props.title}</span>
           </div>

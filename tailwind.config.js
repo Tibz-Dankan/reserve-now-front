@@ -33,6 +33,7 @@ export default {
         slideDown: "slideDown 0.5s ease-out forwards",
         moveInRight: "moveInRight 0.35s ease-out",
         rotate: "rotate 0.8s linear infinite",
+        sidebarMoveInLeft: "sidebarMoveInLeft 0.3s ease-out",
       },
       keyframes: {
         slideDown: {
@@ -46,6 +47,10 @@ export default {
         rotate: {
           "0%": { transform: "rotate(0deg)" },
           "100%": { transform: "rotate(360deg)" },
+        },
+        sidebarMoveInLeft: {
+          "0%": { opacity: "0", left: "-256px" },
+          "100%": { opacity: "1", left: "0px" },
         },
       },
     },

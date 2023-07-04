@@ -52,7 +52,9 @@ export const Sidebar = () => {
     <Fragment>
       <aside
         id="sidebar"
-        className="bg-primary-dark w-[256px] h-[100vh] fixed top-0"
+        className={`bg-primary-dark w-[256px] h-[100vh] fixed top-0  ${
+          isOpenSidebar && "animate-sidebarMoveInLeft"
+        }`}
       >
         <div
           className="px-4 py-[21.5px] w-full text-[20px] text-gray-light-2
