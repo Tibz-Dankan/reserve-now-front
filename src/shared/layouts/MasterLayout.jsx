@@ -10,7 +10,7 @@ export const MasterLayout = (props) => {
         <Sidebar />
         <div id="header-main-footer" className="flex-1 transition-[0.35s]">
           <Header title={props.title} />
-          <main className="min-h-[80vh] pt-4 flex justify-center">
+          <main className="min-h-[80vh] flex justify-center">
             {props.children}
           </main>
           <Footer />
