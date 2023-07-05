@@ -9,19 +9,19 @@ export const Notification = (props) => {
 
   if (type === "success") {
     icon = "check-circle";
-    bgColor = "bg-green-500";
+    bgColor = "bg-success";
   } else if (type === "error") {
     icon = "cancel-circle";
-    bgColor = "bg-red-500";
+    bgColor = "bg-error";
   } else if (type === "info") {
     icon = "info";
-    bgColor = "bg-blue-500";
+    bgColor = "bg-info";
   } else if (type === "warning") {
     icon = "warning";
-    bgColor = "bg-yellow-400";
+    bgColor = "bg-warning";
   } else {
     icon = "info";
-    bgColor = "bg-blue-500";
+    bgColor = "bg-info";
   }
 
   return (

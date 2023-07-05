@@ -12,12 +12,6 @@ import { updateRoom } from "../API";
 
 export const UpdateRoom = (props) => {
   const id = props.id;
-  //   const roomNumberRef = useRef(props.roomNumber);
-  //   const roomTypeRef = useRef(props.roomType);
-  //   const capacityRef = useRef(props.capacity);
-  //   const priceRef = useRef(props.price);
-  //   const priceCurrencyRef = useRef(props.priceCurrency);
-
   const [roomNumber, setRoomNumber] = useState(props.roomNumber);
   const [roomType, setRoomType] = useState(props.roomType);
   const [capacity, setCapacity] = useState(props.capacity);
@@ -55,12 +49,6 @@ export const UpdateRoom = (props) => {
 
   const updateRoomHandler = (event) => {
     event.preventDefault();
-    // const roomNumber = roomNumberRef.current.value;
-    // const roomType = roomTypeRef.current.value;
-    // const capacity = capacityRef.current.value;
-    // const price = priceRef.current.value;
-    // const priceCurrency = priceCurrencyRef.current.value;
-
     if (!roomNumber || !roomType || !capacity || !price || !priceCurrency) {
       return;
     }
@@ -127,7 +115,7 @@ export const UpdateRoom = (props) => {
                   type="text"
                   placeholder="Price currency"
                   value={priceCurrency}
-                  onChange={(event) => priceChangeHandler(event)}
+                  onChange={(event) => priceCurrencyChangeHandler(event)}
                   required
                   className="w-full bg-gray-light-1 p-1 outline-none border-[2px] border-gray-opacity focus:border-primary rounded transition-all"
                 />

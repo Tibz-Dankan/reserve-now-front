@@ -28,6 +28,10 @@ export default {
         "gray-dark-3": "#1f2937",
         "gray-dark-4": "#111827",
         "gray-opacity": "rgba(0, 0, 0, 0.15)",
+        info: " #5BC0DE",
+        warning: "#F0AD4E",
+        error: "#D9534F",
+        success: "#55C57A",
       },
       animation: {
         slideDown: "slideDown 0.5s ease-out forwards",
