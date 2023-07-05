@@ -9,6 +9,7 @@ import { SignIn } from "./modules/auth/pages/Signin";
 import { SignUp } from "./modules/auth/pages/SignUp";
 import { Booking } from "./modules/booking/Pages/Booking";
 import { Notification } from "./shared/UI/Notification";
+import { Rooms } from "./modules/room/pages/Rooms";
 import "./App.css";
 
 export const App = () => {
@@ -68,7 +69,7 @@ export const App = () => {
 
   return (
     <Fragment>
-      <div className="app">
+      <div className="bg-gray-light-1 text-base">
         <BrowserRouter>
           {!isLoggedIn && (
             <Routes>
@@ -130,6 +131,7 @@ export const App = () => {
               <Routes>
                 <Route path="/" element={<Booking />} />
                 <Route path="booking" element={<Booking />} />
+                <Route path="rooms" element={<Rooms />} />
                 <Route path="*" element={<Navigate to="/booking" replace />} />
               </Routes>
             </Fragment>
