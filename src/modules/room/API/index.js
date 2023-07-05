@@ -56,3 +56,33 @@ export const addRoom = async ({
   }
   return await response.json();
 };
+
+export const updateRoom = async ({
+  id,
+  roomNumber,
+  roomType,
+  capacity,
+  price,
+  priceCurrency,
+  token,
+}) => {
+  const response = await fetch(`${url}/rooms/update-room/${id}`, {
+    method: "PATCH",
+    body: JSON.stringify({
+      roomNumber,
+      roomType,
+      capacity,
+      price,
+      priceCurrency,
+    }),
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message);
+  }
+  return await response.json();
+};

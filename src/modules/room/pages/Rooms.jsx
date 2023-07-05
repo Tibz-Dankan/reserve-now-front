@@ -8,6 +8,7 @@ import {
 } from "../../../store/actions/notification";
 import { MasterLayout } from "../../../shared/layouts/MasterLayout";
 import { AddRoom } from "../UI/AddRoom";
+import { UpdateRoom } from "../UI/UpdateRoom";
 
 export const Rooms = () => {
   const dispatch = useDispatch();
@@ -33,7 +34,19 @@ export const Rooms = () => {
         <div className="w-full p-4">
           <AddRoom />
           {rooms.map((room) => {
-            return <div key={room.id}>Room {room.roomNumber}</div>;
+            return (
+              <div key={room.id}>
+                <span> Room {room.roomNumber} </span>
+                <UpdateRoom
+                  id={room.id}
+                  roomNumber={room.roomNumber}
+                  roomType={room.roomType}
+                  capacity={room.capacity}
+                  price={room.price}
+                  priceCurrency={room.priceCurrency}
+                />
+              </div>
+            );
           })}
         </div>
       </MasterLayout>

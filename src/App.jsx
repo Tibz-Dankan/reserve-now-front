@@ -19,8 +19,8 @@ export const App = () => {
   const dispatch = useDispatch();
 
   const notification = useSelector((state) => state.notification);
-  console.log("notification");
-  console.log(notification);
+  // console.log("notification");
+  // console.log(notification);
 
   const closeAlertHandler = () => {
     dispatch(notificationActions.hideAlert());
