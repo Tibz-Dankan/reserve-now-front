@@ -137,7 +137,6 @@ export const SearchRooms = () => {
                 onChange={(event) => checkInDateHandler(event)}
                 placeholder="Check-in date"
               />
-              {/* To be changed to svg icon */}
               <span>-</span>
               <input
                 type="date"
@@ -153,14 +152,16 @@ export const SearchRooms = () => {
                 <span className="mr-1">{adults}</span>
                 <label htmlFor="adults">adults</label>
               </div>
-              {/* To be changed to svg */}
-              <span>.</span>
+              <svg className="fill-gray-dark-2 h-[20px] w-[20px]">
+                <use href={`${sprite}#icon-dot`}></use>
+              </svg>
               <div>
                 <span className="mr-1">{children}</span>
                 <label htmlFor="child">child</label>
               </div>
-              {/* To be changed to svg */}
-              <span>.</span>
+              <svg className="fill-gray-dark-2 h-[20px] w-[20px]">
+                <use href={`${sprite}#icon-dot`}></use>
+              </svg>
               <div>
                 <span className="mr-1">{rooms}</span>
                 <label htmlFor="room">room</label>
@@ -181,7 +182,8 @@ export const SearchRooms = () => {
           {showCardNumber && (
             <div
               className=" bg-gray-light-1 flex flex-col items-center p-6 w-[300px] border-[1px]
-              border-gray-opacity  gap-y-2 rounded shadow-xl absolute top-[40px] right-[76px]  z-[60]"
+              border-gray-opacity  gap-y-2 rounded shadow-xl absolute top-[40px] right-[76px] z-[60]
+              animate-slideDownDropDown"
             >
               <div className="flex items-center justify-between  gap-x-12 w-full">
                 <span>Adults</span>

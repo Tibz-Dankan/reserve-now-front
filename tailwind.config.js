@@ -35,6 +35,7 @@ export default {
       },
       animation: {
         slideDown: "slideDown 0.5s ease-out forwards",
+        slideDownDropDown: "slideDownDropDown 0.3s ease-out",
         moveInRight: "moveInRight 0.35s ease-out",
         rotate: "rotate 0.8s linear infinite",
         sidebarMoveInLeft: "sidebarMoveInLeft 0.3s ease-out",
@@ -55,6 +56,10 @@ export default {
         sidebarMoveInLeft: {
           "0%": { opacity: "0", left: "-256px" },
           "100%": { opacity: "1", left: "0px" },
+        },
+        slideDownDropDown: {
+          "0%": { opacity: "0", transform: "translateY(-48px)" },
+          "100%": { opacity: "1", transform: "translateY(0px)" },
         },
       },
     },
