@@ -6,6 +6,7 @@ export const Button = (props) => {
       <button
         className={`${props.className} h-9 bg-primary text-gray-light-1 rounded px-3`}
         type={props.type}
+        onClick={props.onClick}
       >
         {props.children}
       </button>
