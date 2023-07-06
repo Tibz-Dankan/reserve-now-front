@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Children, Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useMutation } from "@tanstack/react-query";
 import {
@@ -13,10 +13,10 @@ import sprite from "../../../assets/icons/sprite.svg";
 export const SearchRooms = () => {
   const [checkInDate, setCheckInDate] = useState("");
   const [checkOutDate, setCheckOutDate] = useState("");
-  const [adults, setAdults] = useState(0);
+  const [adults, setAdults] = useState(1);
   const [children, setChildren] = useState(0);
-  const [childAge, setChildAge] = useState(0);
-  const [rooms, setRooms] = useState(0);
+  const [childAge, setChildAge] = useState(null);
+  const [rooms, setRooms] = useState(1);
 
   const [showCardNumber, setShowCardNumber] = useState(false);
 
@@ -27,15 +27,66 @@ export const SearchRooms = () => {
     setCheckInDate(checkIn);
   };
 
+  const age = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
+  const isLessThanEqualOneAdult = adults <= 1;
+  const isLessThanEqualOneRoom = rooms <= 1;
+  const hasChild = children > 0;
+
+  const checkInMillSec = new Date(checkInDate).getTime();
+  const checkOutMillSec = new Date(checkOutDate).getTime();
+  const nowMillSec = new Date().getTime();
+
+  const isCheckOutEqualCheckIn = checkInMillSec === checkOutMillSec;
+  const isCheckOutLessThanCheckIn = checkOutMillSec < checkInMillSec;
+
+  const isInvalidCheckInDate = nowMillSec > checkInMillSec;
+  const isInvalidCheckOutDate =
+    isCheckOutLessThanCheckIn || isCheckOutEqualCheckIn;
+
   const checkOutDateHandler = (event) => {
     const checkOut = new Date(event.target.value).toISOString();
     setCheckOutDate(checkOut);
   };
-  const adultsHandler = (event) => setAdults(event.target.value);
-  const childrenHandler = (event) => setChildren(event.target.value);
-  const childAgeHandler = (event) => setChildAge(event.target.value);
 
-  const age = [0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
+  const dateErrorHandler = () => {
+    let error = null;
+    if (!checkInDate || !checkOutDate) error = "Please select dates";
+    if (isInvalidCheckInDate) error = "Please provide valid check-in date";
+    if (isInvalidCheckOutDate) error = "Please provide  valid check-out date";
+    if (error) {
+      dispatch(
+        showCardNotification({
+          type: "error",
+          message: error,
+        })
+      );
+      setTimeout(() => {
+        dispatch(hideCardNotification());
+      }, 5000);
+      throw new Error(error);
+    }
+  };
+
+  const guestErrorHandler = () => {
+    let error = null;
+    if (adults < 1) error = "Adults must at least be 1";
+    if (rooms < 1) error = "Rooms must at least be 1";
+    if (children >= 1 && childAge === null) {
+      error = "Child's age must be provided";
+    }
+    if (error) {
+      dispatch(
+        showCardNotification({
+          type: "error",
+          message: error,
+        })
+      );
+      setTimeout(() => {
+        dispatch(hideCardNotification());
+      }, 5000);
+      throw new Error(error);
+    }
+  };
 
   const { isLoading, data, mutate } = useMutation({
     mutationFn: searchRooms,
@@ -59,6 +110,8 @@ export const SearchRooms = () => {
 
   const searchRoomHandler = (event) => {
     event.preventDefault();
+    dateErrorHandler();
+    guestErrorHandler();
     mutate({ checkInDate, checkOutDate, adults, children, childAge, rooms });
   };
 
@@ -112,7 +165,7 @@ export const SearchRooms = () => {
             </div>
             <svg
               className="fill-gray-dark-4 h-[16px] w-[16px] ml-4"
-              onClick={() => setShowCardNumber(true)}
+              onClick={() => setShowCardNumber(!showCardNumber)}
             >
               <use href={`${sprite}#icon-chevron-down`}></use>
             </svg>
@@ -126,7 +179,7 @@ export const SearchRooms = () => {
         {showCardNumber && (
           <div
             className=" bg-gray-light-1 flex flex-col items-center p-6 w-[300px] border-[1px]
-         border-gray-opacity  gap-y-2 rounded shadow-xl absolute top-[40px] right-[20px] "
+         border-gray-opacity  gap-y-2 rounded shadow-xl absolute top-[40px] right-[20px]  z-[60]"
           >
             <div className="flex items-center justify-between  gap-x-12 w-full">
               <span>Adults</span>
@@ -164,28 +217,30 @@ export const SearchRooms = () => {
                 </span>
               </div>
             </div>
-            <div className="w-full">
-              <select
-                onChange={(event) => setChildAge(event.target.value)}
-                value={childAge}
-              >
-                <option>Age is needed</option>
-                {age.map((age, index) => {
-                  if (age === 1) {
+            {hasChild && (
+              <div className="w-full">
+                <select
+                  onChange={(event) => setChildAge(event.target.value)}
+                  value={childAge}
+                >
+                  <option>Age is needed</option>
+                  {age.map((age, index) => {
+                    if (age === 1) {
+                      return (
+                        <option value={age} key={index}>
+                          {age} year
+                        </option>
+                      );
+                    }
                     return (
                       <option value={age} key={index}>
-                        {age} year
+                        {age} years
                       </option>
                     );
-                  }
-                  return (
-                    <option value={age} key={index}>
-                      {age} years
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
+                  })}
+                </select>
+              </div>
+            )}
             <div className="flex items-center justify-between  gap-x-12 w-full">
               <span>Rooms</span>
               <div className="flex items-center justify-center gap-x-5 border-2 border-gray-100 w-[112px] px-3 pt-1 pb-[6px] rounded">
