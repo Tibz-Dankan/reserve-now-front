@@ -30,6 +30,7 @@ export const SearchRooms = () => {
   const age = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
   const isLessThanEqualOneAdult = adults <= 1;
   const isLessThanEqualOneRoom = rooms <= 1;
+  const isLessThanEqualZeroChild = children <= 0;
   const hasChild = children > 0;
 
   const checkInMillSec = new Date(checkInDate).getTime();
@@ -184,37 +185,39 @@ export const SearchRooms = () => {
             <div className="flex items-center justify-between  gap-x-12 w-full">
               <span>Adults</span>
               <div className="flex items-center justify-center gap-x-5 border-2 border-gray-dark-1 w-[112px] px-3 pt-1 pb-[6px] rounded">
-                <span
-                  className="text-[32px] text-primary cursor-pointer"
+                <button
+                  className="text-[32px] text-primary cursor-pointer disabled:text-gray-light-4"
                   onClick={() => setAdults((adult) => adult - 1)}
+                  disabled={isLessThanEqualOneAdult}
                 >
                   -
-                </span>
+                </button>
                 <span>{adults}</span>
-                <span
+                <button
                   className="text-[24px] text-primary cursor-pointer"
                   onClick={() => setAdults((adult) => adult + 1)}
                 >
                   +
-                </span>
+                </button>
               </div>
             </div>
             <div className="flex items-center justify-between  gap-x-12 w-full">
               <span>children</span>
               <div className="flex items-center justify-center gap-x-5 border-2 border-gray-dark-1 w-[112px] px-3 pt-1 pb-[6px] rounded">
-                <span
-                  className="text-[32px] text-primary cursor-pointer"
+                <button
+                  className="text-[32px] text-primary cursor-pointer disabled:text-gray-light-4"
                   onClick={() => setChildren((children) => children - 1)}
+                  disabled={isLessThanEqualZeroChild}
                 >
                   -
-                </span>
+                </button>
                 <span>{children}</span>
-                <span
+                <button
                   className="text-[24px] text-primary cursor-pointer"
                   onClick={() => setChildren((children) => children + 1)}
                 >
                   +
-                </span>
+                </button>
               </div>
             </div>
             {hasChild && (
@@ -243,20 +246,21 @@ export const SearchRooms = () => {
             )}
             <div className="flex items-center justify-between  gap-x-12 w-full">
               <span>Rooms</span>
-              <div className="flex items-center justify-center gap-x-5 border-2 border-gray-100 w-[112px] px-3 pt-1 pb-[6px] rounded">
-                <span
-                  className="text-[32px] text-primary cursor-pointer"
+              <div className="flex items-center justify-center gap-x-5 border-2 border-gray-dark-1 w-[112px] px-3 pt-1 pb-[6px] rounded">
+                <button
+                  className="text-[32px] text-primary cursor-pointer disabled:text-gray-light-4"
                   onClick={() => setRooms((rooms) => rooms - 1)}
+                  disabled={isLessThanEqualOneRoom}
                 >
                   -
-                </span>
+                </button>
                 <span>{rooms}</span>
-                <span
+                <button
                   className="text-[24px] text-primary cursor-pointer"
                   onClick={() => setRooms((rooms) => rooms + 1)}
                 >
                   +
-                </span>
+                </button>
               </div>
             </div>
             <div className=" w-full">
