@@ -69,43 +69,22 @@ export const App = () => {
 
   return (
     <Fragment>
-      <div className="bg-gray-light-1 text-base">
+      <div className="bg-gray-light-1 text-base overflow-x-hidden">
         <BrowserRouter>
           {!isLoggedIn && (
-            <Routes>
-              <Fragment>
+            <Fragment>
+              {notification.showCardNotification && (
+                <Notification
+                  type={notification.cardNotificationType}
+                  message={notification.cardMessage}
+                  onClose={closeCardHandler}
+                />
+              )}
+              <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/home" element={<Home />} />
-                <Route
-                  path="signup"
-                  element={
-                    <div>
-                      {notification.showCardNotification && (
-                        <Notification
-                          type={notification.cardNotificationType}
-                          message={notification.cardMessage}
-                          onClose={closeCardHandler}
-                        />
-                      )}
-                      <SignUp />
-                    </div>
-                  }
-                />
-                <Route
-                  path="signin"
-                  element={
-                    <div>
-                      {notification.showCardNotification && (
-                        <Notification
-                          type={notification.cardNotificationType}
-                          message={notification.cardMessage}
-                          onClose={closeCardHandler}
-                        />
-                      )}
-                      <SignIn />
-                    </div>
-                  }
-                />
+                <Route path="/home" element={<SignUp />} />
+                <Route path="signup" element={<SignUp />} />
+                <Route path="signin" element={<SignIn />} />
                 <Route
                   path="register"
                   element={<Navigate to="/signup" replace />}
@@ -115,8 +94,8 @@ export const App = () => {
                   element={<Navigate to="/signin" replace />}
                 />
                 <Route path="*" element={<Navigate to="/" replace />} />
-              </Fragment>
-            </Routes>
+              </Routes>
+            </Fragment>
           )}
 
           {isLoggedIn && (

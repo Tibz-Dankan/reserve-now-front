@@ -101,3 +101,28 @@ export const deleteRoom = async ({ id, token }) => {
   }
   return await response.json();
 };
+
+export const searchRooms = async ({
+  checkInDate,
+  checkOutDate,
+  adults,
+  children,
+  childAge,
+  rooms,
+}) => {
+  const response = await fetch(
+    `${url}/rooms/search-rooms?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}
+    &adults=${adults}&children=${children}&childAge=${childAge}&rooms=${rooms}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+      },
+    }
+  );
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message);
+  }
+  return await response.json();
+};
