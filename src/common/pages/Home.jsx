@@ -30,6 +30,10 @@ export const Home = () => {
           <div className="bg-gray-light-2 h-[70vh]"></div>
         </header>
         <SearchRooms />
+        {/* Several sections here */}
+        <footer className="h-[350px]">
+          <span>Footer</span>
+        </footer>
       </div>
     </Fragment>
   );

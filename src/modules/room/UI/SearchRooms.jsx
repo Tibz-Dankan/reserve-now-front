@@ -122,7 +122,7 @@ export const SearchRooms = () => {
 
   return (
     <Fragment>
-      <div className="px-6">
+      <div className="px-6 flex justify-center">
         <div className="inline-block relative">
           <form
             className="flex items-center"
@@ -166,7 +166,7 @@ export const SearchRooms = () => {
                 <label htmlFor="room">room</label>
               </div>
               <svg
-                className="fill-gray-dark-4 h-[16px] w-[16px] ml-4"
+                className="fill-gray-dark-4 h-[16px] w-[16px] ml-4 cursor-pointer"
                 onClick={() => setShowCardNumber(!showCardNumber)}
               >
                 <use href={`${sprite}#icon-chevron-down`}></use>
@@ -181,7 +181,7 @@ export const SearchRooms = () => {
           {showCardNumber && (
             <div
               className=" bg-gray-light-1 flex flex-col items-center p-6 w-[300px] border-[1px]
-         border-gray-opacity  gap-y-2 rounded shadow-xl absolute top-[40px] right-[76px]  z-[60]"
+              border-gray-opacity  gap-y-2 rounded shadow-xl absolute top-[40px] right-[76px]  z-[60]"
             >
               <div className="flex items-center justify-between  gap-x-12 w-full">
                 <span>Adults</span>
