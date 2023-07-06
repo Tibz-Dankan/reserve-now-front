@@ -122,158 +122,160 @@ export const SearchRooms = () => {
 
   return (
     <Fragment>
-      <div className="px-6 relative">
-        <form
-          className="flex items-center"
-          onSubmit={(event) => searchRoomHandler(event)}
-        >
-          <div className="flex items-center justify-start gap-x-1 border-2 rounded border-primary-dark px-2 py-[3px]">
-            <svg className="fill-gray-dark-4 h-[20px] w-[20px] ">
-              <use href={`${sprite}#icon-calendar`}></use>
-            </svg>
-            <input
-              type="date"
-              onChange={(event) => checkInDateHandler(event)}
-              placeholder="Check-in date"
-            />
-            {/* To be changed to svg icon */}
-            <span>-</span>
-            <input
-              type="date"
-              placeholder="check-out date"
-              onChange={(event) => checkOutDateHandler(event)}
-            />
-          </div>
-          <div className="flex items-center justify-start gap-x-1 border-2 rounded border-primary-dark px-2 py-1">
-            <svg className="fill-gray-dark-1 mr-1 h-[24px] w-[24px]">
-              <use href={`${sprite}#icon-person`}></use>
-            </svg>
-            <div>
-              <span className="mr-1">{adults}</span>
-              <label htmlFor="adults">adults</label>
-            </div>
-            {/* To be changed to svg */}
-            <span>.</span>
-            <div>
-              <span className="mr-1">{children}</span>
-              <label htmlFor="child">child</label>
-            </div>
-            {/* To be changed to svg */}
-            <span>.</span>
-            <div>
-              <span className="mr-1">{rooms}</span>
-              <label htmlFor="room">room</label>
-            </div>
-            <svg
-              className="fill-gray-dark-4 h-[16px] w-[16px] ml-4"
-              onClick={() => setShowCardNumber(!showCardNumber)}
-            >
-              <use href={`${sprite}#icon-chevron-down`}></use>
-            </svg>
-          </div>
-          <div>
-            {!isLoading && <Button>Search</Button>}
-            {isLoading && <Loader />}
-          </div>
-        </form>
-
-        {showCardNumber && (
-          <div
-            className=" bg-gray-light-1 flex flex-col items-center p-6 w-[300px] border-[1px]
-         border-gray-opacity  gap-y-2 rounded shadow-xl absolute top-[40px] right-[20px]  z-[60]"
+      <div className="px-6">
+        <div className="inline-block relative">
+          <form
+            className="flex items-center"
+            onSubmit={(event) => searchRoomHandler(event)}
           >
-            <div className="flex items-center justify-between  gap-x-12 w-full">
-              <span>Adults</span>
-              <div className="flex items-center justify-center gap-x-5 border-2 border-gray-dark-1 w-[112px] px-3 pt-1 pb-[6px] rounded">
-                <button
-                  className="text-[32px] text-primary cursor-pointer disabled:text-gray-light-4"
-                  onClick={() => setAdults((adult) => adult - 1)}
-                  disabled={isLessThanEqualOneAdult}
-                >
-                  -
-                </button>
-                <span>{adults}</span>
-                <button
-                  className="text-[24px] text-primary cursor-pointer"
-                  onClick={() => setAdults((adult) => adult + 1)}
-                >
-                  +
-                </button>
-              </div>
+            <div className="flex items-center justify-start gap-x-1 border-2 rounded border-primary-dark px-2 py-[3px]">
+              <svg className="fill-gray-dark-4 h-[20px] w-[20px] ">
+                <use href={`${sprite}#icon-calendar`}></use>
+              </svg>
+              <input
+                type="date"
+                onChange={(event) => checkInDateHandler(event)}
+                placeholder="Check-in date"
+              />
+              {/* To be changed to svg icon */}
+              <span>-</span>
+              <input
+                type="date"
+                placeholder="check-out date"
+                onChange={(event) => checkOutDateHandler(event)}
+              />
             </div>
-            <div className="flex items-center justify-between  gap-x-12 w-full">
-              <span>children</span>
-              <div className="flex items-center justify-center gap-x-5 border-2 border-gray-dark-1 w-[112px] px-3 pt-1 pb-[6px] rounded">
-                <button
-                  className="text-[32px] text-primary cursor-pointer disabled:text-gray-light-4"
-                  onClick={() => setChildren((children) => children - 1)}
-                  disabled={isLessThanEqualZeroChild}
-                >
-                  -
-                </button>
-                <span>{children}</span>
-                <button
-                  className="text-[24px] text-primary cursor-pointer"
-                  onClick={() => setChildren((children) => children + 1)}
-                >
-                  +
-                </button>
+            <div className="flex items-center justify-start gap-x-1 border-2 rounded border-primary-dark px-2 py-1">
+              <svg className="fill-gray-dark-1 mr-1 h-[24px] w-[24px]">
+                <use href={`${sprite}#icon-person`}></use>
+              </svg>
+              <div>
+                <span className="mr-1">{adults}</span>
+                <label htmlFor="adults">adults</label>
               </div>
+              {/* To be changed to svg */}
+              <span>.</span>
+              <div>
+                <span className="mr-1">{children}</span>
+                <label htmlFor="child">child</label>
+              </div>
+              {/* To be changed to svg */}
+              <span>.</span>
+              <div>
+                <span className="mr-1">{rooms}</span>
+                <label htmlFor="room">room</label>
+              </div>
+              <svg
+                className="fill-gray-dark-4 h-[16px] w-[16px] ml-4"
+                onClick={() => setShowCardNumber(!showCardNumber)}
+              >
+                <use href={`${sprite}#icon-chevron-down`}></use>
+              </svg>
             </div>
-            {hasChild && (
-              <div className="w-full">
-                <select
-                  onChange={(event) => setChildAge(event.target.value)}
-                  value={childAge}
-                >
-                  <option>Age is needed</option>
-                  {age.map((age, index) => {
-                    if (age === 1) {
+            <div>
+              {!isLoading && <Button>Search</Button>}
+              {isLoading && <Loader />}
+            </div>
+          </form>
+
+          {showCardNumber && (
+            <div
+              className=" bg-gray-light-1 flex flex-col items-center p-6 w-[300px] border-[1px]
+         border-gray-opacity  gap-y-2 rounded shadow-xl absolute top-[40px] right-[76px]  z-[60]"
+            >
+              <div className="flex items-center justify-between  gap-x-12 w-full">
+                <span>Adults</span>
+                <div className="flex items-center justify-center gap-x-5 border-2 border-gray-dark-1 w-[112px] px-3 pt-1 pb-[6px] rounded">
+                  <button
+                    className="text-[32px] text-primary cursor-pointer disabled:text-gray-light-4"
+                    onClick={() => setAdults((adult) => adult - 1)}
+                    disabled={isLessThanEqualOneAdult}
+                  >
+                    -
+                  </button>
+                  <span>{adults}</span>
+                  <button
+                    className="text-[24px] text-primary cursor-pointer"
+                    onClick={() => setAdults((adult) => adult + 1)}
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              <div className="flex items-center justify-between  gap-x-12 w-full">
+                <span>children</span>
+                <div className="flex items-center justify-center gap-x-5 border-2 border-gray-dark-1 w-[112px] px-3 pt-1 pb-[6px] rounded">
+                  <button
+                    className="text-[32px] text-primary cursor-pointer disabled:text-gray-light-4"
+                    onClick={() => setChildren((children) => children - 1)}
+                    disabled={isLessThanEqualZeroChild}
+                  >
+                    -
+                  </button>
+                  <span>{children}</span>
+                  <button
+                    className="text-[24px] text-primary cursor-pointer"
+                    onClick={() => setChildren((children) => children + 1)}
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              {hasChild && (
+                <div className="w-full">
+                  <select
+                    onChange={(event) => setChildAge(event.target.value)}
+                    value={childAge}
+                  >
+                    <option>Age is needed</option>
+                    {age.map((age, index) => {
+                      if (age === 1) {
+                        return (
+                          <option value={age} key={index}>
+                            {age} year
+                          </option>
+                        );
+                      }
                       return (
                         <option value={age} key={index}>
-                          {age} year
+                          {age} years
                         </option>
                       );
-                    }
-                    return (
-                      <option value={age} key={index}>
-                        {age} years
-                      </option>
-                    );
-                  })}
-                </select>
+                    })}
+                  </select>
+                </div>
+              )}
+              <div className="flex items-center justify-between  gap-x-12 w-full">
+                <span>Rooms</span>
+                <div className="flex items-center justify-center gap-x-5 border-2 border-gray-dark-1 w-[112px] px-3 pt-1 pb-[6px] rounded">
+                  <button
+                    className="text-[32px] text-primary cursor-pointer disabled:text-gray-light-4"
+                    onClick={() => setRooms((rooms) => rooms - 1)}
+                    disabled={isLessThanEqualOneRoom}
+                  >
+                    -
+                  </button>
+                  <span>{rooms}</span>
+                  <button
+                    className="text-[24px] text-primary cursor-pointer"
+                    onClick={() => setRooms((rooms) => rooms + 1)}
+                  >
+                    +
+                  </button>
+                </div>
               </div>
-            )}
-            <div className="flex items-center justify-between  gap-x-12 w-full">
-              <span>Rooms</span>
-              <div className="flex items-center justify-center gap-x-5 border-2 border-gray-dark-1 w-[112px] px-3 pt-1 pb-[6px] rounded">
-                <button
-                  className="text-[32px] text-primary cursor-pointer disabled:text-gray-light-4"
-                  onClick={() => setRooms((rooms) => rooms - 1)}
-                  disabled={isLessThanEqualOneRoom}
+              <div className=" w-full">
+                <Button
+                  className="w-full"
+                  type="button"
+                  onClick={() => setShowCardNumber(false)}
                 >
-                  -
-                </button>
-                <span>{rooms}</span>
-                <button
-                  className="text-[24px] text-primary cursor-pointer"
-                  onClick={() => setRooms((rooms) => rooms + 1)}
-                >
-                  +
-                </button>
+                  Done
+                </Button>
               </div>
             </div>
-            <div className=" w-full">
-              <Button
-                className="w-full"
-                type="button"
-                onClick={() => setShowCardNumber(false)}
-              >
-                Done
-              </Button>
-            </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </Fragment>
   );
