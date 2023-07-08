@@ -188,7 +188,11 @@ export const SearchRooms = () => {
                 onChange={(event) => checkOutDateHandler(event)}
               />
             </div>
-            <div className="flex items-center justify-start gap-x-1 border-2 rounded border-primary-dark px-2 py-1">
+            <div
+              className="flex items-center justify-start gap-x-1  cursor-pointer
+              border-2 rounded border-primary-dark px-2 py-1"
+              onClick={() => setShowCardNumber(!showCardNumber)}
+            >
               <svg className="fill-gray-dark-1 mr-1 h-[24px] w-[24px]">
                 <use href={`${sprite}#icon-person`}></use>
               </svg>
@@ -210,10 +214,7 @@ export const SearchRooms = () => {
                 <span className="mr-1">{rooms}</span>
                 <label htmlFor="room">room</label>
               </div>
-              <svg
-                className="fill-gray-dark-4 h-[16px] w-[16px] ml-4 cursor-pointer"
-                onClick={() => setShowCardNumber(!showCardNumber)}
-              >
+              <svg className="fill-gray-dark-4 h-[16px] w-[16px] ml-4">
                 <use href={`${sprite}#icon-chevron-down`}></use>
               </svg>
             </div>
