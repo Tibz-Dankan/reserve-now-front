@@ -53,6 +53,7 @@ export const SearchRooms = () => {
     setCheckOutDate(checkOut);
   };
 
+  // create an array based on the number of children
   useEffect(() => {
     const incrementChildrenArray = () => {
       const childrenArr = [];
@@ -145,8 +146,6 @@ export const SearchRooms = () => {
   const { isLoading, data, mutate } = useMutation({
     mutationFn: searchRooms,
     onError: (error) => {
-      console.log("error");
-      console.log(error);
       dispatch(showCardNotification({ type: "error", message: error.message }));
       setTimeout(() => {
         dispatch(hideCardNotification());
