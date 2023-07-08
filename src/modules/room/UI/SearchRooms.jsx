@@ -234,7 +234,7 @@ export const SearchRooms = () => {
                 <span>Adults</span>
                 <div className="flex items-center justify-center gap-x-5 border-2 border-gray-dark-1 w-[112px] px-3 pt-1 pb-[6px] rounded">
                   <button
-                    className="text-[32px] text-primary cursor-pointer disabled:text-gray-light-4"
+                    className="text-[32px] text-primary cursor-pointer disabled:cursor-not-allowed disabled:text-gray-light-4"
                     onClick={() => setAdults((adult) => adult - 1)}
                     disabled={isLessThanEqualOneAdult}
                   >
@@ -253,7 +253,7 @@ export const SearchRooms = () => {
                 <span>children</span>
                 <div className="flex items-center justify-center gap-x-5 border-2 border-gray-dark-1 w-[112px] px-3 pt-1 pb-[6px] rounded">
                   <button
-                    className="text-[32px] text-primary cursor-pointer disabled:text-gray-light-4"
+                    className="text-[32px] text-primary cursor-pointer disabled:cursor-not-allowed disabled:text-gray-light-4"
                     onClick={() => {
                       setChildren((children) => children - 1),
                         setIsRemoveLastAge(!isRemoveLastAge);
@@ -304,7 +304,7 @@ export const SearchRooms = () => {
                 <span>Rooms</span>
                 <div className="flex items-center justify-center gap-x-5 border-2 border-gray-dark-1 w-[112px] px-3 pt-1 pb-[6px] rounded">
                   <button
-                    className="text-[32px] text-primary cursor-pointer disabled:text-gray-light-4"
+                    className="text-[32px] text-primary cursor-pointer disabled:cursor-not-allowed disabled:text-gray-light-4"
                     onClick={() => setRooms((rooms) => rooms - 1)}
                     disabled={isLessThanEqualOneRoom}
                   >
