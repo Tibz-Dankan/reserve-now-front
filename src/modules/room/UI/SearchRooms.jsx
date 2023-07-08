@@ -32,6 +32,9 @@ export const SearchRooms = () => {
   const isLessThanEqualZeroChild = children <= 0;
   const hasChild = children > 0;
 
+  const checkInDateString = checkInDate && new Date(checkInDate).toDateString();
+  const checkOutDateString =
+    checkOutDate && new Date(checkOutDate).toDateString();
   const checkInMillSec = new Date(checkInDate).getTime();
   const checkOutMillSec = new Date(checkOutDate).getTime();
   const nowMillSec = new Date().getTime();
@@ -51,6 +54,12 @@ export const SearchRooms = () => {
   const checkOutDateHandler = (event) => {
     const checkOut = new Date(event.target.value).toISOString();
     setCheckOutDate(checkOut);
+  };
+
+  const dateCalendarOpenHandler = (dateElementRef) => {
+    console.log("dateElementRef.current");
+    console.log(dateElementRef.current);
+    dateElementRef.current.focus();
   };
 
   // create an array based on the number of children
@@ -169,28 +178,36 @@ export const SearchRooms = () => {
       <div className="px-6 flex flex-col items-center">
         <div className="inline-block relative">
           <form
-            className="flex items-center"
+            className=" space-y-2 md:space-y-0 md:flex items-center"
             onSubmit={(event) => searchRoomHandler(event)}
           >
             <div className="flex items-center justify-start gap-x-1 border-2 rounded border-primary-dark px-2 py-[3px]">
               <svg className="fill-gray-dark-4 h-[20px] w-[20px] ">
                 <use href={`${sprite}#icon-calendar`}></use>
               </svg>
+              {/* <span onClick={() => dateCalendarOpenHandler(checkInRef)}>
+                {checkInDateString ? checkInDateString : "Check-in date"}
+              </span> */}
               <input
                 type="date"
+                ref={checkInRef}
                 onChange={(event) => checkInDateHandler(event)}
                 placeholder="Check-in date"
               />
               <span>-</span>
+              {/* <span onClick={() => dateCalendarOpenHandler(checkOutRef)}>
+                {checkInDateString ? checkInDateString : "Check-in date"}
+              </span> */}
               <input
                 type="date"
+                ref={checkOutRef}
                 placeholder="check-out date"
                 onChange={(event) => checkOutDateHandler(event)}
               />
             </div>
             <div
               className="flex items-center justify-start gap-x-1  cursor-pointer
-              border-2 rounded border-primary-dark px-2 py-1"
+              border-2 rounded border-primary-dark px-2 py-1 relative"
               onClick={() => setShowCardNumber(!showCardNumber)}
             >
               <svg className="fill-gray-dark-1 mr-1 h-[24px] w-[24px]">
@@ -210,15 +227,15 @@ export const SearchRooms = () => {
               <svg className="fill-gray-dark-2 h-[12px] w-[12px]">
                 <use href={`${sprite}#icon-dot`}></use>
               </svg>
-              <div>
+              <div className="mr-6">
                 <span className="mr-1">{rooms}</span>
                 <label htmlFor="room">room</label>
               </div>
-              <svg className="fill-gray-dark-4 h-[16px] w-[16px] ml-4">
+              <svg className="fill-gray-dark-4 h-[16px] w-[16px] absolute right-3 md:right-2 top-2">
                 <use href={`${sprite}#icon-chevron-down`}></use>
               </svg>
             </div>
-            <div>
+            <div className="flex items-center justify-end">
               {!isLoading && <Button>Search</Button>}
               {isLoading && <Loader />}
             </div>
@@ -227,8 +244,8 @@ export const SearchRooms = () => {
           {showCardNumber && (
             <div
               className=" bg-gray-light-1 flex flex-col items-center p-6 w-[300px] border-[1px]
-              border-gray-opacity  gap-y-2 rounded shadow-xl absolute top-[40px] right-[76px] z-[60]
-              animate-slideDownDropDown"
+              border-gray-opacity  gap-y-2 rounded shadow-xl absolute top-[80px] md:top-[40px] 
+              right-0 md:right-[76px] z-[60] animate-slideDownDropDown"
             >
               <div className="flex items-center justify-between  gap-x-12 w-full">
                 <span>Adults</span>
