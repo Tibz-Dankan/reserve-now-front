@@ -1,4 +1,4 @@
-import React, { Children, Fragment, useState } from "react";
+import React, { Fragment, useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useMutation } from "@tanstack/react-query";
 import {
@@ -9,23 +9,22 @@ import { searchRooms } from "../API";
 import { Button } from "../../../shared/UI/Button";
 import { Loader } from "../../../shared/UI/Loader";
 import sprite from "../../../assets/icons/sprite.svg";
+import { RoomsTable } from "./RoomsTable";
 
 export const SearchRooms = () => {
+  const checkInRef = useRef("");
+  const checkOutRef = useRef("");
   const [checkInDate, setCheckInDate] = useState("");
   const [checkOutDate, setCheckOutDate] = useState("");
   const [adults, setAdults] = useState(1);
   const [children, setChildren] = useState(0);
-  const [childAge, setChildAge] = useState(null);
+  const [childrenArray, setChildrenArray] = useState([]);
+  const [childAge, setChildAge] = useState([]);
   const [rooms, setRooms] = useState(1);
 
   const [showCardNumber, setShowCardNumber] = useState(false);
 
   const dispatch = useDispatch();
-
-  const checkInDateHandler = (event) => {
-    const checkIn = new Date(event.target.value).toISOString();
-    setCheckInDate(checkIn);
-  };
 
   const age = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
   const isLessThanEqualOneAdult = adults <= 1;
@@ -44,9 +43,63 @@ export const SearchRooms = () => {
   const isInvalidCheckOutDate =
     isCheckOutLessThanCheckIn || isCheckOutEqualCheckIn;
 
+  const checkInDateHandler = (event) => {
+    const checkIn = new Date(event.target.value).toISOString();
+    setCheckInDate(checkIn);
+  };
+
   const checkOutDateHandler = (event) => {
     const checkOut = new Date(event.target.value).toISOString();
     setCheckOutDate(checkOut);
+  };
+
+  useEffect(() => {
+    const incrementChildrenArray = () => {
+      const childrenArr = [];
+      for (let index = 0; index < children; index++) {
+        childrenArr.push(index + 1);
+      }
+      setChildrenArray(childrenArr);
+    };
+    incrementChildrenArray();
+  }, [children, setChildrenArray]);
+
+  const [isRemoveLastAge, setIsRemoveLastAge] = useState(false);
+  useEffect(() => {
+    const removeLastChildAge = () => {
+      const newChildAge = [];
+      for (let index = 0; index < children; index++) {
+        newChildAge.push(childAge[index]);
+      }
+      setChildAge(newChildAge);
+    };
+    removeLastChildAge();
+  }, [isRemoveLastAge]);
+
+  const childAgeHandler = (event) => {
+    let eachChildAge = {};
+    const selectedId = event.target.id;
+    const selectedValue = event.target.value;
+    eachChildAge[`${selectedId}`] = selectedValue;
+
+    if (!childAge[0]) {
+      setChildAge([eachChildAge]);
+      return;
+    }
+    let childAgeArr = [];
+    let isChildAgePresent = false;
+
+    childAge.map((childAg) => {
+      const currProp = Object.keys(childAg)[0];
+      if (currProp === selectedId) {
+        childAg[currProp] = selectedValue;
+        isChildAgePresent = true;
+      }
+      childAgeArr.push(childAg);
+    });
+    if (isChildAgePresent) return;
+    childAgeArr.push(eachChildAge);
+    setChildAge(childAgeArr);
   };
 
   const dateErrorHandler = () => {
@@ -122,7 +175,7 @@ export const SearchRooms = () => {
 
   return (
     <Fragment>
-      <div className="px-6 flex justify-center">
+      <div className="px-6 flex flex-col items-center">
         <div className="inline-block relative">
           <form
             className="flex items-center"
@@ -152,14 +205,14 @@ export const SearchRooms = () => {
                 <span className="mr-1">{adults}</span>
                 <label htmlFor="adults">adults</label>
               </div>
-              <svg className="fill-gray-dark-2 h-[20px] w-[20px]">
+              <svg className="fill-gray-dark-2 h-[12px] w-[12px]">
                 <use href={`${sprite}#icon-dot`}></use>
               </svg>
               <div>
                 <span className="mr-1">{children}</span>
                 <label htmlFor="child">child</label>
               </div>
-              <svg className="fill-gray-dark-2 h-[20px] w-[20px]">
+              <svg className="fill-gray-dark-2 h-[12px] w-[12px]">
                 <use href={`${sprite}#icon-dot`}></use>
               </svg>
               <div>
@@ -209,7 +262,10 @@ export const SearchRooms = () => {
                 <div className="flex items-center justify-center gap-x-5 border-2 border-gray-dark-1 w-[112px] px-3 pt-1 pb-[6px] rounded">
                   <button
                     className="text-[32px] text-primary cursor-pointer disabled:text-gray-light-4"
-                    onClick={() => setChildren((children) => children - 1)}
+                    onClick={() => {
+                      setChildren((children) => children - 1),
+                        setIsRemoveLastAge(!isRemoveLastAge);
+                    }}
                     disabled={isLessThanEqualZeroChild}
                   >
                     -
@@ -223,30 +279,35 @@ export const SearchRooms = () => {
                   </button>
                 </div>
               </div>
-              {hasChild && (
-                <div className="w-full">
-                  <select
-                    onChange={(event) => setChildAge(event.target.value)}
-                    value={childAge}
-                  >
-                    <option>Age is needed</option>
-                    {age.map((age, index) => {
-                      if (age === 1) {
-                        return (
-                          <option value={age} key={index}>
-                            {age} year
-                          </option>
-                        );
-                      }
-                      return (
-                        <option value={age} key={index}>
-                          {age} years
-                        </option>
-                      );
-                    })}
-                  </select>
-                </div>
-              )}
+              {hasChild &&
+                childrenArray.map((_, index) => {
+                  return (
+                    <div key={index} className="w-full">
+                      <select
+                        onChange={(event) => childAgeHandler(event)}
+                        value={childAge[index + 1]}
+                        defaultValue={childAge[index + 1]}
+                        id={`child${index + 1}`}
+                      >
+                        <option>Age is needed</option>
+                        {age.map((age, index) => {
+                          if (age === 1) {
+                            return (
+                              <option value={age} key={index}>
+                                {age} year
+                              </option>
+                            );
+                          }
+                          return (
+                            <option value={age} key={index}>
+                              {age} years
+                            </option>
+                          );
+                        })}
+                      </select>
+                    </div>
+                  );
+                })}
               <div className="flex items-center justify-between  gap-x-12 w-full">
                 <span>Rooms</span>
                 <div className="flex items-center justify-center gap-x-5 border-2 border-gray-dark-1 w-[112px] px-3 pt-1 pb-[6px] rounded">
@@ -278,6 +339,7 @@ export const SearchRooms = () => {
             </div>
           )}
         </div>
+        <RoomsTable />
       </div>
     </Fragment>
   );
