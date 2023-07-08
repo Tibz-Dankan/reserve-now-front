@@ -144,14 +144,6 @@ export const SearchRooms = () => {
 
   const { isLoading, data, mutate } = useMutation({
     mutationFn: searchRooms,
-    // onSuccess: (data) => {
-    //   dispatch(
-    //     showCardNotification({ type: "success", message: data.message })
-    //   );
-    //   setTimeout(() => {
-    //     dispatch(hideCardNotification());
-    //   }, 5000);
-    // },
     onError: (error) => {
       console.log("error");
       console.log(error);
