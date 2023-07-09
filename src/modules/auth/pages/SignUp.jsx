@@ -54,42 +54,14 @@ export const SignUp = () => {
 
   return (
     <Fragment>
-      {/* <div>
-        <div>
-          <form onSubmit={(event) => signUpHandler(event)}>
-            <input
-              type="text"
-              ref={usernameRef}
-              placeholder="Username"
-              required
-            />
-            <input
-              type="email"
-              ref={emailRef}
-              placeholder="Enter email"
-              required
-            />
-            <input
-              type="text"
-              ref={countryRef}
-              placeholder="Enter country"
-              required
-            />
-            <input
-              type="password"
-              ref={passwordRef}
-              placeholder="Enter password"
-              required
-            />
-            {!isLoading && <button type="submit">Sign Up</button>}
-            {isLoading && <span>signing in...</span>}
-          </form>
-          <div>some cool image on the side</div>
-        </div>
-      </div> */}
       <div className="min-h-[100vh]">
-        <header className="flex items-center justify-end px-8">
-          <Link to="/">Home</Link>
+        <header className="flex items-center justify-end px-8 py-6">
+          <Link
+            to="/"
+            className="px-2 py-1 rounded text-gray-light-1 bg-primary-dark"
+          >
+            Home
+          </Link>
         </header>
         <div className=" flex items-center justify-center py-8">
           <span className="text-center font-bold text-gray-dark-1">
@@ -111,12 +83,12 @@ export const SignUp = () => {
               >
                 Username
               </label>
-              <svg className="fill-gray-500 mr-1 h-[20px] w-[20px] absolute bottom-[8px] left-[8px]">
-                <use href={`${sprite}#icon-email`}></use>
+              <svg className="fill-gray-dark-4 mr-1 h-[20px] w-[20px] absolute bottom-[10px] left-[8px]">
+                <use href={`${sprite}#icon-person-small`}></use>
               </svg>
               <input
                 className="border-[1px] border-gray-400 focus:border-primary focus:bg-gray-200 transition-all outline-none 
-                p-[4px]  pl-8 rounded bg-gray-light-1"
+                 p-2 pl-8 rounded bg-gray-light-1 text-sm"
                 type="text"
                 ref={usernameRef}
                 placeholder="Enter your username"
@@ -130,12 +102,12 @@ export const SignUp = () => {
               >
                 Email
               </label>
-              <svg className="fill-gray-500 mr-1 h-[20px] w-[20px] absolute bottom-[8px] left-[8px]">
-                <use href={`${sprite}#icon-email`}></use>
+              <svg className="fill-gray-dark-4 mr-1 h-[20px] w-[20px] absolute bottom-[10px] left-[8px]">
+                <use href={`${sprite}#icon-email-small`}></use>
               </svg>
               <input
                 className="border-[1px] border-gray-400 focus:border-primary focus:bg-gray-200 transition-all outline-none 
-                p-[4px]  pl-8 rounded bg-gray-light-1"
+                p-2  pl-8 rounded bg-gray-light-1 text-sm"
                 type="email"
                 ref={emailRef}
                 placeholder="Enter your email"
@@ -144,17 +116,17 @@ export const SignUp = () => {
             </div>
             <div className="flex flex-col justify-center relative space-y-[4px]">
               <label
-                htmlFor="username"
+                htmlFor="country"
                 className="text-sm font-bold text-gray-dark-1"
               >
                 Country
               </label>
-              <svg className="fill-gray-500 mr-1 h-[20px] w-[20px] absolute bottom-[8px] left-[8px]">
-                <use href={`${sprite}#icon-email`}></use>
+              <svg className="fill-gray-dark-4 mr-1 h-[20px] w-[20px] absolute bottom-[10px] left-[8px]">
+                <use href={`${sprite}#icon-global-small`}></use>
               </svg>
               <input
                 className="border-[1px] border-gray-400 focus:border-primary focus:bg-gray-200 transition-all outline-none 
-                p-[4px]  pl-8 rounded bg-gray-light-1"
+                p-2 pl-8 rounded bg-gray-light-1 text-sm"
                 type="text"
                 ref={countryRef}
                 placeholder="Enter your username"
@@ -168,18 +140,18 @@ export const SignUp = () => {
               >
                 Password
               </label>
-              <svg className="fill-gray-500 mr-1 h-[20px] w-[20px] absolute bottom-[8px] left-[8px]">
-                <use href={`${sprite}#icon-password`}></use>
+              <svg className="fill-gray-dark-4 mr-1 h-[20px] w-[20px] absolute bottom-[10px] left-[8px] stroke-gray-dark-4">
+                <use href={`${sprite}#icon-password-small`}></use>
               </svg>
               <Link
                 to="/forgot-password"
-                className="text-sm text-primary-dark absolute right-0 top-[-4px] outline-none focus:underline"
+                className="text-sm text-primary-dark hover:underline absolute right-0 top-[-4px] outline-none focus:underline"
               >
                 Forgot password?
               </Link>
               <input
                 className="border-[1px] border-gray-400 focus:border-primary focus:bg-gray-200 transition-all outline-none 
-                p-[4px]  pl-8 rounded bg-gray-light-1"
+                p-2  pl-8 rounded bg-gray-light-1 text-sm"
                 type="password"
                 ref={passwordRef}
                 placeholder="Enter your password"
@@ -193,15 +165,15 @@ export const SignUp = () => {
               >
                 Confirm password
               </label>
-              <svg className="fill-gray-500 mr-1 h-[20px] w-[20px] absolute bottom-[8px] left-[8px]">
-                <use href={`${sprite}#icon-password`}></use>
+              <svg className="fill-gray-dark-4 mr-1 h-[20px] w-[20px] absolute bottom-[10px] left-[8px]">
+                <use href={`${sprite}#icon-password-small`}></use>
               </svg>
               <input
                 className="border-[1px] border-gray-400 focus:border-primary focus:bg-gray-200 transition-all outline-none 
-                p-[4px]  pl-8 rounded bg-gray-light-1"
+                p-2  pl-8 rounded bg-gray-light-1 text-sm"
                 type="password"
                 ref={confirmPasswordRef}
-                placeholder="Enter your password"
+                placeholder="Enter confirm password"
                 required
               />
             </div>

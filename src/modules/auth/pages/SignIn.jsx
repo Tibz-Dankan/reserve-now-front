@@ -85,7 +85,7 @@ export const SignIn = () => {
               >
                 Email
               </label>
-              <svg className="fill-gray-dark-2 mr-1 h-[20px] w-[20px] absolute bottom-[10px] left-[8px]">
+              <svg className="fill-gray-dark-4 mr-1 h-[20px] w-[20px] absolute bottom-[10px] left-[8px]">
                 <use href={`${sprite}#icon-email-small`}></use>
               </svg>
               <input
@@ -104,12 +104,12 @@ export const SignIn = () => {
               >
                 Password
               </label>
-              <svg className="fill-gray-dark-2 mr-1 h-[20px] w-[20px] absolute bottom-[10px] left-[8px]">
+              <svg className="fill-gray-dark-4 mr-1 h-[20px] w-[20px] absolute bottom-[10px] left-[8px]">
                 <use href={`${sprite}#icon-password-small`}></use>
               </svg>
               <Link
                 to="/forgot-password"
-                className="text-sm text-primary-dark hover:underline focus:underline absolute right-0 top-[-4px] outline-none focus:underline"
+                className="text-sm text-primary-dark hover:underline focus:underline absolute right-0 top-[-4px] outline-none"
               >
                 Forgot password?
               </Link>
