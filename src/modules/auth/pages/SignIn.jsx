@@ -20,7 +20,10 @@ export const SignIn = () => {
     onSuccess: (auth) => {
       dispatch(authenticate(auth));
       dispatch(
-        showCardNotification({ type: "success", message: auth.message })
+        showCardNotification({
+          type: "success",
+          message: "You have logged in successfully",
+        })
       );
       setTimeout(() => {
         dispatch(hideCardNotification());

@@ -1,7 +1,7 @@
 import React, { Fragment, useRef, useState } from "react";
 import sprite from "../../assets/icons/sprite.svg";
 import { openSidebar } from "../../store/actions/sidebar";
-
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logOut } from "../../store/actions/auth";
 
@@ -10,9 +10,13 @@ export const Header = (props) => {
   const isOpenSidebar = useSelector((state) => state.sidebar.isOpen);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const openSidebarHandler = () => dispatch(openSidebar());
-  const logoutHandler = async () => await dispatch(logOut());
+  const logoutHandler = async () => {
+    await dispatch(logOut());
+    navigate("/signin", { replace: true });
+  };
 
   // const [isOpenDropDown, setIsOpenDropDown] = useState(false);
   // const dropDownContentRef = useRef();
