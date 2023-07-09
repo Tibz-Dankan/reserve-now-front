@@ -192,7 +192,7 @@ export const SearchRooms = () => {
       <div className="px-6 flex flex-col items-center">
         <div className="inline-block relative">
           <form
-            className=" space-y-2 md:space-y-0 md:flex items-center"
+            className=" space-y-2 lg:space-y-0 lg:flex items-center"
             onSubmit={(event) => searchRoomHandler(event)}
           >
             <div className="flex items-center justify-start gap-x-1 border-2 rounded border-primary-dark px-2 py-[3px]">
@@ -257,7 +257,7 @@ export const SearchRooms = () => {
                 <span className="mr-1">{rooms}</span>
                 <label htmlFor="room">room</label>
               </div>
-              <svg className="fill-gray-dark-4 h-[16px] w-[16px] absolute right-3 md:right-2 top-2">
+              <svg className="fill-gray-dark-4 h-[16px] w-[16px] absolute right-3 lg:right-2 top-2">
                 <use href={`${sprite}#icon-chevron-down`}></use>
               </svg>
             </div>
@@ -270,8 +270,8 @@ export const SearchRooms = () => {
           {showCardNumber && (
             <div
               className=" bg-gray-light-1 flex flex-col items-center p-6 w-[300px] border-[1px]
-              border-gray-opacity  gap-y-2 rounded shadow-xl absolute top-[80px] md:top-[40px] 
-              right-0 md:right-[76px] z-[60] animate-slideDownDropDown"
+              border-gray-opacity  gap-y-2 rounded shadow-xl absolute top-[80px] lg:top-[40px] 
+              right-0 lg:right-[76px] z-[60] animate-slideDownDropDown"
             >
               <div className="flex items-center justify-between  gap-x-12 w-full">
                 <span>Adults</span>
@@ -374,7 +374,7 @@ export const SearchRooms = () => {
             </div>
           )}
         </div>
-        <RoomsTable />
+        {/* <RoomsTable /> */}
       </div>
     </Fragment>
   );
