@@ -1,4 +1,5 @@
 import { sidebarActions } from "..";
+const sidebarWidth = "220px";
 
 export const layoutElements = () => {
   return {
@@ -10,7 +11,7 @@ export const layoutElements = () => {
 export const openSidebar = () => {
   const layout = layoutElements();
   layout.sidebar.style.left = "0px";
-  layout.headerMainFooter.style.marginLeft = "256px";
+  layout.headerMainFooter.style.marginLeft = sidebarWidth;
 
   return (dispatch) => {
     dispatch(sidebarActions.openSidebar());
@@ -21,7 +22,7 @@ export const openSidebar = () => {
 export const autoOpenSidebar = () => {
   const layout = layoutElements();
   layout.sidebar.style.left = "0px";
-  layout.headerMainFooter.style.marginLeft = "256px";
+  layout.headerMainFooter.style.marginLeft = sidebarWidth;
 
   return (dispatch) => {
     dispatch(sidebarActions.openSidebar());
@@ -30,7 +31,7 @@ export const autoOpenSidebar = () => {
 
 export const closeSidebar = () => {
   const layout = layoutElements();
-  layout.sidebar.style.left = "-256px";
+  layout.sidebar.style.left = `-${sidebarWidth}`;
   layout.headerMainFooter.style.marginLeft = "0px";
 
   return (dispatch) => {
@@ -41,7 +42,7 @@ export const closeSidebar = () => {
 // Auto close sidebar on medium screens(768px)
 export const autoCloseSidebar = () => {
   const layout = layoutElements();
-  layout.sidebar.style.left = "-256px";
+  layout.sidebar.style.left = `-${sidebarWidth}`;
   layout.headerMainFooter.style.marginLeft = "0px";
 
   return (dispatch) => {
