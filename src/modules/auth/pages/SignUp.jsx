@@ -1,4 +1,4 @@
-import React, { Fragment, useRef } from "react";
+import React, { Fragment, useRef, useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { useDispatch } from "react-redux";
@@ -12,14 +12,25 @@ import { Loader } from "../../../shared/UI/Loader";
 import { Button } from "../../../shared/UI/Button";
 import { Footer } from "../../../shared/layouts/Footer";
 import sprite from "../../../assets/icons/sprite.svg";
+import countryList from "react-select-country-list";
 
 export const SignUp = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
   const usernameRef = useRef(null);
-  const countryRef = useRef(null);
+  const [country, setCountry] = useState("");
   const dispatch = useDispatch();
+
+  const options = useMemo(() => {
+    const countries = countryList().getData();
+    if (countries[0].value !== "placeholder") {
+      countries.unshift({ value: "placeholder", label: "Select your country" });
+    }
+    return countries;
+  }, []);
+
+  const countryChangeHandler = (event) => setCountry(event.target.value);
 
   const { isLoading, data, mutate } = useMutation({
     mutationFn: signUp,
@@ -48,7 +59,6 @@ export const SignUp = () => {
     const name = usernameRef.current.value;
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
-    const country = countryRef.current.value;
     const confirmPassword = confirmPasswordRef.current.value;
 
     if (!name || !email || !password || !country) return;
@@ -75,7 +85,7 @@ export const SignUp = () => {
         <div className=" min-h-[80vh] flex items-start justify-center ">
           <form
             onSubmit={(event) => signUpHandler(event)}
-            className="p-4 space-y-3 border-[1px] border-gray-400 rounded pb-5 min-w-[300px]"
+            className="p-4 space-y-3 border-[1px] border-gray-400 rounded pb-5 max-w-[300px]"
           >
             <div>
               <p>Create an account</p>
@@ -128,14 +138,19 @@ export const SignUp = () => {
               <svg className="fill-gray-dark-4 mr-1 h-[20px] w-[20px] absolute bottom-[10px] left-[8px]">
                 <use href={`${sprite}#icon-global-small`}></use>
               </svg>
-              <input
-                className="border-[1px] border-gray-400 focus:border-primary focus:bg-gray-200 transition-all outline-none 
-                p-2 pl-8 rounded bg-gray-light-1 text-sm"
-                type="text"
-                ref={countryRef}
-                placeholder="Enter your country"
-                required
-              />
+              <select
+                onChange={(event) => countryChangeHandler(event)}
+                className="border-[1px] border-gray-400 focus:border-primary focus:bg-gray-200 
+                  transition-all outline-none p-2 pl-8 rounded bg-gray-light-1 text-sm"
+              >
+                {options.map((country, index) => {
+                  return (
+                    <option key={index} value={country.label}>
+                      {country.label}
+                    </option>
+                  );
+                })}
+              </select>
             </div>
             <div className="flex flex-col justify-center relative space-y-[4px]">
               <label

@@ -24,7 +24,6 @@
     "react-icons": "^4.10.1",
     "react-redux": "^8.1.1",
     "react-router-dom": "^6.12.1",
-    "react-select": "^5.7.3",
     "react-select-country-list": "^2.2.3",
     "use-file-picker": "^1.7.0"
   },
