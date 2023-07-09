@@ -4,6 +4,11 @@ import { useMutation } from "@tanstack/react-query";
 import { useDispatch } from "react-redux";
 import { signUp } from "../API";
 import { authenticate } from "../../../store/actions/auth";
+import {
+  showCardNotification,
+  hideCardNotification,
+} from "../../../store/actions/notification";
+import { Loader } from "../../../shared/UI/Loader";
 import { Button } from "../../../shared/UI/Button";
 import { Footer } from "../../../shared/layouts/Footer";
 import sprite from "../../../assets/icons/sprite.svg";
@@ -19,20 +24,24 @@ export const SignUp = () => {
   const { isLoading, data, mutate } = useMutation({
     mutationFn: signUp,
     onSuccess: (auth) => {
-      console.log(auth);
       dispatch(authenticate(auth));
-      //  dispatch success notification
+      dispatch(
+        showCardNotification({
+          type: "success",
+          message: "Your account has been created successfully ",
+        })
+      );
+      setTimeout(() => {
+        dispatch(hideCardNotification());
+      }, 5000);
     },
     onError: (error) => {
-      console.log("error.message");
-      console.log(error.message);
-      //  dispatch error notification to show error message
-      // throw an error message
+      dispatch(showCardNotification({ type: "error", message: error.message }));
+      setTimeout(() => {
+        dispatch(hideCardNotification());
+      }, 5000);
     },
   });
-
-  console.log("data auth");
-  console.log(data);
 
   const signUpHandler = (event) => {
     event.preventDefault();
@@ -40,15 +49,10 @@ export const SignUp = () => {
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
     const country = countryRef.current.value;
-
-    // validate confirm password here
+    const confirmPassword = confirmPasswordRef.current.value;
 
     if (!name || !email || !password || !country) return;
-    console.log("email");
-    console.log(email);
-    console.log("password");
-    console.log(password);
-
+    if (password !== confirmPassword) return;
     mutate({ name, email, password, country });
   };
 
@@ -129,7 +133,7 @@ export const SignUp = () => {
                 p-2 pl-8 rounded bg-gray-light-1 text-sm"
                 type="text"
                 ref={countryRef}
-                placeholder="Enter your username"
+                placeholder="Enter your country"
                 required
               />
             </div>
