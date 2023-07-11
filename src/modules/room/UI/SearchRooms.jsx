@@ -5,8 +5,8 @@ import {
   showCardNotification,
   hideCardNotification,
 } from "../../../store/actions/notification";
-// import { DatePicker } from "react-datepicker";
-// import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { searchRooms } from "../API";
 import { Button } from "../../../shared/UI/Button";
 import { Loader } from "../../../shared/UI/Loader";
@@ -14,12 +14,8 @@ import sprite from "../../../assets/icons/sprite.svg";
 import { RoomsTable } from "./RoomsTable";
 
 export const SearchRooms = () => {
-  const checkInRef = useRef("");
-  const checkOutRef = useRef("");
-  const [checkInDate, setCheckInDate] = useState("");
-  // const [checkInDate, setCheckInDate] = useState(new Date());
-  const [checkOutDate, setCheckOutDate] = useState("");
-  // const [checkOutDate, setCheckOutDate] = useState(new Date());
+  let [checkInDate, setCheckInDate] = useState(new Date());
+  let [checkOutDate, setCheckOutDate] = useState(new Date());
   const [adults, setAdults] = useState(1);
   const [children, setChildren] = useState(0);
   const [childrenArray, setChildrenArray] = useState([]);
@@ -27,7 +23,8 @@ export const SearchRooms = () => {
   const [rooms, setRooms] = useState(1);
 
   const [showCardNumber, setShowCardNumber] = useState(false);
-  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+  const [checkInCalendarOpen, setCheckInCalendarOpen] = useState(false);
+  const [checkOutCalendarOpen, setCheckOutCalendarOpen] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -51,29 +48,14 @@ export const SearchRooms = () => {
   const isInvalidCheckOutDate =
     isCheckOutLessThanCheckIn || isCheckOutEqualCheckIn;
 
-  const checkInDateHandler = (event) => {
-    const checkIn = new Date(event.target.value).toISOString();
-    setCheckInDate(checkIn);
+  const checkInDateHandler = (date) => {
+    setCheckInDate(date);
+    setCheckInCalendarOpen(false);
   };
-  // const checkInSelectHandler = (date) => {
-  //   const checkIn = new Date(date).toISOString();
-  //   setCheckInDate(checkIn);
-  // };
 
-  const checkOutDateHandler = (event) => {
-    const checkOut = new Date(event.target.value).toISOString();
-    setCheckOutDate(checkOut);
-  };
-  // const checkOutSelectHandler = (date) => {
-  //   const checkOut = new Date(date).toISOString();
-  //   setCheckOutDate(checkOut);
-  // };
-
-  const dateCalendarOpenHandler = (dateElementRef) => {
-    console.log("dateElementRef.current");
-    console.log(dateElementRef.current);
-    setIsCalendarOpen(true);
-    dateElementRef.current.focus();
+  const checkOutDateHandler = (date) => {
+    setCheckOutDate(date);
+    setCheckOutCalendarOpen(false);
   };
 
   // create an array based on the number of children
@@ -180,6 +162,8 @@ export const SearchRooms = () => {
     event.preventDefault();
     dateErrorHandler();
     guestErrorHandler();
+    checkInDate = new Date(checkInDate).toISOString();
+    checkOutDate = new Date(checkOutDate).toISOString();
     mutate({ checkInDate, checkOutDate, adults, children, childAge, rooms });
   };
 
@@ -199,37 +183,37 @@ export const SearchRooms = () => {
               <svg className="fill-gray-dark-4 h-[20px] w-[20px] ">
                 <use href={`${sprite}#icon-calendar`}></use>
               </svg>
-              <span onClick={() => dateCalendarOpenHandler(checkInRef)}>
-                {checkInDateString ? checkInDateString : "Check-in date"}
-              </span>
-              {/* <DatePicker
-                selected={checkInDate}
-                onSelect={(date) => checkInSelectHandler(date)}
-                onChange={(date) => setCheckInDate(date)}
-              /> */}
-              <input
-                type="date"
-                ref={checkInRef}
-                onChange={(event) => checkInDateHandler(event)}
-                placeholder="Check-in date"
-                style={{ display: isCalendarOpen ? "block" : "none" }}
-              />
+              {!checkInCalendarOpen && (
+                <span
+                  onClick={() => setCheckInCalendarOpen(true)}
+                  className="cursor-pointer"
+                >
+                  {checkInDateString ? checkInDateString : "Check-in date"}
+                </span>
+              )}
+              {checkInCalendarOpen && (
+                <DatePicker
+                  selected={checkInDate}
+                  onChange={(date) => checkInDateHandler(date)}
+                  autoFocus={checkInCalendarOpen}
+                />
+              )}
               <span>-</span>
-              <span onClick={() => dateCalendarOpenHandler(checkOutRef)}>
-                {checkOutDateString ? checkOutDateString : "Check-out date"}
-              </span>
-              {/* <DatePicker
-                selected={checkOutDate}
-                onSelect={(date) => checkOutSelectHandler(date)}
-                onChange={(date) => setCheckOutDate(date)}
-              /> */}
-              <input
-                type="date"
-                ref={checkOutRef}
-                placeholder="check-out date"
-                onChange={(event) => checkOutDateHandler(event)}
-                style={{ display: isCalendarOpen ? "block" : "none" }}
-              />
+              {!checkOutCalendarOpen && (
+                <span
+                  onClick={() => setCheckOutCalendarOpen(true)}
+                  className="cursor-pointer"
+                >
+                  {checkOutDateString ? checkOutDateString : "Check-out date"}
+                </span>
+              )}
+              {checkOutCalendarOpen && (
+                <DatePicker
+                  selected={checkOutDate}
+                  onChange={(date) => checkOutDateHandler(date)}
+                  autoFocus={checkOutCalendarOpen}
+                />
+              )}
             </div>
             <div
               className="flex items-center justify-start gap-x-1  cursor-pointer
