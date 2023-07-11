@@ -23,7 +23,7 @@ export const SearchRooms = () => {
   const [rooms, setRooms] = useState(1);
   const [showCheckInPlaceholder, setShowCheckInPlaceholder] = useState(true);
   const [showCheckOutPlaceholder, setShowCheckOutPlaceholder] = useState(true);
-  const [showCardNumber, setShowCardNumber] = useState(false);
+  const [showDropDown, setShowDropDown] = useState(false);
   const [checkInCalendarOpen, setCheckInCalendarOpen] = useState(false);
   const [checkOutCalendarOpen, setCheckOutCalendarOpen] = useState(false);
 
@@ -223,7 +223,7 @@ export const SearchRooms = () => {
             <div
               className="flex items-center justify-start gap-x-1  cursor-pointer
               border-2 rounded border-primary-dark px-2 py-1 relative"
-              onClick={() => setShowCardNumber(!showCardNumber)}
+              onClick={() => setShowDropDown(!showDropDown)}
             >
               <svg className="fill-gray-dark-1 mr-1 h-[24px] w-[24px]">
                 <use href={`${sprite}#icon-person`}></use>
@@ -256,7 +256,7 @@ export const SearchRooms = () => {
             </div>
           </form>
 
-          {showCardNumber && (
+          {showDropDown && (
             <div
               className=" bg-gray-light-1 flex flex-col items-center p-6 w-[300px] border-[1px]
               border-gray-opacity  gap-y-2 rounded shadow-xl absolute top-[80px] lg:top-[40px] 
@@ -355,7 +355,7 @@ export const SearchRooms = () => {
                 <Button
                   className="w-full"
                   type="button"
-                  onClick={() => setShowCardNumber(false)}
+                  onClick={() => setShowDropDown(false)}
                 >
                   Done
                 </Button>
