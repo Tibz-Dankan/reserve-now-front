@@ -21,7 +21,8 @@ export const SearchRooms = () => {
   const [childrenArray, setChildrenArray] = useState([]);
   const [childAge, setChildAge] = useState([]);
   const [rooms, setRooms] = useState(1);
-
+  const [showCheckInPlaceholder, setShowCheckInPlaceholder] = useState(true);
+  const [showCheckOutPlaceholder, setShowCheckOutPlaceholder] = useState(true);
   const [showCardNumber, setShowCardNumber] = useState(false);
   const [checkInCalendarOpen, setCheckInCalendarOpen] = useState(false);
   const [checkOutCalendarOpen, setCheckOutCalendarOpen] = useState(false);
@@ -51,11 +52,13 @@ export const SearchRooms = () => {
   const checkInDateHandler = (date) => {
     setCheckInDate(date);
     setCheckInCalendarOpen(false);
+    setShowCheckInPlaceholder(false);
   };
 
   const checkOutDateHandler = (date) => {
     setCheckOutDate(date);
     setCheckOutCalendarOpen(false);
+    setShowCheckOutPlaceholder(false);
   };
 
   // create an array based on the number of children
@@ -188,7 +191,7 @@ export const SearchRooms = () => {
                   onClick={() => setCheckInCalendarOpen(true)}
                   className="cursor-pointer"
                 >
-                  {checkInDateString ? checkInDateString : "Check-in date"}
+                  {showCheckInPlaceholder ? "Check-in date" : checkInDateString}
                 </span>
               )}
               {checkInCalendarOpen && (
@@ -204,7 +207,9 @@ export const SearchRooms = () => {
                   onClick={() => setCheckOutCalendarOpen(true)}
                   className="cursor-pointer"
                 >
-                  {checkOutDateString ? checkOutDateString : "Check-out date"}
+                  {showCheckOutPlaceholder
+                    ? "Check-out date"
+                    : checkOutDateString}
                 </span>
               )}
               {checkOutCalendarOpen && (
