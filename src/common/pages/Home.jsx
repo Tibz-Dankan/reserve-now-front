@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { SearchRooms } from "../../modules/room/UI/SearchRooms";
+import { UniqueRoomTypes } from "../../modules/room/UI/UniqueRoomTypes";
 import { Link } from "react-router-dom";
 
 export const Home = () => {
@@ -30,6 +31,7 @@ export const Home = () => {
           <div className="bg-gray-light-2 h-[70vh]"></div>
         </header>
         <SearchRooms />
+        <UniqueRoomTypes />
         {/* Several sections here */}
         <footer className="h-[350px]">
           <span>Footer</span>
