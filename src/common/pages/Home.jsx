@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { SearchRooms } from "../../modules/room/UI/SearchRooms";
 import { UniqueRoomTypes } from "../../modules/room/UI/UniqueRoomTypes";
+import { Reviews } from "../../modules/review/UI/Reviews";
 import { Link } from "react-router-dom";
 
 export const Home = () => {
@@ -32,6 +33,7 @@ export const Home = () => {
         </header>
         <SearchRooms />
         <UniqueRoomTypes />
+        <Reviews />
         {/* Several sections here */}
         <footer className="h-[350px]">
           <span>Footer</span>
