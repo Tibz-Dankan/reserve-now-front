@@ -34,7 +34,7 @@ export const UniqueRoomTypes = () => {
     <Fragment>
       <div className="bg-green-4 p-4 mt-16">
         <p className="text-center text-lg mb-4">Rooms</p>
-        <div className="grid grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
           {uniqueRooms.map((room, index) => (
             <div key={index + 1}>
               <img
