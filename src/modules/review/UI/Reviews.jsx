@@ -1,5 +1,7 @@
 import React, { Fragment } from "react";
 import sprite from "../../../assets/icons/sprite.svg";
+import roomImage from "../../../assets/Images/room1.png";
+import { StarRating } from "./StarRating";
 
 export const Reviews = () => {
   // TODO: To fetch reviews from the backend
@@ -19,7 +21,7 @@ export const Reviews = () => {
       imageUrl: "",
       reviewInfo:
         "The hotel exceeded my expectations. The room was spacious and clean. The staff was attentive, and the location was perfect for exploring the city. I had a wonderful time and would definitely stay here again.",
-      reviewStars: 4,
+      reviewStars: 2,
       createdAt: "2023-07-14",
       role: "client",
     },
@@ -43,7 +45,7 @@ export const Reviews = () => {
     },
     {
       username: "alex_williams",
-      imageUrl: "https://example.com/user5.jpg",
+      imageUrl: roomImage,
       reviewInfo:
         "Friendly staff and comfortable beds. Will definitely come back! The hotel's spa and wellness center were fantastic, and the breakfast buffet had a great selection. This was one of the best hotels I've stayed in.",
       reviewStars: 5,
@@ -64,7 +66,7 @@ export const Reviews = () => {
       imageUrl: "",
       reviewInfo:
         "Had a wonderful time during my stay. Everything was perfect. The hotel's staff went above and beyond to make me feel welcome. The room was spotless, and the hotel's facilities were top-notch. I'll definitely be back!",
-      reviewStars: 4.8,
+      reviewStars: 1,
       createdAt: "2023-07-03",
       role: "client",
     },
@@ -73,7 +75,7 @@ export const Reviews = () => {
       imageUrl: "",
       reviewInfo:
         "Great value for money. I highly recommend this hotel. The room was spacious and well-equipped, and the hotel's location was convenient. The staff was friendly and provided excellent service throughout my stay.",
-      reviewStars: 3.5,
+      reviewStars: 3,
       createdAt: "2023-07-01",
       role: "client",
     },
@@ -97,23 +99,31 @@ export const Reviews = () => {
               className="p-4 rounded-lg shadow-lg border-[1px] border-solid border-gray-light-2"
             >
               <div className="">
-                <span>stars {review.reviewStars}</span>
+                <StarRating numStars={review.reviewStars} />
               </div>
               <div className="py-4">"{review.reviewInfo}"</div>
               <div className="flex align-center justify-between border-t-[1px] pt-4">
                 <div className="flex flex-col">
                   <span className="font-bold text-lg">{review.username}</span>
-                  <span className="text-gray-dark-2">
+                  <span className="text-gray-dark-2 text-sm">
                     {capitalizeFirstLetter(review.role)}
                   </span>
                 </div>
                 {review.imageUrl && (
-                  <img src={review.imageUrl} alt={review.username} />
+                  <div className="bg-gray-light-3 flex items-center justify-center w-12 h-12 rounded-[50%]">
+                    <img
+                      src={review.imageUrl}
+                      alt={review.username}
+                      className="w-full  h-full rounded-[50%]"
+                    />
+                  </div>
                 )}
                 {!review.imageUrl && (
-                  <svg className="w-[44px] h-[44px] fill-gray-dark-3">
-                    <use href={`${sprite}#icon-person-circle`}></use>
-                  </svg>
+                  <div className="bg-gray-light-3 flex items-center justify-center w-12 h-12 rounded-[50%]">
+                    <svg className="w-[36px] h-[36px] fill-gray-dark-1">
+                      <use href={`${sprite}#icon-person-filled`}></use>
+                    </svg>
+                  </div>
                 )}
               </div>
             </div>
