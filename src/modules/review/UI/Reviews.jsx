@@ -92,15 +92,13 @@ export const Reviews = () => {
     <Fragment>
       <div className="p-4 mt-16">
         <p className="text-center text-lg mb-4">Reviews</p>
-        <div className="grid grid-cols-3 gap-4 relative">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4  gap-4 relative">
           {reviews.map((review, index) => (
             <div
               key={index + 1}
               className="p-4 rounded-lg shadow-lg border-[1px] border-solid border-gray-light-2"
             >
-              <div className="">
-                <StarRating numStars={review.reviewStars} />
-              </div>
+              <StarRating numStars={review.reviewStars} />
               <div className="py-4">"{review.reviewInfo}"</div>
               <div className="flex align-center justify-between border-t-[1px] pt-4">
                 <div className="flex flex-col">
