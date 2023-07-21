@@ -2,12 +2,13 @@ import { Fragment } from "react";
 import { SearchRooms } from "../../modules/room/UI/SearchRooms";
 import { UniqueRoomTypes } from "../../modules/room/UI/UniqueRoomTypes";
 import { Reviews } from "../../modules/review/UI/Reviews";
+import { Footer } from "../../shared/layouts/Footer";
 import { Link } from "react-router-dom";
 
 export const Home = () => {
   return (
     <Fragment>
-      <div className="min-h-[100vh] mb-24">
+      <div className="min-h-[100vh]">
         <header className="text-gray-light-2">
           <nav className="bg-primary flex items-center justify-between px-6 py-4">
             <span>ReserveNow</span>
@@ -34,10 +35,7 @@ export const Home = () => {
         <SearchRooms />
         <UniqueRoomTypes />
         <Reviews />
-        {/* Several sections here */}
-        <footer className="h-[350px]">
-          <span>Footer</span>
-        </footer>
+        <Footer />
       </div>
     </Fragment>
   );
