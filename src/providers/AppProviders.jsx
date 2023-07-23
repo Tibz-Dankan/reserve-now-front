@@ -1,5 +1,5 @@
 import React from "react";
-import { ReduxProvider } from "./reduxProvider";
+import { ReduxProvider } from "./ReduxProvider";
 import { ReactQueryProvider } from "./ReactQueryProvider";
 
 export const AppProviders = (props) => {

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { notificationActions } from "./store";
 // import { Alert } from "@mui/material";
 import { Home } from "./common/pages/Home";
-import { SignIn } from "./modules/auth/pages/Signin";
+import { SignIn } from "./modules/auth/pages/SignIn";
 import { SignUp } from "./modules/auth/pages/SignUp";
 import { Booking } from "./modules/booking/Pages/Booking";
 import { Notification } from "./shared/UI/Notification";
