@@ -3,6 +3,7 @@ import { SearchRooms } from "../../modules/room/UI/SearchRooms";
 import { UniqueRoomTypes } from "../../modules/room/UI/UniqueRoomTypes";
 import { Reviews } from "../../modules/review/UI/Reviews";
 import { Footer } from "../../shared/layouts/Footer";
+import { ScrollToTop } from "../../shared/UI/ScrollToTop";
 import { Link } from "react-router-dom";
 
 export const Home = () => {
@@ -36,6 +37,7 @@ export const Home = () => {
         <UniqueRoomTypes />
         <Reviews />
         <Footer />
+        <ScrollToTop/>
       </div>
     </Fragment>
   );

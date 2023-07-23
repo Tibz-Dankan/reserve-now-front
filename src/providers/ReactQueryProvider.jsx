@@ -19,7 +19,7 @@ export const ReactQueryProvider = (props) => {
     <Fragment>
       <QueryClientProvider client={queryClient}>
         {props.children}
-        <ReactQueryDevtools initialIsOpen={false} />
+        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
       </QueryClientProvider>
     </Fragment>
   );
