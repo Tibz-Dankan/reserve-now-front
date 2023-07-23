@@ -8,25 +8,25 @@ export const ChatRecipientsList = () => {
       username: "JohnDoe",
       imageUrl: "",
       lastChatMessage: "Hey there, how are you?",
-      chatMessageDate: "2023-07-21 09:30:15",
+      chatMessageDate: "Jul 2",
     },
     {
       username: "JaneSmith",
       imageUrl: "https://example.com/janesmith.jpg",
       lastChatMessage: "I'm doing great, thanks!",
-      chatMessageDate: "2023-07-21 10:45:22",
+      chatMessageDate: "Jun 28",
     },
     {
       username: "AlexJohnson",
       imageUrl: "",
       lastChatMessage: "Did you watch the game last night?",
-      chatMessageDate: "2023-07-22 18:15:50",
+      chatMessageDate: "Jun 22",
     },
     {
       username: "EmilyDavis",
       imageUrl: "",
       lastChatMessage: "No, I missed it. How was it?",
-      chatMessageDate: "2023-07-22 19:05:03",
+      chatMessageDate: "May 13",
     },
   ];
 
@@ -38,7 +38,9 @@ export const ChatRecipientsList = () => {
             border-gray-light-3  p-3"
         >
           <span>Messaging</span>
-          <span>svg icon</span>
+          <svg className="w-[16px] h-[16px] fill-gray-dark-4">
+            <use href={`${sprite}#icon-new-message`}></use>
+          </svg>
         </div>
         <div>
           <SearchMessages />
@@ -46,12 +48,27 @@ export const ChatRecipientsList = () => {
         <div>
           {recipientList.map((recipient) => {
             return (
-              <div className="relative p-4 flex items-center justify-center">
+              <div
+                className="relative p-4 flex items-center justify-start border-b-[1px]
+                    border-gray-light-3"
+              >
                 {recipient.imageUrl && (
-                  <img src={recipient.imageUrl} alt={recipient.username} />
+                  <div
+                    className="bg-gray-light-3 flex items-center justify-center 
+                        w-12 h-12 rounded-[50%]"
+                  >
+                    <img
+                      src={recipient.imageUrl}
+                      alt={recipient.username}
+                      className="w-full  h-full rounded-[50%]"
+                    />
+                  </div>
                 )}
                 {!recipient.imageUrl && (
-                  <div className="bg-gray-light-3 flex items-center justify-center w-12 h-12 rounded-[50%]">
+                  <div
+                    className="bg-gray-light-3 flex items-center justify-center 
+                        w-12 h-12 rounded-[50%]"
+                  >
                     <svg className="w-[36px] h-[36px] fill-gray-dark-1">
                       <use href={`${sprite}#icon-person-filled`}></use>
                     </svg>
@@ -61,7 +78,9 @@ export const ChatRecipientsList = () => {
                   <p className="font-bold">{recipient.username}</p>
                   <p className="text-gray-500">{recipient.lastChatMessage}</p>
                 </div>
-                <span>{recipient.chatMessageDate}</span>
+                <span className="absolute top-4 right-4 text-[12px]">
+                  {recipient.chatMessageDate}
+                </span>
               </div>
             );
           })}
