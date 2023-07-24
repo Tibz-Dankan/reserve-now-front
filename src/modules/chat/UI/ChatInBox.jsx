@@ -6,7 +6,10 @@ import { ChatMessages } from "./ChatMessages";
 export const ChatInBox = () => {
   return (
     <Fragment>
-      <div>
+      <div
+        className="border-[1px] border-gray-light-3 rounded-tr-lg
+      h-full"
+      >
         <ChatInBoxHeader />
         <ChatMessages />
         <ChatInBoxForm />
