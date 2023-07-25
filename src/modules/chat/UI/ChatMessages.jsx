@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { MessagePrimary } from "./MessagePrimary";
+import { MessageSecondary } from "./MessageSecondary";
 
 // export const ChatMessages = ({ messageList }) => {
 export const ChatMessages = () => {
@@ -52,6 +53,7 @@ export const ChatMessages = () => {
     <Fragment>
       <div className="p-4 pt-8">
         <MessagePrimary />
+        <MessageSecondary />
       </div>
     </Fragment>
   );
