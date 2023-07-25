@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { ChatInBox } from "../UI/ChatInBox";
 import { ChatRecipientsList } from "../UI/ChatRecipientsList";
 

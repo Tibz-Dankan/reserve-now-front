@@ -1,7 +1,18 @@
-import React, { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import sprite from "../../../assets/icons/sprite.svg";
 
 export const ChatInBoxHeader = () => {
+  const showImage = false;
+
+  const [showOnlineStatus, setShowOnlineStatus] = useState(false);
+
+  useEffect(() => {
+    setShowOnlineStatus(true);
+    setTimeout(() => {
+      setShowOnlineStatus(false);
+    }, 3000);
+  }, []);
+
   return (
     <Fragment>
       <div className="">
@@ -9,9 +20,34 @@ export const ChatInBoxHeader = () => {
           className="flex items-center justify-between border-b-[1px]
              border-gray-light-3 px-3 py-1 gap-x-40"
         >
-          <div className="">
-            <p className="font-bold mb-[-4px]">John Doe</p>
-            <p className="text-sm text-gray-700">Client</p>
+          <div className="flex items-center justify-center">
+            <div
+              className="bg-gray-light-3 flex items-center justify-center 
+                w-10 h-10 rounded-[50%] relative"
+            >
+              {showImage && (
+                <img
+                  src={"recipient.imageUrl"}
+                  alt={"recipient.username"}
+                  className="w-full  h-full rounded-[50%]"
+                />
+              )}
+              {!showImage && (
+                <svg className="w-[24px] h-[24px] fill-gray-dark-1">
+                  <use href={`${sprite}#icon-person-filled`}></use>
+                </svg>
+              )}
+              {/* TODO: To dynamically change the color od the dot depending 
+              on users online status(active[fill-green-600], active-5min-ago[fill-yellow-600] 
+              active-beyond-5min[fill-gray-500])  */}
+              <svg className="w-[24px] h-[24px] fill-green-600 absolute right-[-8px] bottom-[-4px]">
+                <use href={`${sprite}#icon-dots`}></use>
+              </svg>
+            </div>
+            <div className="ml-2">
+              <p className="font-bold mb-[-4px]">John Doe</p>
+              <p className="text-sm text-gray-700">Client</p>
+            </div>
           </div>
           <div className=" w-[96px] relative p-3">
             <svg className="w-[24px] h-[24px] fill-gray-dark-4 absolute top-0 left-0">
@@ -25,9 +61,11 @@ export const ChatInBoxHeader = () => {
             </svg>
           </div>
         </div>
-        <div>
-          <span>Online</span>
-        </div>
+        {showOnlineStatus && (
+          <div className="bg-green-600 text-gray-light-1 py-2 px-4 transition-transform">
+            <span>Online</span>
+          </div>
+        )}
       </div>
     </Fragment>
   );

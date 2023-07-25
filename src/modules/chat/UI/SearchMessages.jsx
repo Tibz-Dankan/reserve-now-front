@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import sprite from "../../../assets/icons/sprite.svg";
 
 export const SearchMessages = () => {

@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { SearchMessages } from "./SearchMessages";
 import sprite from "../../../assets/icons/sprite.svg";
 
@@ -46,11 +46,12 @@ export const ChatRecipientsList = () => {
           <SearchMessages />
         </div>
         <div>
-          {recipientList.map((recipient) => {
+          {recipientList.map((recipient, index) => {
             return (
               <div
                 className="relative p-4 flex items-center justify-start border-b-[1px]
                     border-gray-light-3"
+                key={index + 1}
               >
                 {recipient.imageUrl && (
                   <div
