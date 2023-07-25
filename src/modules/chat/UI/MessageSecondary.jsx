@@ -2,15 +2,16 @@ import { Fragment } from "react";
 
 // export const MessageSecondary = ({msg}) => {
 export const MessageSecondary = () => {
+  const showTime = true;
   return (
     <Fragment>
       <div>
-        <div className="mt-6 ml-9 relative inline-block">
-          <span className="text-sm text-gray-500 absolute -top-5 right-1">
-            8:16 PM
-          </span>
+        <div className="mt-1 ml-9  inline-block">
+          {showTime && (
+            <p className="text-sm text-gray-500 text-end pr-4">8:16 PM</p>
+          )}
           <p
-            className="text-sm text-gray-900 bg-gray-light-3 p-4 rounded-xl 
+            className="text-sm text-gray-light-2 bg-primary p-4 rounded-2xl 
             relative w-auto max-w-[300px] min-h-[32px]"
           >
             this is secondary message for the chat this is secondary message for

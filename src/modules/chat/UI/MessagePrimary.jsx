@@ -33,9 +33,9 @@ export const MessagePrimary = () => {
       </div>
       <div className="mt-3 ml-9">
         <p
-          className="text-sm text-gray-900 bg-gray-light-3 p-4 rounded-xl 
+          className="text-sm text-gray-light-2 bg-primary p-4 rounded-2xl 
             rounded-tl-none relative before:absolute before:top-[-8px] before:left-0 
-            before:h-4 before:w-8 before:bg-gray-light-3 before:skew-y-[32deg] 
+            before:h-4 before:w-8 before:bg-primary before:skew-y-[32deg] 
             before:rotate-[-8deg] w-auto max-w-[300px] min-h-[32px]"
         >
           Chat message here Chat message here Chat message here Chat message
