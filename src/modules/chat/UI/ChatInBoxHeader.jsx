@@ -50,13 +50,13 @@ export const ChatInBoxHeader = () => {
             </div>
           </div>
           <div className=" w-[96px] relative p-3">
-            <svg className="w-[24px] h-[24px] fill-gray-dark-4 absolute top-0 left-0">
+            <svg className="w-[24px] h-[24px] fill-primary absolute top-0 left-0">
               <use href={`${sprite}#icon-audio-call`}></use>
             </svg>
-            <svg className="w-[24px] h-[24px] fill-gray-dark-4 absolute top-0 right-[36px]">
+            <svg className="w-[24px] h-[24px] fill-primary absolute top-0 right-[36px]">
               <use href={`${sprite}#icon-video-call`}></use>
             </svg>
-            <svg className="w-[24px] h-[24px] fill-gray-dark-4 absolute top-0 right-0">
+            <svg className="w-[24px] h-[24px] fill-primary absolute top-0 right-0">
               <use href={`${sprite}#icon-dots-y`}></use>
             </svg>
           </div>
