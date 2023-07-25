@@ -41,7 +41,7 @@ export const ChatInBoxHeader = () => {
               on users online status(active[fill-green-600], active-5min-ago[fill-yellow-600] 
               active-beyond-5min[fill-gray-500])  */}
               <svg className="w-[24px] h-[24px] fill-green-600 absolute right-[-8px] bottom-[-4px]">
-                <use href={`${sprite}#icon-dots`}></use>
+                <use href={`${sprite}#icon-dot`}></use>
               </svg>
             </div>
             <div className="ml-2">
