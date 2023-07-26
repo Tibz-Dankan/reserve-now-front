@@ -1,6 +1,27 @@
 import { AppDate } from "../../../shared/utils/appDate";
 
 export class Messages {
+  currentUser;
+  recipient;
+
+  constructor(currentUserObj, recipientObj) {
+    this.currentUser = currentUserObj;
+    this.recipient = recipientObj;
+  }
+
+  currentUserIsSender(msgObj) {
+    if (this.currentUser.id === msgObj.senderId) {
+      return {
+        currentUserIsSender: true,
+        userImageUrl: this.currentUser.imageUrl,
+      };
+    }
+    return {
+      currentUserIsSender: false,
+      userImageUrl: this.recipient.imageUrl,
+    };
+  }
+
   hasDifferentMinute(prevDate, currentDate) {
     const prevMinutes = new Date(prevDate).getMinutes();
     const currentMinutes = new Date(currentDate).getMinutes();
@@ -38,6 +59,11 @@ export class Messages {
 
       msgObj.showTime = this.showTime(prevDate, currentDate);
       msgObj.showDay = this.showDay(prevDate, currentDate);
+
+      const currentUserIsSender = this.currentUserIsSender(messageObj);
+      msgObj.currentUserIsSender = currentUserIsSender.currentUserIsSender;
+      msgObj.userImageUrl = currentUserIsSender.userImageUrl;
+
       organizedMessageList.push(msgObj);
     });
     return organizedMessageList;
