@@ -8,6 +8,18 @@ export class Messages {
     this.messageList = messageList;
   }
 
+  hasDifferentMinute(prevDate, currentDate) {
+    const prevMessageMinutes = new Date(prevDate).getMinutes();
+    const currentMessageMinutes = new Date(currentDate).getMinutes();
+
+    if (currentMessageMinutes !== prevMessageMinutes) return true;
+    if (currentMessageMinutes === prevMessageMinutes) return false;
+  }
+
+  showTime(prevDate, currentDate) {
+    return this.hasDifferentMinute(prevDate, currentDate);
+  }
+
   organize() {
     let msgObj = {};
     let prevDay, currentDay;
@@ -22,9 +34,12 @@ export class Messages {
       prevDay = prevDate && new AppDate(prevDate).day();
 
       if (currentDay !== prevDay) {
-        msgObj.day = currentDay;
+        msgObj.showDay = true;
+        msgObj.showTime = this.showTime(prevDate, currentDate);
         this.organizedMessageList.push(msgObj);
       } else {
+        msgObj.showDay = false;
+        msgObj.showTime = this.showTime(prevDate, currentDate);
         this.organizedMessageList.push(msgObj);
       }
     });
