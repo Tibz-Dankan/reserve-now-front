@@ -2,11 +2,11 @@ import { AppDate } from "../../../shared/utils/appDate";
 
 export class Messages {
   hasDifferentMinute(prevDate, currentDate) {
-    const prevMessageMinutes = new Date(prevDate).getMinutes();
-    const currentMessageMinutes = new Date(currentDate).getMinutes();
+    const prevMinutes = new Date(prevDate).getMinutes();
+    const currentMinutes = new Date(currentDate).getMinutes();
 
-    if (currentMessageMinutes !== prevMessageMinutes) return true;
-    if (currentMessageMinutes === prevMessageMinutes) return false;
+    if (currentMinutes !== prevMinutes) return true;
+    if (currentMinutes === prevMinutes) return false;
   }
 
   showTime(prevDate, currentDate) {
