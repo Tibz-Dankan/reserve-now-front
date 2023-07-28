@@ -52,8 +52,15 @@ export const ChatMessages = () => {
   return (
     <Fragment>
       <div className="p-4 pt-8">
-        <MessagePrimary />
-        <MessageSecondary />
+        {messageList.map((message, index) => {
+          return (
+            <div key={index + 1}>
+              <MessagePrimary />
+
+              <MessageSecondary />
+            </div>
+          );
+        })}
       </div>
     </Fragment>
   );

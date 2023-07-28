@@ -1,9 +1,11 @@
+/* eslint-disable react/prop-types */
 import { Fragment } from "react";
 import sprite from "../../../assets/icons/sprite.svg";
 
-// export const MessagePrimary = ({ message }) => {
-export const MessagePrimary = () => {
+export const MessagePrimary = ({ msg }) => {
+  // export const MessagePrimary = () => {
   const showImage = false;
+  // userImageUrl
 
   return (
     <Fragment>
@@ -12,14 +14,14 @@ export const MessagePrimary = () => {
           className="bg-gray-light-3 flex items-center justify-center 
                 w-10 h-10 rounded-[50%] relative"
         >
-          {showImage && (
+          {msg.userImageUrl && (
             <img
               src={"recipient.imageUrl"}
               alt={"recipient.username"}
               className="w-full  h-full rounded-[50%]"
             />
           )}
-          {!showImage && (
+          {!msg.userImageUrl && (
             <svg className="w-[24px] h-[24px] fill-gray-dark-1">
               <use href={`${sprite}#icon-person-filled`}></use>
             </svg>
@@ -38,8 +40,9 @@ export const MessagePrimary = () => {
             before:h-4 before:w-8 before:bg-primary before:skew-y-[32deg] 
             before:rotate-[-8deg] w-auto max-w-[300px] min-h-[32px]"
         >
-          Chat message here Chat message here Chat message here Chat message
-          here Chat message here
+          {/* Chat message here Chat message here Chat message here Chat message
+          here Chat message here */}
+          {msg.message}
         </p>
       </div>
     </Fragment>
