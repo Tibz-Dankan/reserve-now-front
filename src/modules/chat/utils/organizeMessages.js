@@ -24,6 +24,17 @@ export class Messages {
     };
   }
 
+  isPrimaryMessage(currentMessageObj, prevMessageObj) {
+    if (currentMessageObj.senderId !== prevMessageObj?.senderId) {
+      return {
+        isPrimaryMessage: true,
+      };
+    }
+    return {
+      isPrimaryMessage: false,
+    };
+  }
+
   hasDifferentMinute(prevDate, currentDate) {
     const prevMinutes = new Date(prevDate).getMinutes();
     const currentMinutes = new Date(currentDate).getMinutes();
@@ -58,7 +69,12 @@ export class Messages {
       msgObj = messageObj;
       currentDate = new Date(messageObj.createdAt);
       prevDate = new Date(messageList[index - 1]?.createdAt);
+      const prevMessageObj = messageList[index - 1];
 
+      msgObj.isPrimaryMessage = this.isPrimaryMessage(
+        messageObj,
+        prevMessageObj
+      ).isPrimaryMessage;
       msgObj.showTime = this.showTime(prevDate, currentDate);
       msgObj.showDay = this.showDay(prevDate, currentDate);
 

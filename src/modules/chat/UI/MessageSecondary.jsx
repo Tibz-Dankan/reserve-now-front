@@ -13,8 +13,12 @@ export const MessageSecondary = ({ msg }) => {
             <p className="text-sm text-gray-500 text-end pr-4">{time()}</p>
           )}
           <p
-            className="text-sm text-gray-light-2 bg-primary p-4 rounded-2xl 
-            relative w-auto max-w-[300px] min-h-[32px]"
+            className={`text-sm ${
+              msg.currentUserIsSender
+                ? "bg-primary text-gray-light-2"
+                : "bg-gray-light-3 text-gray-900"
+            } p-4 rounded-2xl 
+            relative w-auto max-w-[300px] min-h-[32px]`}
           >
             {msg.message}
           </p>
