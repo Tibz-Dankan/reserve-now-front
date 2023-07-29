@@ -14,13 +14,13 @@ export class Messages {
       return {
         currentUserIsSender: true,
         userImageUrl: this.currentUser.imageUrl,
-        username: this.currentUser.username,
+        username: this.currentUser.name,
       };
     }
     return {
       currentUserIsSender: false,
       userImageUrl: this.recipient.imageUrl,
-      username: this.recipient.username,
+      username: this.recipient.name,
     };
   }
 
