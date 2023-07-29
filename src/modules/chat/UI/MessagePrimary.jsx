@@ -6,9 +6,6 @@ import { AppDate } from "../../../shared/utils/appDate";
 export const MessagePrimary = ({ msg }) => {
   const time = () => new AppDate(msg?.createdAt).time();
 
-  // recipient color -> className="text-sm text-gray-light-2 bg-primary p-4 rounded-2xl
-  // current user color -> className="text-sm text-gray-900 bg-gray-light-3 p-4 rounded-2xl
-
   return (
     <Fragment>
       <div className="bg-green- flex items-center gap-x-1">

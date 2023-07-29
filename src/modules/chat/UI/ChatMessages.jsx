@@ -4,7 +4,6 @@ import { MessageSecondary } from "./MessageSecondary";
 import { AppDate } from "../../../shared/utils/appDate";
 import { Messages } from "../utils/organizeMessages";
 
-// export const ChatMessages = ({ messageList }) => {
 export const ChatMessages = () => {
   const messageList = [
     {
@@ -61,14 +60,9 @@ export const ChatMessages = () => {
     imageUrl: "",
   };
 
-  const day = (date) => {
-    console.log("new AppDate(date).day()");
-    console.log(new AppDate(date).day());
-    return new AppDate(date).day();
-  };
-  // TODO: to sort messages accordingly
+  const day = (date) => new AppDate(date).day();
+
   const messages = new Messages(currentUser, recipient).organize(messageList);
-  console.log("messages");
   console.log(messages);
 
   return (
