@@ -22,6 +22,9 @@ export const chatSlice = createSlice({
     updateMessageList(state, action) {
       state.messageList = action.payload.messageList;
     },
+    addToMessageList(state, action) {
+      state.messageList = [...state.messageList, action.payload.message];
+    },
     clearChat(state, _) {
       state.chatRecipientList = [];
       state.currentRecipient = {};

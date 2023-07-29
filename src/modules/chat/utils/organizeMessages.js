@@ -61,12 +61,13 @@ export class Messages {
 
   organize(msgList) {
     const organizedMessageList = [];
-    let msgObj = {};
     let prevDate, currentDate;
     const messageList = msgList;
 
     messageList.map((messageObj, index) => {
-      msgObj = messageObj;
+      const descriptors = Object.getOwnPropertyDescriptors(messageObj); //copy properties
+      const msgObj = Object.defineProperties({}, descriptors); //create mutable object with all properties
+
       currentDate = new Date(messageObj.createdAt);
       prevDate = new Date(messageList[index - 1]?.createdAt);
       const prevMessageObj = messageList[index - 1];

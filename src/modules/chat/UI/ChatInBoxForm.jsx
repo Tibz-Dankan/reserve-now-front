@@ -1,13 +1,42 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import sprite from "../../../assets/icons/sprite.svg";
 import { Button } from "../../../shared/UI/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { addToMessageList } from "../../../store/actions/chat";
 
 export const ChatInBoxForm = () => {
-  // TODO: update redux store upon submitting
-  // TODO: form submit handler
+  const currentUser = useSelector((state) => state.auth.user);
+  // const recipient = useSelector((state) => state.chat.currentRecipient);
+  console.log("currentUser");
+  console.log(currentUser);
+
+  const [message, setMessage] = useState("");
+  const createdAt = new Date().toISOString();
+  console.log("createdAt");
+  console.log(createdAt);
+  const dispatch = useDispatch();
+
+  const onChangeMessageHandler = (event) => {
+    setMessage(event.target.value);
+  };
+
+  const messageObj = {
+    senderId: "user1",
+    recipientId: "user2",
+    createdAt: createdAt,
+    chatroomId: "mbTD24@30",
+    message: message,
+  };
+
+  const sendMessageHandler = (event) => {
+    event.preventDefault();
+    dispatch(addToMessageList(messageObj));
+    //TODO: send message to the socket room
+  };
+
   return (
     <Fragment>
-      <form>
+      <form onSubmit={(event) => sendMessageHandler(event)}>
         <div
           className="flex items-center justify-center border-y-[1px] border-gray-light-3
              p-4 gap-x-4"
@@ -16,6 +45,7 @@ export const ChatInBoxForm = () => {
             type="text"
             className="h-9 w-[80%]  border-[2px] border-gray-dark-2 outline-none
            focus:border-primary transition-transform rounded"
+            onChange={(event) => onChangeMessageHandler(event)}
           />
           <svg className="w-[24px] h-[24px] fill-gray-dark-1">
             <use href={`${sprite}#icon-chevron-up`}></use>
@@ -33,7 +63,7 @@ export const ChatInBoxForm = () => {
               <use href={`${sprite}#icon-emoji`}></use>
             </svg>
           </div>
-          <Button>Send</Button>
+          <Button type="submit">Send</Button>
         </div>
       </form>
     </Fragment>

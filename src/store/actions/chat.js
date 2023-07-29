@@ -31,11 +31,20 @@ export const addToThreadList = (recipient) => {
 };
 
 export const updateMessageList = (messageList) => {
-  // TODO: organize messages
   return (dispatch) => {
     dispatch(
       chatActions.updateMessageList({
         messageList: messageList,
+      })
+    );
+  };
+};
+
+export const addToMessageList = (message) => {
+  return (dispatch) => {
+    dispatch(
+      chatActions.addToMessageList({
+        message: message,
       })
     );
   };

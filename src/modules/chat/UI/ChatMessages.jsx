@@ -3,54 +3,16 @@ import { MessagePrimary } from "./MessagePrimary";
 import { MessageSecondary } from "./MessageSecondary";
 import { AppDate } from "../../../shared/utils/appDate";
 import { Messages } from "../utils/organizeMessages";
+import { useSelector } from "react-redux";
 
 export const ChatMessages = () => {
-  const messageList = [
-    {
-      senderId: "user1",
-      recipientId: "user2",
-      createdAt: "2023-07-25T13:15:00Z",
-      senderImageUrl: "https://example.com/user1.jpg",
-      recipientImageUrl: "https://example.com/user2.jpg",
-      isRead: true,
-      isDelivered: true,
-      message: "Hello, how are you?",
-    },
-    {
-      senderId: "user3",
-      recipientId: "user1",
-      createdAt: "2023-07-25T14:35:00Z",
-      senderImageUrl: "https://example.com/user1.jpg",
-      recipientImageUrl: "https://example.com/user3.jpg",
-      isRead: true,
-      isDelivered: true,
-      message: "Hey there, what's up?",
-    },
-    {
-      senderId: "user1",
-      recipientId: "user2",
-      createdAt: "2023-07-25T13:15:00Z",
-      senderImageUrl: "https://example.com/user2.jpg",
-      recipientImageUrl: "https://example.com/user1.jpg",
-      isRead: false,
-      isDelivered: true,
-      message: "I'm doing great! Thanks for asking.",
-    },
-    {
-      senderId: "user3",
-      recipientId: "user1",
-      createdAt: "2023-07-28T14:40:00Z",
-      senderImageUrl: "https://example.com/user3.jpg",
-      recipientImageUrl: "https://example.com/user1.jpg",
-      isRead: true,
-      isDelivered: false,
-      message: "Not much, just working on some stuff.",
-    },
-  ];
+  const messageList = useSelector((state) => state.chat.messageList);
+  // const currentUser = useSelector((state) => state.auth.user);
+  // const recipient = useSelector((state) => state.chat.currentRecipient);
 
   const currentUser = {
     id: "user1",
-    name: "Tibesigwa Dankan",
+    name: "Tibs Dankan",
     imageUrl: "",
   };
 
