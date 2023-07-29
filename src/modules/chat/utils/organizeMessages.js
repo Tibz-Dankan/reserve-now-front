@@ -14,11 +14,13 @@ export class Messages {
       return {
         currentUserIsSender: true,
         userImageUrl: this.currentUser.imageUrl,
+        username: this.currentUser.username,
       };
     }
     return {
       currentUserIsSender: false,
       userImageUrl: this.recipient.imageUrl,
+      username: this.recipient.username,
     };
   }
 
@@ -63,6 +65,7 @@ export class Messages {
       const currentUserIsSender = this.currentUserIsSender(messageObj);
       msgObj.currentUserIsSender = currentUserIsSender.currentUserIsSender;
       msgObj.userImageUrl = currentUserIsSender.userImageUrl;
+      msgObj.username = currentUserIsSender.username;
 
       organizedMessageList.push(msgObj);
     });
