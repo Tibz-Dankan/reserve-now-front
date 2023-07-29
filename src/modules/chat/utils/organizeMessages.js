@@ -57,7 +57,7 @@ export class Messages {
     messageList.map((messageObj, index) => {
       msgObj = messageObj;
       currentDate = new Date(messageObj.createdAt);
-      prevDate = new Date(this.messageList[index - 1]?.createdAt);
+      prevDate = new Date(messageList[index - 1]?.createdAt);
 
       msgObj.showTime = this.showTime(prevDate, currentDate);
       msgObj.showDay = this.showDay(prevDate, currentDate);

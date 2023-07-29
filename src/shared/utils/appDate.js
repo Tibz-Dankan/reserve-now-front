@@ -12,7 +12,7 @@ export class AppDate {
       this.currentDate.getDate()
     );
     this.oneDayMillSec = 1000 * 60 * 60 * 24;
-    this.date = date;
+    this.date = new Date(date);
   }
 
   day() {

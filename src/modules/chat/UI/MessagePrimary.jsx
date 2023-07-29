@@ -1,11 +1,10 @@
 /* eslint-disable react/prop-types */
 import { Fragment } from "react";
 import sprite from "../../../assets/icons/sprite.svg";
+import { AppDate } from "../../../shared/utils/appDate";
 
 export const MessagePrimary = ({ msg }) => {
-  // export const MessagePrimary = () => {
-  const showImage = false;
-  // userImageUrl
+  const time = () => new AppDate(msg?.createdAt).time();
 
   return (
     <Fragment>
@@ -27,11 +26,11 @@ export const MessagePrimary = ({ msg }) => {
             </svg>
           )}
         </div>
-        <span>Tibesigwa Dankan</span>
+        <span>{msg.username}</span>
         <svg className="w-[12px] h-[12px] fill-gray-500">
           <use href={`${sprite}#icon-dot`}></use>
         </svg>
-        <span className="text-sm text-gray-500">6:36 PM</span>
+        <span className="text-sm text-gray-500">{time()}</span>
       </div>
       <div className="mt-3 ml-9">
         <p
@@ -40,8 +39,6 @@ export const MessagePrimary = ({ msg }) => {
             before:h-4 before:w-8 before:bg-primary before:skew-y-[32deg] 
             before:rotate-[-8deg] w-auto max-w-[300px] min-h-[32px]"
         >
-          {/* Chat message here Chat message here Chat message here Chat message
-          here Chat message here */}
           {msg.message}
         </p>
       </div>

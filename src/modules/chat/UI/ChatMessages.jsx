@@ -1,6 +1,8 @@
 import { Fragment } from "react";
 import { MessagePrimary } from "./MessagePrimary";
 import { MessageSecondary } from "./MessageSecondary";
+import { AppDate } from "../../../shared/utils/appDate";
+import { Messages } from "../utils/organizeMessages";
 
 // export const ChatMessages = ({ messageList }) => {
 export const ChatMessages = () => {
@@ -47,17 +49,37 @@ export const ChatMessages = () => {
     },
   ];
 
+  const currentUser = {
+    id: "user1",
+    name: "Tibesigwa Dankan",
+    imageUrl: "",
+  };
+
+  const recipient = {
+    id: "user2",
+    name: "Kusiima Nathaniel",
+    imageUrl: "",
+  };
+
+  const day = (date) => {
+    console.log("new AppDate(date).day()");
+    console.log(new AppDate(date).day());
+    return new AppDate(date).day();
+  };
   // TODO: to sort messages accordingly
+  const messages = new Messages(currentUser, recipient).organize(messageList);
+  console.log("messages");
+  console.log(messages);
 
   return (
     <Fragment>
       <div className="p-4 pt-8">
-        {messageList.map((message, index) => {
+        {messages.map((message, index) => {
           return (
             <div key={index + 1}>
-              <MessagePrimary />
-
-              <MessageSecondary />
+              {message.showDay && <p>{day(message.createdAt)}</p>}
+              {!message.showTime && <MessagePrimary msg={message} />}
+              {message.showTime && <MessageSecondary msg={message} />}
             </div>
           );
         })}
