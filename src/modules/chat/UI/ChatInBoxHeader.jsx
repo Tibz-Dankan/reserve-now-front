@@ -1,10 +1,12 @@
 import { Fragment, useEffect, useState } from "react";
 import sprite from "../../../assets/icons/sprite.svg";
+import { useSelector } from "react-redux";
 
 export const ChatInBoxHeader = () => {
   const showImage = false;
 
   const [showOnlineStatus, setShowOnlineStatus] = useState(false);
+  const recipient = useSelector((state) => state.chat.currentRecipient);
 
   useEffect(() => {
     setShowOnlineStatus(true);
@@ -45,8 +47,8 @@ export const ChatInBoxHeader = () => {
               </svg>
             </div>
             <div className="ml-2">
-              <p className="font-bold mb-[-4px]">John Doe</p>
-              <p className="text-sm text-gray-700">Client</p>
+              <p className="font-bold mb-[-4px]">{recipient.name}</p>
+              <p className="text-sm text-gray-700">{recipient.role}</p>
             </div>
           </div>
           <div className=" w-[96px] relative p-3">
