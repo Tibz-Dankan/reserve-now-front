@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { authenticate } from "./store/actions/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { notificationActions } from "./store";
+import { io } from "socket.io-client";
 // import { Alert } from "@mui/material";
 import { Home } from "./common/pages/Home";
 import { SignIn } from "./modules/auth/pages/SignIn";
@@ -11,17 +12,16 @@ import { Booking } from "./modules/booking/Pages/Booking";
 import { Notification } from "./shared/UI/Notification";
 import { Rooms } from "./modules/room/pages/Rooms";
 import { Chat } from "./modules/chat/pages/Chat";
+import { socketUrl } from "./store";
 import "./App.css";
 
 export const App = () => {
   const auth = useSelector((state) => state.auth);
   const isLoggedIn = auth.isLoggedIn;
-
+  const socket = io.connect(socketUrl);
   const dispatch = useDispatch();
 
   const notification = useSelector((state) => state.notification);
-  // console.log("notification");
-  // console.log(notification);
 
   const closeAlertHandler = () => {
     dispatch(notificationActions.hideAlert());
@@ -111,7 +111,7 @@ export const App = () => {
               <Routes>
                 <Route path="/" element={<Booking />} />
                 <Route path="booking" element={<Booking />} />
-                <Route path="chat" element={<Chat />} />
+                <Route path="chat" element={<Chat socket={socket} />} />
                 <Route path="rooms" element={<Rooms />} />
                 <Route path="*" element={<Navigate to="/booking" replace />} />
               </Routes>

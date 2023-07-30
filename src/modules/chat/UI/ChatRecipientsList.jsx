@@ -1,34 +1,47 @@
 import { Fragment } from "react";
 import { SearchMessages } from "./SearchMessages";
 import sprite from "../../../assets/icons/sprite.svg";
+import { generateChatRoomId } from "../utils/generateChatRoomId";
+import { updateCurrentRecipient } from "../../../store/actions/chat";
+import { useDispatch, useSelector } from "react-redux";
+import { useQuery } from "@tanstack/react-query";
+import { getChatRecipients } from "../API";
+import {
+  hideCardNotification,
+  showCardNotification,
+} from "../../../store/actions/notification";
 
-export const ChatRecipientsList = () => {
-  const recipientList = [
+export const ChatRecipientsList = (props) => {
+  const currentUserId = useSelector((state) => state.auth.user.id);
+  const token = useSelector((state) => state.auth.token);
+  const dispatch = useDispatch();
+
+  const { isLoading, data } = useQuery(
+    ["chatRecipientList"],
+    () => getChatRecipients(currentUserId, token),
     {
-      username: "JohnDoe",
-      imageUrl: "",
-      lastChatMessage: "Hey there, how are you?",
-      chatMessageDate: "Jul 2",
-    },
-    {
-      username: "JaneSmith",
-      imageUrl: "https://example.com/janesmith.jpg",
-      lastChatMessage: "I'm doing great, thanks!",
-      chatMessageDate: "Jun 28",
-    },
-    {
-      username: "AlexJohnson",
-      imageUrl: "",
-      lastChatMessage: "Did you watch the game last night?",
-      chatMessageDate: "Jun 22",
-    },
-    {
-      username: "EmilyDavis",
-      imageUrl: "",
-      lastChatMessage: "No, I missed it. How was it?",
-      chatMessageDate: "May 13",
-    },
-  ];
+      onError: (error) => {
+        dispatch(
+          showCardNotification({ type: "error", message: error.message })
+        );
+        setTimeout(() => {
+          dispatch(hideCardNotification());
+        }, 5000);
+      },
+    }
+  );
+
+  if (isLoading) return <p>Loading...</p>;
+
+  if (!data) return <p>No data fetched(Recipient)</p>;
+
+  const recipientList = data?.data;
+
+  const joinChatRoom = async (recipient) => {
+    const chatRoomId = generateChatRoomId(currentUserId, recipient.id);
+    dispatch(updateCurrentRecipient(recipient));
+    props.socket.emit("joinRoom", chatRoomId);
+  };
 
   return (
     <Fragment>
@@ -50,8 +63,9 @@ export const ChatRecipientsList = () => {
             return (
               <div
                 className="relative p-4 flex items-center justify-start border-b-[1px]
-                    border-gray-light-3"
+                    border-gray-light-3 cursor-pointer"
                 key={index + 1}
+                onClick={() => joinChatRoom(recipient)}
               >
                 {recipient.imageUrl && (
                   <div
@@ -76,7 +90,7 @@ export const ChatRecipientsList = () => {
                   </div>
                 )}
                 <div className="px-2 text-sm">
-                  <p className="font-bold">{recipient.username}</p>
+                  <p className="font-bold">{recipient.name}</p>
                   <p className="text-gray-500">{recipient.lastChatMessage}</p>
                 </div>
                 <span className="absolute top-4 right-4 text-[12px]">

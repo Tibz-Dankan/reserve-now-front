@@ -5,8 +5,9 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 10000,
-      networkMode: "always",
+      staleTime: 150000,
+      networkMode: "cache-and-network",
+      cacheTime: 300000,
     },
     mutations: {
       networkMode: "always",
@@ -19,7 +20,7 @@ export const ReactQueryProvider = (props) => {
     <Fragment>
       <QueryClientProvider client={queryClient}>
         {props.children}
-        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </Fragment>
   );

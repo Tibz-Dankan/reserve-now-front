@@ -13,14 +13,16 @@ export const store = configureStore({
   },
 });
 
-let url;
+let url, socketUrl;
 if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
   url = "http://localhost:8000/api/v1";
+  socketUrl = "http://localhost:8000";
 } else {
   url = "some production url/api/v1";
+  socketUrl = "some production url";
 }
 
-export { url };
+export { url, socketUrl };
 export const authActions = authSlice.actions;
 export const notificationActions = notificationSlice.actions;
 export const sidebarActions = sidebarSlice.actions;

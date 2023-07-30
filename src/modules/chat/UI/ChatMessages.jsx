@@ -7,20 +7,8 @@ import { useSelector } from "react-redux";
 
 export const ChatMessages = () => {
   const messageList = useSelector((state) => state.chat.messageList);
-  // const currentUser = useSelector((state) => state.auth.user);
-  // const recipient = useSelector((state) => state.chat.currentRecipient);
-
-  const currentUser = {
-    id: "user1",
-    name: "Tibs Dankan",
-    imageUrl: "",
-  };
-
-  const recipient = {
-    id: "user2",
-    name: "Kusiima Nathaniel",
-    imageUrl: "",
-  };
+  const currentUser = useSelector((state) => state.auth.user);
+  const recipient = useSelector((state) => state.chat.currentRecipient);
 
   const day = (date) => new AppDate(date).day();
 

@@ -25,6 +25,7 @@
     "react-redux": "^8.1.1",
     "react-router-dom": "^6.12.1",
     "react-select-country-list": "^2.2.3",
+    "socket.io-client": "^4.7.1",
     "use-file-picker": "^1.7.0"
   },
   "devDependencies": {
