@@ -34,7 +34,7 @@ export const MessagePrimary = ({ msg }) => {
       </div>
       <div className="mt-3 ml-9">
         <p
-          className={`text-sm text-gray-light-2  ${
+          className={`text-sm ${
             msg.currentUserIsSender
               ? "bg-primary text-gray-light-2 before:bg-primary"
               : "bg-gray-light-3 text-gray-900 before:bg-gray-light-3"
