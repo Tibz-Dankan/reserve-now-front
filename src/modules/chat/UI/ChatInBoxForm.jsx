@@ -3,35 +3,35 @@ import sprite from "../../../assets/icons/sprite.svg";
 import { Button } from "../../../shared/UI/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { addToMessageList } from "../../../store/actions/chat";
+import { generateChatRoomId } from "../utils/generateChatRoomId";
 
 export const ChatInBoxForm = () => {
   const currentUser = useSelector((state) => state.auth.user);
-  // const recipient = useSelector((state) => state.chat.currentRecipient);
-  console.log("currentUser");
-  console.log(currentUser);
+  const recipient = useSelector((state) => state.chat.currentRecipient);
 
   const [message, setMessage] = useState("");
   const createdAt = new Date().toISOString();
-  console.log("createdAt");
-  console.log(createdAt);
+  const chatRoomId = generateChatRoomId(currentUser.id, recipient.id);
   const dispatch = useDispatch();
 
-  const onChangeMessageHandler = (event) => {
-    setMessage(event.target.value);
-  };
+  const onChangeMessageHandler = (event) => setMessage(event.target.value);
 
   const messageObj = {
-    senderId: "user1",
-    recipientId: "user2",
-    createdAt: createdAt,
-    chatroomId: "mbTD24@30",
+    senderId: currentUser.id,
+    recipientId: recipient.id,
+    chatRoomId: chatRoomId,
     message: message,
+    isRead: false,
+    isDelivered: false,
+    createdAt: createdAt,
   };
 
   const sendMessageHandler = (event) => {
     event.preventDefault();
     dispatch(addToMessageList(messageObj));
+    console.log("dispatched the message");
     //TODO: send message to the socket room
+    setMessage("");
   };
 
   return (
@@ -45,6 +45,7 @@ export const ChatInBoxForm = () => {
             type="text"
             className="h-9 w-[80%]  border-[2px] border-gray-dark-2 outline-none
            focus:border-primary transition-transform rounded"
+            value={message}
             onChange={(event) => onChangeMessageHandler(event)}
           />
           <svg className="w-[24px] h-[24px] fill-gray-dark-1">
