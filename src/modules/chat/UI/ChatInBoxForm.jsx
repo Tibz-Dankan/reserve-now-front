@@ -1,17 +1,18 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect, useRef } from "react";
 import sprite from "../../../assets/icons/sprite.svg";
 import { Button } from "../../../shared/UI/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { addToMessageList } from "../../../store/actions/chat";
 import { generateChatRoomId } from "../utils/generateChatRoomId";
 
-export const ChatInBoxForm = () => {
+export const ChatInBoxForm = (props) => {
   const currentUser = useSelector((state) => state.auth.user);
   const recipient = useSelector((state) => state.chat.currentRecipient);
 
   const [message, setMessage] = useState("");
   const createdAt = new Date().toISOString();
   const chatRoomId = generateChatRoomId(currentUser.id, recipient.id);
+  const effectRan = useRef(false);
   const dispatch = useDispatch();
 
   const onChangeMessageHandler = (event) => setMessage(event.target.value);
@@ -29,10 +30,20 @@ export const ChatInBoxForm = () => {
   const sendMessageHandler = (event) => {
     event.preventDefault();
     dispatch(addToMessageList(messageObj));
-    console.log("dispatched the message");
-    //TODO: send message to the socket room
+    props.socket.emit("sendMessage", messageObj);
     setMessage("");
   };
+
+  useEffect(() => {
+    if (effectRan.current === false) {
+      props.socket.on("receiveMessage", (messageObj) => {
+        dispatch(addToMessageList(messageObj));
+      });
+      return () => {
+        effectRan.current = true;
+      };
+    }
+  }, [props.socket]);
 
   return (
     <Fragment>

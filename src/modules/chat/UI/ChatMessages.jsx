@@ -1,16 +1,30 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useRef } from "react";
 import { MessagePrimary } from "./MessagePrimary";
 import { MessageSecondary } from "./MessageSecondary";
 import { AppDate } from "../../../shared/utils/appDate";
 import { Messages } from "../utils/organizeMessages";
-import { useSelector } from "react-redux";
+import { addToMessageList } from "../../../store/actions/chat";
+import { useDispatch, useSelector } from "react-redux";
 
-export const ChatMessages = () => {
+export const ChatMessages = (props) => {
   const messageList = useSelector((state) => state.chat.messageList);
   const currentUser = useSelector((state) => state.auth.user);
   const recipient = useSelector((state) => state.chat.currentRecipient);
+  const effectRan = useRef(false);
+
+  const dispatch = useDispatch();
 
   const day = (date) => new AppDate(date).day();
+  // useEffect(() => {
+  //   if (effectRan.current === false) {
+  //     props.socket.on("receiveMessage", (messageObj) => {
+  //       dispatch(addToMessageList(messageObj));
+  //     });
+  //     return () => {
+  //       effectRan.current = true;
+  //     };
+  //   }
+  // }, [props.socket]);
 
   const messages = new Messages(currentUser, recipient).organize(messageList);
   console.log(messages);

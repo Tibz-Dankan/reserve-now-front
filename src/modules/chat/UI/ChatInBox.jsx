@@ -3,7 +3,7 @@ import { ChatInBoxHeader } from "./ChatInBoxHeader";
 import { ChatInBoxForm } from "./ChatInBoxForm";
 import { ChatMessages } from "./ChatMessages";
 
-export const ChatInBox = () => {
+export const ChatInBox = (props) => {
   return (
     <Fragment>
       <div
@@ -11,8 +11,8 @@ export const ChatInBox = () => {
           h-full"
       >
         <ChatInBoxHeader />
-        <ChatMessages />
-        <ChatInBoxForm />
+        <ChatMessages socket={props.socket} />
+        <ChatInBoxForm socket={props.socket} />
       </div>
     </Fragment>
   );
