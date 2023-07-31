@@ -38,7 +38,15 @@ export const ChatMessages = (props) => {
         {messages.map((message, index) => {
           return (
             <div key={index + 1}>
-              {message.showDay && <p>{day(message.createdAt)}</p>}
+              {message.showDay && (
+                <p className="flex items-center justify-between mb-3">
+                  <span className="h-[1px] grow bg-gray-light-4"></span>
+                  <span className="bg-gray-300 px-2 py-1 rounded-md mx-2 text-gray-700">
+                    {day(message.createdAt)}
+                  </span>
+                  <span className="h-[1px] grow bg-gray-light-4"></span>
+                </p>
+              )}
               {message.isPrimaryMessage && <MessagePrimary msg={message} />}
               {!message.isPrimaryMessage && <MessageSecondary msg={message} />}
             </div>
