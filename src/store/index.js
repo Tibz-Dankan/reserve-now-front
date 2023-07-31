@@ -18,8 +18,8 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
   url = "http://localhost:8000/api/v1";
   socketUrl = "http://localhost:8000";
 } else {
-  url = "some production url/api/v1";
-  socketUrl = "some production url";
+  url = "https://reserve-now-backend.onrender.com/api/v1";
+  socketUrl = "https://reserve-now-backend.onrender.com";
 }
 
 export { url, socketUrl };
