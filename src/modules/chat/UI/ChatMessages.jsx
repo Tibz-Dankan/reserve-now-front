@@ -5,7 +5,6 @@ import { AppDate } from "../../../shared/utils/appDate";
 import { Messages } from "../utils/organizeMessages";
 import { addToMessageList } from "../../../store/actions/chat";
 import { useDispatch, useSelector } from "react-redux";
-import { ScrollToBottom } from "../../../shared/UI/ScrollToBottom";
 
 export const ChatMessages = (props) => {
   const messageList = useSelector((state) => state.chat.messageList);
@@ -33,7 +32,7 @@ export const ChatMessages = (props) => {
   return (
     <Fragment>
       <div
-        className="p-4 pt-8 h-[55vh] overflow-x-hidden"
+        className="p-4 pt-8 h-[55vh] overflow-x-hidden relative"
         id="message-container"
       >
         {messages.map((message, index) => {
@@ -45,7 +44,6 @@ export const ChatMessages = (props) => {
             </div>
           );
         })}
-        <ScrollToBottom elementId="#message-container" />
       </div>
     </Fragment>
   );
