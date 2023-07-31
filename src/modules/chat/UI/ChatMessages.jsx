@@ -14,6 +14,8 @@ export const ChatMessages = (props) => {
 
   const dispatch = useDispatch();
 
+  // Netlify auth token -> CXHmsYoZgIPSVU3sTWV2A5oGzB3BxNcW82nL9KRcVOk
+
   const day = (date) => new AppDate(date).day();
   // useEffect(() => {
   //   if (effectRan.current === false) {
