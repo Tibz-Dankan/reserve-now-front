@@ -12,7 +12,11 @@ const ModalOverlay = ({ onClose }) => {
 };
 const ModalContent = ({ content, onClose }) => {
   return (
-    <div className="fixed top-[10vh] left-[5%] w-[90%] md:left-[15%] md:w-[70%] xl:left-[20%] xl:w-[60%] p-3  rounded-[12px] z-40 bg-gray-light-1 shadow-2xl animate-slideDown">
+    <div
+      className="fixed top-[10vh] left-[5%] w-[90%] md:left-[15%] 
+          md:w-[70%] xl:left-[20%] xl:w-[60%] p-0  rounded-lg z-40 
+          bg-gray-light-1 shadow-2xl animate-slideDown"
+    >
       <svg
         className="w-3 h-3 fill-gray-dark-2 absolute right-2 top-2"
         onClick={() => onClose()}
