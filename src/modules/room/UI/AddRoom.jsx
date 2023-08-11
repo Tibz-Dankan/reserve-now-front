@@ -22,6 +22,17 @@ export const AddRoom = () => {
   const roomViewRef = useRef(null);
   const token = useSelector((state) => state.auth.token);
 
+  const clearForm = () => {
+    roomNameRef.current.value = "";
+    roomTypeRef.current.value = "";
+    capacityOfAdultsRef.current.value = "";
+    capacityOfChildrenRef.current.value = "";
+    priceAmountRef.current.value = "";
+    priceCurrencyRef.current.value = "";
+    amenitiesRef.current.value = "";
+    roomViewRef.current.value = "";
+  };
+
   const dispatch = useDispatch();
 
   const { isLoading, data, mutate } = useMutation({
@@ -33,6 +44,7 @@ export const AddRoom = () => {
       setTimeout(() => {
         dispatch(hideCardNotification());
       }, 5000);
+      clearForm();
     },
     onError: (error) => {
       dispatch(showCardNotification({ type: "error", message: error.message }));
