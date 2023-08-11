@@ -8,6 +8,7 @@ import {
 import { Modal } from "../../../shared/UI/Modal";
 import { Loader } from "../../../shared/UI/Loader";
 import { Button } from "../../../shared/UI/Button";
+import { ProgressBar } from "../../../shared/UI/ProgressBar";
 import { addRoom } from "../API";
 
 export const AddRoom = () => {
@@ -75,6 +76,29 @@ export const AddRoom = () => {
               <span className="font-bold text-gray-dark-3  text-lg p-4 self-start">
                 Add new room
               </span>
+            </div>
+            <div>
+              <ProgressBar
+                stageNum={4}
+                stageLabelList={[
+                  {
+                    label: "Basic Information",
+                    stage: 1,
+                  },
+                  {
+                    label: "Add Beds",
+                    stage: 2,
+                  },
+                  {
+                    label: "Upload Images",
+                    stage: 3,
+                  },
+                  {
+                    label: "Publish",
+                    stage: 4,
+                  },
+                ]}
+              />
             </div>
             <div
               className="overflow-x-hidden h-[80%] sm:h-auto pb-9 sm:pb-4 grid 
