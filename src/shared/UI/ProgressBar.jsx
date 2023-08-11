@@ -14,7 +14,7 @@ export const ProgressBar = (props) => {
 
   return (
     <Fragment>
-      <div className="w-full flex items-center justify-center mb-8 mt-12">
+      <div className="w-full flex items-center justify-center mb-4 mt-12">
         {stages.map((stage, index) => {
           return (
             <div key={stage}>
