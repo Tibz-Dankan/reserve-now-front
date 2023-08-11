@@ -29,21 +29,23 @@ export const getRoom = async (id) => {
 };
 
 export const addRoom = async ({
-  roomNumber,
+  roomName,
   roomType,
   capacity,
   price,
-  priceCurrency,
+  amenities,
+  view,
   token,
 }) => {
   const response = await fetch(`${url}/rooms/add-room`, {
     method: "POST",
     body: JSON.stringify({
-      roomNumber,
+      roomName,
       roomType,
       capacity,
       price,
-      priceCurrency,
+      amenities,
+      view,
     }),
     headers: {
       "Content-type": "application/json",
