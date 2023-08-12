@@ -4,6 +4,7 @@ import { Button } from "../../../shared/UI/Button";
 import { ProgressBar } from "../../../shared/UI/ProgressBar";
 import { AddRoomForm } from "./AddRoomForm";
 import { useSelector } from "react-redux";
+import { AddRoomBedForm } from "./AddRoomBedForm";
 
 export const AddRoomOperations = () => {
   const addRoomStage = useSelector((state) => state.room.addRoomStage);
@@ -51,7 +52,10 @@ export const AddRoomOperations = () => {
             currentStage={addRoomStage}
           />
           {/* TODO: render components below conditionally depending on the stage */}
-          <AddRoomForm />
+          {addRoomStage === 3 && <AddRoomForm />}
+          {addRoomStage === 1 && <AddRoomBedForm />}
+          {addRoomStage === 3 && <span>Add room images</span>}
+          {addRoomStage === 4 && <span>Publish images</span>}
         </Modal>
       </div>
     </Fragment>

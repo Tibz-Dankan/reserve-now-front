@@ -6,6 +6,12 @@ export const updateAddRoomStage = (nextStage) => {
   };
 };
 
+export const updateNewRoom = (newRoomObj) => {
+  return (dispatch) => {
+    dispatch(roomActions.updateNewRoom({ newRom: newRoomObj }));
+  };
+};
+
 export const clearAddRoomStage = () => {
   return (dispatch) => {
     dispatch(roomActions.clearStage());

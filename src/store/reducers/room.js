@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const theInitialState = {
   addRoomStage: 1,
+  newRoom: {},
 };
 export const roomSlice = createSlice({
   name: "room",
@@ -12,7 +13,15 @@ export const roomSlice = createSlice({
       return;
     },
     clearStage(state) {
-      state.addRoomStage = null;
+      state.addRoomStage = 1;
+    },
+    updateNewRoom(state, action) {
+      state.addRoomStage = action.payload.newRoom;
+      return;
+    },
+    clearRoom(state) {
+      state.addRoomStage = 1;
+      state.addRoomStage = {};
     },
   },
 });
