@@ -12,21 +12,19 @@ export const ProgressBar = (props) => {
   const stages = generateStagesArray();
   const stageLabelList = props.stageLabelList;
 
-  const filledCircle = (index) => {
+  // TODO: make current stage the prop updated from  redux
+
+  const filledCircle = (elementIndex) => {
     const currentStage = 2;
-    console.log("currentStage === index");
-    console.log(currentStage === index);
-    return currentStage === index;
+    const elementStage = elementIndex + 1;
+    return elementStage <= currentStage;
   };
 
-  // const filledCircle = (index) => props.currentStage === index;
-  const filledBar = (index) => {
+  const filledBar = (elementIndex) => {
     const currentStage = 2;
-    console.log("currentStage < index");
-    console.log(currentStage < index);
-    return currentStage < index;
+    const elementStage = elementIndex + 1;
+    return elementStage < currentStage;
   };
-  // const filledBar = (index) => props.currentStage < index;
 
   return (
     <Fragment>
@@ -44,8 +42,8 @@ export const ProgressBar = (props) => {
                       stageLabelList[index].label}
                   </label>
                   <span
-                    className={`w-10 h-10 bg-primary flex items-center justify-center 
-                     rounded-[50%] text-gray-light-1 ${
+                    className={`w-10 h-10 flex items-center justify-center 
+                     rounded-[50%] z-10 ${
                        filledCircle(index)
                          ? "bg-primary text-gray-light-1"
                          : "bg-gray-light-3 text-gray-900"
@@ -65,8 +63,8 @@ export const ProgressBar = (props) => {
                       stageLabelList[index].label}
                   </label>
                   <span
-                    className={`w-10 h-10 bg-primary flex items-center justify-center 
-                     rounded-[50%] text-gray-light-1 ${
+                    className={`w-10 h-10 flex items-center justify-center 
+                     rounded-[50%] z-10 ${
                        filledCircle(index)
                          ? "bg-primary text-gray-light-1"
                          : "bg-gray-light-3 text-gray-900"
