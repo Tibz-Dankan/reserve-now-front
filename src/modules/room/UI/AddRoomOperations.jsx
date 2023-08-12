@@ -3,8 +3,11 @@ import { Modal } from "../../../shared/UI/Modal";
 import { Button } from "../../../shared/UI/Button";
 import { ProgressBar } from "../../../shared/UI/ProgressBar";
 import { AddRoomForm } from "./AddRoomForm";
+import { useSelector } from "react-redux";
 
 export const AddRoomOperations = () => {
+  const addRoomStage = useSelector((state) => state.room.addRoomStage);
+
   const stageLabelList = [
     {
       label: "Basic Information",
@@ -42,7 +45,11 @@ export const AddRoomOperations = () => {
               Add new room
             </span>
           </div>
-          <ProgressBar stageNum={4} stageLabelList={stageLabelList} />
+          <ProgressBar
+            stageNum={4}
+            stageLabelList={stageLabelList}
+            currentStage={addRoomStage}
+          />
           {/* TODO: render components below conditionally depending on the stage */}
           <AddRoomForm />
         </Modal>

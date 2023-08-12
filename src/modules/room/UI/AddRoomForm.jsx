@@ -8,6 +8,7 @@ import {
 import { Loader } from "../../../shared/UI/Loader";
 import { Button } from "../../../shared/UI/Button";
 import { addRoom } from "../API";
+import { updateAddRoomStage } from "../../../store/actions/room";
 
 export const AddRoomForm = () => {
   const roomNameRef = useRef(null);
@@ -42,6 +43,7 @@ export const AddRoomForm = () => {
       setTimeout(() => {
         dispatch(hideCardNotification());
       }, 5000);
+      dispatch(updateAddRoomStage(2));
       clearForm();
     },
     onError: (error) => {

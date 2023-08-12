@@ -17,13 +17,13 @@ export const ProgressBar = (props) => {
   const filledCircle = (elementIndex) => {
     const currentStage = 2;
     const elementStage = elementIndex + 1;
-    return elementStage <= currentStage;
+    return elementStage <= props.currentStage;
   };
 
   const filledBar = (elementIndex) => {
     const currentStage = 2;
     const elementStage = elementIndex + 1;
-    return elementStage < currentStage;
+    return elementStage < props.currentStage;
   };
 
   return (

@@ -3,6 +3,7 @@ import { authSlice } from "./reducers/auth";
 import { notificationSlice } from "./reducers/notification";
 import { sidebarSlice } from "./reducers/sidebar";
 import { chatSlice } from "./reducers/chat";
+import { roomSlice } from "./reducers/room";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     notification: notificationSlice.reducer,
     sidebar: sidebarSlice.reducer,
     chat: chatSlice.reducer,
+    room: roomSlice.reducer,
   },
 });
 
@@ -27,3 +29,4 @@ export const authActions = authSlice.actions;
 export const notificationActions = notificationSlice.actions;
 export const sidebarActions = sidebarSlice.actions;
 export const chatActions = chatSlice.actions;
+export const roomActions = roomSlice.actions;
