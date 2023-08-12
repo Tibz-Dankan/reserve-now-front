@@ -12,16 +12,17 @@ export const ProgressBar = (props) => {
   const stages = generateStagesArray();
   const stageLabelList = props.stageLabelList;
 
-  // TODO: make current stage the prop updated from  redux
+  const label = (elementStage, elementIndex) => {
+    if (elementStage === stageLabelList[elementIndex].stage)
+      return stageLabelList[elementIndex].label;
+  };
 
   const filledCircle = (elementIndex) => {
-    const currentStage = 2;
     const elementStage = elementIndex + 1;
     return elementStage <= props.currentStage;
   };
 
   const filledBar = (elementIndex) => {
-    const currentStage = 2;
     const elementStage = elementIndex + 1;
     return elementStage < props.currentStage;
   };
@@ -38,8 +39,7 @@ export const ProgressBar = (props) => {
                     className="absolute top-[-32px] left-[-20px] 
                      w-auto h-auto text-gray-dark-2  text-center font-bold"
                   >
-                    {stage === stageLabelList[index].stage &&
-                      stageLabelList[index].label}
+                    {label(stage, index)}
                   </label>
                   <span
                     className={`w-10 h-10 flex items-center justify-center 
@@ -59,8 +59,7 @@ export const ProgressBar = (props) => {
                     className="absolute top-[-32px] left-[-32px] w-auto h-auto
                     text-gray-dark-2 text-center font-bold"
                   >
-                    {stage === stageLabelList[index].stage &&
-                      stageLabelList[index].label}
+                    {label(stage, index)}
                   </label>
                   <span
                     className={`w-10 h-10 flex items-center justify-center 
