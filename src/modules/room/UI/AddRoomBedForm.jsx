@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useMutation } from "@tanstack/react-query";
 import {
@@ -11,16 +11,30 @@ import { addRoomBeds } from "../API";
 import { updateAddRoomStage } from "../../../store/actions/room";
 import beds from "../data/beds.json";
 import { LabelTag } from "../../../shared/UI/LabelTag";
+import sprite from "../../../assets/icons/sprite.svg";
 
 export const AddRoomBedForm = () => {
   const [selectedBeds, setSelectedBeds] = useState([]);
   const [bed, setBed] = useState("");
   const [capacityError, setCapacityError] = useState("");
+  const [showError, setShowError] = useState(false);
   const dispatch = useDispatch();
   const room = useSelector((state) => state.room.newRoom);
 
-  console.log("beds");
-  console.log(beds);
+  console.log("new room");
+  console.log(room);
+
+  const bedsWithLabel = useMemo(() => {
+    const availableBeds = beds;
+    if (availableBeds[0].bedType !== "Select bed type") {
+      beds.unshift({
+        bedType: "Select bed type",
+        additionalInfo: "",
+        capacity: "",
+      });
+    }
+    return availableBeds;
+  }, []);
 
   const onSelectBedHandler = (event) => {
     setBed("");
@@ -47,6 +61,9 @@ export const AddRoomBedForm = () => {
     },
   });
 
+  console.log("data");
+  console.log(data);
+
   const selectedBedTypes = (selectedBedsArray) => {
     return selectedBedsArray.map((bed) => bed.bedType);
   };
@@ -59,8 +76,15 @@ export const AddRoomBedForm = () => {
     const roomCapacity = room.capacity.adults;
     if (selectedTotalCapacity > roomCapacity) {
       setCapacityError("Selected beds exceed the room capacity");
+      setShowError(true);
       throw new Error("Selected beds exceed the room capacity");
     }
+  };
+
+  const removeBed = (bedIndex) => {
+    setSelectedBeds((prevSelectedBeds) => {
+      return prevSelectedBeds.filter((bed, index) => index !== bedIndex);
+    });
   };
 
   const addBedsHandler = (event) => {
@@ -70,6 +94,7 @@ export const AddRoomBedForm = () => {
     const bedTypeArray = selectedBedTypes(selectedBeds);
 
     if (!roomId || !selectedBeds[0]) {
+      console.log("Missing bed room information");
       return;
     }
     validateRoomCapacity(selectedBeds);
@@ -81,54 +106,96 @@ export const AddRoomBedForm = () => {
 
   return (
     <Fragment>
-      <div>
+      <div className="px-4 sm:px-8">
+        <div className="text-center">
+          {showError && (
+            <div
+              className="flex items-center justify-center bg-red-100 border-[1px]
+                 border-red-300 rounded-lg p-2"
+            >
+              <span className="text-sm text-start text-red-600 p-2">
+                {capacityError && capacityError}
+              </span>
+              <svg
+                className="w-[15px] h-[15px] fill-red-600 cursor-pointer hover:fill-gray-400"
+                onClick={() => setShowError(false)}
+              >
+                <use href={`${sprite}#icon-cancel-circle`}></use>
+              </svg>
+            </div>
+          )}
+        </div>
         <div
-          className="flex items-start justify-center w-full h-[50%vh] overflow-x-hidden
-          px-4 sm:px-8"
+          className="grid gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-4
+           w-full h-[30vh] overflow-x-hidden pt-4"
         >
-          {selectedBeds.map((bed) => {
+          {selectedBeds.map((bed, index) => {
             return (
-              <div className="m-1">
-                <LabelTag>{bed.bedType}</LabelTag>
+              <div className="">
+                <LabelTag>
+                  <div className="flex items-center justify-center gap-x-2">
+                    <div className="relative group">
+                      <svg
+                        className="w-[15px] h-[15px] fill-white cursor-pointer 
+                         group-hover:fill-gray-400"
+                      >
+                        <use href={`${sprite}#icon-info`}></use>
+                      </svg>
+                      <span
+                        className="absolute top-5 left-[88px] right-jkk invisible opacity-0 w-
+                        w-[200px] p-1 bg-gray-800 text-white text-xs rounded-md 
+                        transform -translate-x-1/2 translate-y-2 transition-opacity duration-300 
+                        group-hover:opacity-100 group-hover:visible z-40"
+                      >
+                        {bed.additionalInfo}
+                      </span>
+                    </div>
+                    <span>{bed.bedType}</span>
+                    <svg
+                      className="w-[15px] h-[15px] fill-white cursor-pointer hover:fill-gray-400"
+                      onClick={() => removeBed(index)}
+                    >
+                      <use href={`${sprite}#icon-cancel-circle`}></use>
+                    </svg>
+                  </div>
+                </LabelTag>
               </div>
             );
           })}
-          <div>
-            <span className="text-sm text-red-600">
-              {capacityError && capacityError}
-            </span>
-          </div>
-        </div>
-        <form onSubmit={(event) => addBedsHandler(event)}>
-          <div>
-            <select
-              value={bed}
-              onChange={(event) => onSelectBedHandler(event)}
-              className="border-[1px] border-gray-400 focus:border-primary
-              focus:bg-gray-200 transition-all outline-none p-2 pl-8 rounded
-               bg-gray-light-1 text-sm"
-            >
-              {beds.map((bed, index) => {
-                return (
-                  <option key={index} value={JSON.stringify(bed)}>
-                    {bed.bedType}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
-          <div
-            className="border-t-[1px] border-gray-opacity p-4 sm:px-8 absolute 
-             bottom-0 right-0 left-0 z-50 bg-gray-light-1 rounded-bl-lg rounded-br-lg"
+          <form
+            onSubmit={(event) => addBedsHandler(event)}
+            className="h-[18vh]"
           >
-            {!isLoading && (
-              <Button type="submit" className="bg-gray-light-1 rounded-md">
-                Add
-              </Button>
-            )}
-            {isLoading && <Loader />}
-          </div>
-        </form>
+            <div className="inline-block w-full text-start">
+              <select
+                value={bed}
+                onChange={(event) => onSelectBedHandler(event)}
+                className="border-[1px] border-gray-400 focus:border-primary
+              focus:bg-gray-200 transition-all outline-none p-2 rounded-3xl
+               bg-gray-light-1 text-sm"
+              >
+                {bedsWithLabel.map((bed, index) => {
+                  return (
+                    <option key={index} value={JSON.stringify(bed)}>
+                      {bed.bedType}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+            <div
+              className="border-t-[1px] border-gray-opacity p-4 sm:px-8 absolute 
+             bottom-0 right-0 left-0 z-50 bg-gray-light-1 rounded-bl-lg rounded-br-lg"
+            >
+              {!isLoading && (
+                <Button type="submit" className="bg-gray-light-1 rounded-md">
+                  Add
+                </Button>
+              )}
+              {isLoading && <Loader />}
+            </div>
+          </form>
+        </div>
       </div>
     </Fragment>
   );
