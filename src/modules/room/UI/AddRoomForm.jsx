@@ -47,7 +47,7 @@ export const AddRoomForm = () => {
       dispatch(updateAddRoomStage(2));
       console.log("Response data on adding room info");
       console.log(data);
-      dispatch(updateNewRoom(data.data));
+      dispatch(updateNewRoom(data.data.room));
       clearForm();
     },
     onError: (error) => {

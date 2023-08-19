@@ -59,7 +59,7 @@ export const addRoom = async ({
   return await response.json();
 };
 
-export const addRoomBeds = async ({ roomId, bedTypes }) => {
+export const addRoomBeds = async ({ roomId, bedTypes, token }) => {
   const response = await fetch(`${url}/beds/add-bed`, {
     method: "POST",
     body: JSON.stringify({

@@ -9,9 +9,6 @@ import { AddRoomBedForm } from "./AddRoomBedForm";
 export const AddRoomOperations = () => {
   const addRoomStage = useSelector((state) => state.room.addRoomStage);
 
-  console.log("addRoomStage");
-  console.log(addRoomStage);
-
   const stageLabelList = [
     {
       label: "Basic Information",
@@ -52,13 +49,10 @@ export const AddRoomOperations = () => {
           <ProgressBar
             stageNum={4}
             stageLabelList={stageLabelList}
-            // currentStage={addRoomStage}
-            currentStage={2}
+            currentStage={addRoomStage}
           />
-          {/* TODO: render components below conditionally depending on the stage */}
           {addRoomStage === 1 && <AddRoomForm />}
-          {/* {addRoomStage === 2 && <AddRoomBedForm />} */}
-          {2 === 2 && <AddRoomBedForm />}
+          {addRoomStage === 2 && <AddRoomBedForm />}
           {addRoomStage === 3 && <span>Add room images</span>}
           {addRoomStage === 4 && <span>Publish images</span>}
         </Modal>

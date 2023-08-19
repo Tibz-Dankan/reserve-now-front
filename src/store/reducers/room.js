@@ -9,8 +9,6 @@ export const roomSlice = createSlice({
   initialState: theInitialState,
   reducers: {
     updateAddRoomStage(state, action) {
-      console.log("action.payload.addRoomStage");
-      console.log(action.payload.addRoomStage);
       state.addRoomStage = action.payload.addRoomStage;
       return;
     },
@@ -18,14 +16,12 @@ export const roomSlice = createSlice({
       state.addRoomStage = 1;
     },
     updateNewRoom(state, action) {
-      console.log("action.payload.newRoom");
-      console.log(action.payload.newRoom);
-      state.addRoomStage = action.payload.newRoom;
+      state.newRoom = action.payload.newRoom;
       return;
     },
     clearRoom(state) {
       state.addRoomStage = 1;
-      state.addRoomStage = {};
+      state.newRoom = {};
     },
   },
 });
