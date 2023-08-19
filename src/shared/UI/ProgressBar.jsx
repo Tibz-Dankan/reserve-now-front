@@ -27,6 +27,13 @@ export const ProgressBar = (props) => {
     return elementStage < props.currentStage;
   };
 
+  const isCurrentStage = (elementIndex) => {
+    const elementStage = elementIndex + 1;
+    console.log("elementStage === props.currentStage");
+    console.log(elementStage === props.currentStage);
+    return elementStage === props.currentStage;
+  };
+
   return (
     <Fragment>
       <div className="w-full flex items-center justify-center mb-4 mt-12">
@@ -42,7 +49,9 @@ export const ProgressBar = (props) => {
                     {label(stage, index)}
                   </label>
                   <span
-                    className={`w-10 h-10 flex items-center justify-center 
+                    className={` ${
+                      isCurrentStage(index) && "text-2xl font-bold w-10 h-10"
+                    } w-10 h-10 flex items-center justify-center 
                      rounded-[50%] z-10 ${
                        filledCircle(index)
                          ? "bg-primary text-gray-light-1"
@@ -62,7 +71,9 @@ export const ProgressBar = (props) => {
                     {label(stage, index)}
                   </label>
                   <span
-                    className={`w-10 h-10 flex items-center justify-center 
+                    className={` ${
+                      isCurrentStage(index) && "text-2xl font-bold w-10 h-10"
+                    } w-10 h-10 flex items-center justify-center 
                      rounded-[50%] z-10 ${
                        filledCircle(index)
                          ? "bg-primary text-gray-light-1"
