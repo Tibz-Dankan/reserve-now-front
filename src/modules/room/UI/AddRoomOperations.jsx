@@ -2,10 +2,11 @@ import React, { Fragment } from "react";
 import { Modal } from "../../../shared/UI/Modal";
 import { Button } from "../../../shared/UI/Button";
 import { ProgressBar } from "../../../shared/UI/ProgressBar";
-import { AddRoomForm } from "./AddRoomForm";
 import { useSelector } from "react-redux";
+import { AddRoomForm } from "./AddRoomForm";
 import { AddRoomBedForm } from "./AddRoomBedForm";
 import { AddRoomImages } from "./AddRoomImages";
+import { AddRoomPublicity } from "./AddRoomPublicity";
 
 export const AddRoomOperations = () => {
   const addRoomStage = useSelector((state) => state.room.addRoomStage);
@@ -50,12 +51,13 @@ export const AddRoomOperations = () => {
           <ProgressBar
             stageNum={4}
             stageLabelList={stageLabelList}
-            currentStage={addRoomStage}
+            // currentStage={addRoomStage}
+            currentStage={4}
           />
-          {addRoomStage === 1 && <AddRoomForm />}
+          {addRoomStage === 2 && <AddRoomForm />}
           {addRoomStage === 2 && <AddRoomBedForm />}
           {addRoomStage === 3 && <AddRoomImages />}
-          {addRoomStage === 4 && <span>Publish images</span>}
+          {4 === 4 && <AddRoomPublicity />}
         </Modal>
       </div>
     </Fragment>
