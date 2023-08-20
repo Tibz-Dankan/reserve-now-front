@@ -5,7 +5,8 @@ export const IconButton = (props) => {
   return (
     <Fragment>
       <button
-        className={`${props.className} flex justify-center items-center w-full h-9 bg-primary text-gray-light-1 rounded uppercase font-bold`}
+        className={`${props.className} flex justify-center items-center 
+         w-full h-9 bg-primary text-gray-light-1 rounded px-4 gap-x-4`}
         onClick={props.onClick}
         type={props.type}
         disabled={props.disabled}
