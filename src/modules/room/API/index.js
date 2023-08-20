@@ -108,6 +108,21 @@ export const updateRoom = async ({
   return await response.json();
 };
 
+export const updateRoomImage = async ({ roomId, formData, token }) => {
+  const response = await fetch(`${url}/rooms/update-room-image/${roomId}`, {
+    method: "PATCH",
+    body: formData,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message);
+  }
+  return await response.json();
+};
+
 export const deleteRoom = async ({ id, token }) => {
   const response = await fetch(`${url}/rooms/delete-room/${id}`, {
     method: "DELETE",

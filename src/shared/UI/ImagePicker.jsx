@@ -6,7 +6,9 @@ export const ImagePicker = (props) => {
   const [photo, setPhoto] = useState(null);
 
   const [openFileSelector, { filesContent }] = useFilePicker({
-    readAs: "DataURL",
+    // readAs: "DataURL"
+    readAs: "ArrayBuffer",
+    // readAs: "BinaryString",
     accept: "image/*",
     multiple: false,
     limitFilesConfig: { max: 1 },

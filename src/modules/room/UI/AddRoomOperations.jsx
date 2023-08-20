@@ -5,6 +5,7 @@ import { ProgressBar } from "../../../shared/UI/ProgressBar";
 import { AddRoomForm } from "./AddRoomForm";
 import { useSelector } from "react-redux";
 import { AddRoomBedForm } from "./AddRoomBedForm";
+import { AddRoomImages } from "./AddRoomImages";
 
 export const AddRoomOperations = () => {
   const addRoomStage = useSelector((state) => state.room.addRoomStage);
@@ -53,7 +54,7 @@ export const AddRoomOperations = () => {
           />
           {addRoomStage === 1 && <AddRoomForm />}
           {addRoomStage === 2 && <AddRoomBedForm />}
-          {addRoomStage === 3 && <span>Add room images</span>}
+          {addRoomStage === 3 && <AddRoomImages />}
           {addRoomStage === 4 && <span>Publish images</span>}
         </Modal>
       </div>
