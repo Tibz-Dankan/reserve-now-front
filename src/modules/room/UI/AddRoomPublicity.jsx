@@ -9,7 +9,7 @@ import {
 } from "../../../store/actions/notification";
 import { Button } from "../../../shared/UI/Button";
 import { Loader } from "../../../shared/UI/Loader";
-import { updateAddRoomStage } from "../../../store/actions/room";
+import { updateAddRoomStage, clearRoom } from "../../../store/actions/room";
 import { publishRoom } from "../API";
 import sprite from "../../../assets/icons/sprite.svg";
 
@@ -74,7 +74,6 @@ export const AddRoomPublicity = () => {
       setTimeout(() => {
         dispatch(hideCardNotification());
       }, 5000);
-      // dispatch(updateAddRoomStage(3));
     },
     onError: (error) => {
       dispatch(showCardNotification({ type: "error", message: error.message }));
@@ -90,6 +89,10 @@ export const AddRoomPublicity = () => {
       return;
     }
     mutate({ roomId, token });
+  };
+
+  const AnotherRoomHandler = () => {
+    dispatch(clearRoom());
   };
 
   return (
@@ -188,15 +191,29 @@ export const AddRoomPublicity = () => {
           </div>
         )}
         <div
-          className="w-full border-t-[1px] border-gray-opacity p-4 sm:px-8 bottom-0 
-          right-0 left-0 z-50 bg-gray-light-1 rounded-bl-lg rounded-br-lg"
+          className="flex justify-between w-full border-t-[1px] border-gray-opacity 
+          p-4 sm:px-8 bottom-0 right-0 left-0 z-50 bg-gray-light-1 rounded-bl-lg 
+          rounded-br-lg"
         >
           {!isLoading && (
-            <Button className="font-bold" onClick={() => publishRoomHandler()}>
+            <Button
+              className="font-bold disabled:first-line:bg-primary-light
+             disabled:text-gray-light-2"
+              onClick={() => publishRoomHandler()}
+              disabled={isLoading}
+            >
               Publish
             </Button>
           )}
           {isLoading && <Loader label="Publishing" className="w-40" />}
+          <Button
+            className="font-bold disabled:first-line:bg-primary-light
+            disabled:text-gray-light-2"
+            onClick={() => AnotherRoomHandler()}
+            disabled={isLoading}
+          >
+            Another Room
+          </Button>
         </div>
       </div>
     </Fragment>

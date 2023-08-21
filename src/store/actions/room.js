@@ -20,3 +20,11 @@ export const clearAddRoomStage = () => {
     dispatch(roomActions.clearStage());
   };
 };
+
+export const clearRoom = () => {
+  localStorage.removeItem("addRoomStage");
+  localStorage.removeItem("newRoom");
+  return (dispatch) => {
+    dispatch(roomActions.clearRoom());
+  };
+};
