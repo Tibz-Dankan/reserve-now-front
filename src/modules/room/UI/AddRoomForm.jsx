@@ -215,11 +215,14 @@ export const AddRoomForm = () => {
                right-0 left-0 z-50 bg-gray-light-1 rounded-bl-lg rounded-br-lg"
           >
             {!isLoading && (
-              <Button type="submit" className="bg-gray-light-1 rounded-md">
+              <Button
+                type="submit"
+                className="bg-gray-light-1 rounded-md font-bold"
+              >
                 Add Room
               </Button>
             )}
-            {isLoading && <Loader />}
+            {isLoading && <Loader label="Adding" className="w-36" />}
           </div>
         </form>
       </div>

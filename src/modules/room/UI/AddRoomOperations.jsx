@@ -48,8 +48,9 @@ export const AddRoomOperations = () => {
           >
             <p className="text-gray-dark-3  text-xl p-4 sm:pl-8 self-start">
               <span> Add new room</span>
-              {/* {room?.roomName && <span className="ml-1">({room?.roomName})</span>} */}
-              <span className="ml-1">(cottage 4)</span>
+              {room?.roomName && (
+                <span className="ml-1">({room?.roomName})</span>
+              )}
             </p>
           </div>
           <ProgressBar
