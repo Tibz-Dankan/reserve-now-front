@@ -184,11 +184,14 @@ export const AddRoomBedForm = () => {
              bottom-0 right-0 left-0 z-50 bg-gray-light-1 rounded-bl-lg rounded-br-lg"
             >
               {!isLoading && (
-                <Button type="submit" className="bg-gray-light-1 rounded-md">
-                  Add
+                <Button
+                  type="submit"
+                  className="bg-gray-light-1 rounded-md font-bold"
+                >
+                  Add Beds
                 </Button>
               )}
-              {isLoading && <Loader />}
+              {isLoading && <Loader label="adding" className="w-36" />}
             </div>
           </form>
         </div>
