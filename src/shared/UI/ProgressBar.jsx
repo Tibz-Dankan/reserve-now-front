@@ -42,9 +42,9 @@ export const ProgressBar = (props) => {
                 <div className="relative ">
                   <label
                     className={`${
-                      isCurrentStage(index) && "font-bold text-lg"
-                    } absolute top-[-32px] left-[-16px] 
-                     w-auto h-auto text-gray-dark-3  text-center`}
+                      isCurrentStage(index) && "font-bold text-base sm:text-lg"
+                    } absolute top-[-48px] sm:top-[-32px] left-[-16px]
+                     h-auto text-gray-dark-3  text-center whitespace-normal w-full`}
                   >
                     {label(stage, index)}
                   </label>
@@ -66,9 +66,9 @@ export const ProgressBar = (props) => {
                 <div className="flex items-center justify-start relative">
                   <label
                     className={`${
-                      isCurrentStage(index) && "font-bold text-lg"
-                    } absolute top-[-32px] left-[-24px] w-auto h-auto
-                    text-gray-dark-3 text-center`}
+                      isCurrentStage(index) && "font-bold text-base sm:text-lg"
+                    } absolute -top-12 sm:-top-8 -left-6 sm:-left-12 lg:-left-20 h-auto
+                    text-gray-dark-3 text-center whitespace-normal w-full`}
                   >
                     {label(stage, index)}
                   </label>
@@ -85,7 +85,7 @@ export const ProgressBar = (props) => {
                     {stage}
                   </span>
                   <span
-                    className={`h-3 w-[160px] mx-[-2px] ${
+                    className={`h-3 w-[60px] sm:w-[120px] lg:w-[160px] mx-[-2px] ${
                       filledBar(index) ? "bg-primary" : "bg-gray-light-3"
                     }`}
                   ></span>
