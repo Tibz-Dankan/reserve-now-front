@@ -68,6 +68,9 @@ export const App = () => {
     tryLogin();
   }, [dispatch]);
 
+  // TODO: if user reloads redirect when loggedIn,
+  // redirect them to the page before reload
+
   return (
     <Fragment>
       <div className="bg-gray-light-1 text-base overflow-x-hidden">

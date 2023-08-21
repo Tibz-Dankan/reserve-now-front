@@ -127,7 +127,7 @@ export const AddRoomBedForm = () => {
         >
           {selectedBeds.map((bed, index) => {
             return (
-              <div className="">
+              <div className="" key={index}>
                 <LabelTag>
                   <div className="flex items-center justify-center gap-x-2">
                     <div className="relative group">

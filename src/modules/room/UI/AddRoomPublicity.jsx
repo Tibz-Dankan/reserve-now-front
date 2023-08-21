@@ -15,17 +15,22 @@ import sprite from "../../../assets/icons/sprite.svg";
 
 export const AddRoomPublicity = () => {
   const room = useSelector((state) => state.room.newRoom);
+  console.log("room");
+  console.log(room);
   const token = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const getRoomById = async () => {
-    // return await getRoom(room.id);
-    return await getRoom(13);
+    console.log("room.id");
+    console.log(room.id);
+    return await getRoom(room.id);
+    // return await getRoom(13);
   };
 
   const { data } = useQuery({
     queryKey: ["newRoom"],
+    // queryKey: [""],
     queryFn: getRoomById,
     onError: (error) => {
       dispatch(showCardNotification({ type: "error", message: error.message }));
@@ -42,13 +47,13 @@ export const AddRoomPublicity = () => {
   console.log(data);
 
   const updatedNewRoom = data?.data.room;
-  // const roomImages = updatedNewRoom.images;
+  // const roomImages = updatedNewRoom?.images;
   const roomImages = [
     { viewType: "interior" },
     { viewType: "exterior" },
     { viewType: "bathroom" },
   ];
-  // const beds = updatedNewRoom.beds;
+  // const beds = updatedNewRoom?.beds;
   const beds = [
     { bedType: "Single" },
     { bedType: "Single" },
@@ -68,8 +73,10 @@ export const AddRoomPublicity = () => {
   };
 
   const capitalizeFirstLetter = (word) => {
-    if (typeof word !== "string" || word.length === 0) {
-      throw new Error("Input must be a non-empty string");
+    if (!word) return;
+    if (typeof word !== "string" || word?.length === 0) {
+      return;
+      // throw new Error("Input must be a non-empty string");
     }
     return word.charAt(0).toUpperCase() + word.slice(1);
   };
@@ -84,7 +91,7 @@ export const AddRoomPublicity = () => {
       setTimeout(() => {
         dispatch(hideCardNotification());
       }, 5000);
-      dispatch(updateAddRoomStage(3));
+      // dispatch(updateAddRoomStage(3));
     },
     onError: (error) => {
       dispatch(showCardNotification({ type: "error", message: error.message }));
@@ -95,9 +102,8 @@ export const AddRoomPublicity = () => {
   });
 
   const publishRoomHandler = () => {
-    // const roomId = room.id;
-    const roomId = 13;
-    if (roomId) {
+    const roomId = room.id;
+    if (!roomId) {
       return;
     }
     mutate({ roomId, token });
@@ -153,22 +159,22 @@ export const AddRoomPublicity = () => {
               </li>
               <li>
                 <span className="mr-4">
-                  {updatedNewRoom?.capacity.adults} adults
+                  {updatedNewRoom?.capacity?.adults} adults
                 </span>
-                <span>{updatedNewRoom?.capacity.children} children</span>
+                <span>{updatedNewRoom?.capacity?.children} children</span>
               </li>
               <li>
-                <span>{updatedNewRoom?.price.amount} </span>
-                <span>{updatedNewRoom?.price.currency}</span>
+                <span>{updatedNewRoom?.price?.amount} </span>
+                <span>{updatedNewRoom?.price?.currency}</span>
                 <span className="ml-2">per night</span>
               </li>
               <li className="mt-1">
-                {updatedNewRoom?.publish.isPublished && (
+                {updatedNewRoom?.publish?.isPublished && (
                   <span className="bg-green-200 px-2 py-1 rounded">
                     Published
                   </span>
                 )}
-                {!updatedNewRoom?.publish.isPublished && (
+                {!updatedNewRoom?.publish?.isPublished && (
                   <span className="bg-red-200 px-2 py-1 rounded">
                     Not published
                   </span>

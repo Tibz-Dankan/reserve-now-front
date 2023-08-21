@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
 import { getAllRooms } from "../API";
@@ -9,9 +9,28 @@ import {
 import { MasterLayout } from "../../../shared/layouts/MasterLayout";
 import { AddRoomOperations } from "../UI/AddRoomOperations";
 import { UpdateRoom } from "../UI/UpdateRoom";
+import { updateAddRoomStage, updateNewRoom } from "../../../store/actions/room";
 
 export const Rooms = () => {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const tryUpdateRoom = async () => {
+      const strNewRoomData = localStorage.getItem("newRoom");
+      const strAddRoomStageData = localStorage.getItem("addRoomStage");
+      const parsedNewRoomData = JSON.parse(strNewRoomData);
+      const parsedAddRoomStageData = JSON.parse(strAddRoomStageData);
+
+      if (!parsedNewRoomData || !parsedAddRoomStageData) {
+        localStorage.removeItem("newRoom");
+        localStorage.removeItem("addRoomStage");
+        return;
+      }
+      dispatch(updateAddRoomStage(parsedAddRoomStageData));
+      dispatch(updateNewRoom(parsedNewRoomData));
+    };
+    tryUpdateRoom();
+  }, [dispatch]);
 
   const { isLoading, data } = useQuery({
     queryKey: ["rooms"],

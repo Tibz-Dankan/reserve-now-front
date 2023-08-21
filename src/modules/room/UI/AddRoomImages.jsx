@@ -66,7 +66,7 @@ export const AddRoomImages = () => {
       setTimeout(() => {
         dispatch(hideCardNotification());
       }, 5000);
-      dispatch(updateAddRoomStage(3));
+      dispatch(updateAddRoomStage(4));
       clearRoomImages();
     },
     onError: (error) => {
