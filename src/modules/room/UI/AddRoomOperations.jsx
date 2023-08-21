@@ -10,10 +10,11 @@ import { AddRoomPublicity } from "./AddRoomPublicity";
 
 export const AddRoomOperations = () => {
   const addRoomStage = useSelector((state) => state.room.addRoomStage);
+  const room = useSelector((state) => state.room.newRoom);
 
   const stageLabelList = [
     {
-      label: "Basic Information",
+      label: "Basic Info",
       stage: 1,
     },
     {
@@ -45,15 +46,16 @@ export const AddRoomOperations = () => {
             className="flex items-center justify-start border-b-[1px]
            border-gray-opacity"
           >
-            <span className="font-bold text-gray-dark-3  text-lg p-4 sm:pl-8 self-start">
-              Add new room
-            </span>
+            <p className="text-gray-dark-3  text-xl p-4 sm:pl-8 self-start">
+              <span> Add new room</span>
+              {/* {room?.roomName && <span className="ml-1">({room?.roomName})</span>} */}
+              <span className="ml-1">(cottage 4)</span>
+            </p>
           </div>
           <ProgressBar
             stageNum={4}
             stageLabelList={stageLabelList}
             currentStage={addRoomStage}
-            // currentStage={4}
           />
           {addRoomStage === 1 && <AddRoomForm />}
           {addRoomStage === 2 && <AddRoomBedForm />}

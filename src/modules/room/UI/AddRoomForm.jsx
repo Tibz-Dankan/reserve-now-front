@@ -98,7 +98,7 @@ export const AddRoomForm = () => {
         <form
           onSubmit={(event) => addRoomHandler(event)}
           className="border-[0px] border-gray-opacity rounded w-[100%] h-[50vh] 
-            relative"
+            relative text-gray-dark-3"
         >
           <div
             className="overflow-x-hidden h-[80%] sm:h-auto pb-9 sm:pb-0 sm:px-4
@@ -106,7 +106,7 @@ export const AddRoomForm = () => {
           >
             <div
               className="flex flex-col items-start justify-center mx-4 my-2
-                   space-y-1"
+              space-y-1"
             >
               <label htmlFor="roomNumber">Room Name</label>
               <input

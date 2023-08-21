@@ -1,7 +1,7 @@
 import { authActions } from "../index";
 
 export const logOut = () => {
-  localStorage.removeItem("auth");
+  localStorage.clear();
   return async (dispatch) => {
     await dispatch(authActions.logout());
   };

@@ -29,8 +29,6 @@ export const ProgressBar = (props) => {
 
   const isCurrentStage = (elementIndex) => {
     const elementStage = elementIndex + 1;
-    console.log("elementStage === props.currentStage");
-    console.log(elementStage === props.currentStage);
     return elementStage === props.currentStage;
   };
 
@@ -43,14 +41,16 @@ export const ProgressBar = (props) => {
               {stage === stages.length && (
                 <div className="relative ">
                   <label
-                    className="absolute top-[-32px] left-[-20px] 
-                     w-auto h-auto text-gray-dark-2  text-center font-bold"
+                    className={`${
+                      isCurrentStage(index) && "font-bold text-lg"
+                    } absolute top-[-32px] left-[-16px] 
+                     w-auto h-auto text-gray-dark-3  text-center`}
                   >
                     {label(stage, index)}
                   </label>
                   <span
                     className={` ${
-                      isCurrentStage(index) && "text-2xl font-bold w-10 h-10"
+                      isCurrentStage(index) && "text-2xl font-bold w-11 h-11"
                     } w-10 h-10 flex items-center justify-center 
                      rounded-[50%] z-10 ${
                        filledCircle(index)
@@ -65,14 +65,16 @@ export const ProgressBar = (props) => {
               {stage !== stages.length && (
                 <div className="flex items-center justify-start relative">
                   <label
-                    className="absolute top-[-32px] left-[-32px] w-auto h-auto
-                    text-gray-dark-2 text-center font-bold"
+                    className={`${
+                      isCurrentStage(index) && "font-bold text-lg"
+                    } absolute top-[-32px] left-[-24px] w-auto h-auto
+                    text-gray-dark-3 text-center`}
                   >
                     {label(stage, index)}
                   </label>
                   <span
                     className={` ${
-                      isCurrentStage(index) && "text-2xl font-bold w-10 h-10"
+                      isCurrentStage(index) && "text-2xl font-bold w-11 h-11"
                     } w-10 h-10 flex items-center justify-center 
                      rounded-[50%] z-10 ${
                        filledCircle(index)

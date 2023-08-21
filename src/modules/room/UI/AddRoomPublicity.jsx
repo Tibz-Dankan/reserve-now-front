@@ -9,7 +9,7 @@ import {
 } from "../../../store/actions/notification";
 import { Button } from "../../../shared/UI/Button";
 import { Loader } from "../../../shared/UI/Loader";
-import { updateAddRoomStage, clearRoom } from "../../../store/actions/room";
+import { clearRoom } from "../../../store/actions/room";
 import { publishRoom } from "../API";
 import sprite from "../../../assets/icons/sprite.svg";
 
@@ -37,9 +37,6 @@ export const AddRoomPublicity = () => {
       }, 5000);
     },
   });
-
-  // console.log("data");
-  // console.log(data);
 
   const updatedNewRoom = data?.data.room;
   const roomImages = updatedNewRoom?.images;
