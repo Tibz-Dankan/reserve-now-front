@@ -34,16 +34,19 @@ export const AddRoomImages = () => {
       viewType: "interior",
       src: interiorRoomImage, //current format arraybuffer
       onSelectFn: interiorSelectHandler,
+      additionalInfo: "Interior view image",
     },
     {
       viewType: "exterior",
       src: exteriorRoomImage, //current format arraybuffer
       onSelectFn: exteriorSelectHandler,
+      additionalInfo: "Exterior view image",
     },
     {
       viewType: "bathroom",
       src: bathRoomImage, //current format arraybuffer
       onSelectFn: bathRoomSelectHandler,
+      additionalInfo: "Bathroom view image",
     },
   ];
 
@@ -106,24 +109,11 @@ export const AddRoomImages = () => {
     });
   };
 
-  // const imageURLHandler = (imageArrayBuffer) => {
-  //   let url;
-  //   if (!imageArrayBuffer) return;
-  //   const reader = new FileReader();
-  //   reader.readAsDataURL(new Blob([imageArrayBuffer], { type: "image/png" }));
-
-  //   console.log("reader");
-  //   console.log(reader);
-  //   console.log("reader.result");
-  //   console.log(reader.result);
-
-  //   reader.onload = () => {
-  //     url = reader.result;
-  //   };
-  //   console.log("url");
-  //   console.log(url);
-  //   return url;
-  // };
+  const imageURLHandler = (imageArrayBuffer) => {
+    if (!imageArrayBuffer) return;
+    const blob = new Blob([imageArrayBuffer], { type: "image/*" });
+    return URL.createObjectURL(blob);
+  };
 
   return (
     <Fragment>
@@ -144,11 +134,11 @@ export const AddRoomImages = () => {
                   </svg>
                   <span
                     className="absolute top-5 left-[88px] invisible opacity-0 w-
-                     w-[200px] p-1 bg-gray-800 text-white text-xs rounded-md 
+                     w-[130px] p-2 bg-gray-800 text-white text-xs rounded-md 
                      transform -translate-x-1/2 translate-y-2 transition-opacity duration-300 
                      group-hover:opacity-100 group-hover:visible z-40"
                   >
-                    {"More info about interior images"}
+                    {image.additionalInfo}
                   </span>
                 </div>
                 <span className="text-lg bg-green-400s w-[140px]">
@@ -156,8 +146,7 @@ export const AddRoomImages = () => {
                 </span>
                 {image.src && (
                   <img
-                    src={image.src}
-                    // src={imageURLHandler(image.src)}
+                    src={imageURLHandler(image.src)}
                     className="w-[60px] h-[60px] rounded-lg"
                   />
                 )}
