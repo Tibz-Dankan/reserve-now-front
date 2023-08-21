@@ -9,14 +9,12 @@ import {
 } from "../../../store/actions/notification";
 import { Button } from "../../../shared/UI/Button";
 import { Loader } from "../../../shared/UI/Loader";
-import { clearRoom } from "../../../store/actions/room";
+import { clearRoom, updateAddRoomStage } from "../../../store/actions/room";
 import { publishRoom } from "../API";
 import sprite from "../../../assets/icons/sprite.svg";
 
 export const AddRoomPublicity = () => {
   const room = useSelector((state) => state.room.newRoom);
-  console.log("room");
-  console.log(room);
   const token = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -37,6 +35,9 @@ export const AddRoomPublicity = () => {
       }, 5000);
     },
   });
+
+  console.log("data");
+  console.log(data);
 
   const updatedNewRoom = data?.data.room;
   const roomImages = updatedNewRoom?.images;
@@ -92,6 +93,10 @@ export const AddRoomPublicity = () => {
     dispatch(clearRoom());
   };
 
+  // React.useEffect(() => {
+  //   dispatch(updateAddRoomStage(3));
+  // }, []);
+
   return (
     <Fragment>
       <div>
@@ -99,7 +104,7 @@ export const AddRoomPublicity = () => {
           <div className="px-4 sm:px-8 sm:flex sm:items-start justify-center">
             <div className="relative bg-blue-5s00 px-12 pb-4">
               <img
-                src={"roomImages[0]?.url"}
+                src={roomImages[currentImageIndex]?.url}
                 alt={updatedNewRoom?.roomName}
                 className="bg-gray-light-3 w-[250px] h-[220px] rounded-lg"
               />

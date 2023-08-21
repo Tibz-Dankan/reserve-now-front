@@ -5,9 +5,9 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 150000,
+      staleTime: 2000,
       networkMode: "cache-and-network",
-      cacheTime: 300000,
+      cacheTime: 20000,
     },
     mutations: {
       networkMode: "always",

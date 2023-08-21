@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useMutation } from "@tanstack/react-query";
 import {
@@ -69,8 +69,6 @@ export const AddRoomImages = () => {
       setTimeout(() => {
         dispatch(hideCardNotification());
       }, 5000);
-      dispatch(updateAddRoomStage(4));
-      clearRoomImages();
     },
     onError: (error) => {
       dispatch(showCardNotification({ type: "error", message: error.message }));
@@ -84,36 +82,60 @@ export const AddRoomImages = () => {
     return `${room.roomName}-${viewType}.png`;
   };
 
-  const uploadRoomImageHandler = (imageArrayBuffer, viewType) => {
-    const formData = new FormData();
-    formData.append(
-      "file",
-      new Blob([imageArrayBuffer], { type: "image/*" }),
-      imageName(viewType)
-    );
-    formData.append("viewType", viewType);
-    const roomId = room.id;
+  const uploadRoomImageHandler = async (imageArrayBuffer, viewType) => {
+    return new Promise(async (resolve, reject) => {
+      const formData = new FormData();
+      formData.append(
+        "file",
+        new Blob([imageArrayBuffer], { type: "image/*" }),
+        imageName(viewType)
+      );
+      formData.append("viewType", viewType);
+      const roomId = room.id;
 
-    if (!roomId || !viewType || !room.roomName) {
-      console.log("No roomId or viewType or roomName");
-      return;
-    }
-    mutate({ roomId, formData, token });
-  };
+      if (!roomId || !viewType || !room.roomName) {
+        console.log("No roomId or viewType or roomName");
+        reject(new Error("Missing required data"));
+        return;
+      }
 
-  const uploadImages = () => {
-    images.map((image) => {
-      if (image.src && image.viewType) {
-        uploadRoomImageHandler(image.src, image.viewType);
+      try {
+        await mutate({ roomId, formData, token });
+        resolve();
+      } catch (error) {
+        reject(error);
       }
     });
   };
+
+  const uploadImages = () => {
+    images.map(async (image, index) => {
+      if (image.src && image.viewType) {
+        console.log("uploading index... ", index);
+        try {
+          await uploadRoomImageHandler(image.src, image.viewType);
+        } catch (error) {
+          console.error("Error uploading image:", error);
+        }
+      }
+    });
+  };
+
+  // TODO: To upload one image at a time
 
   const imageURLHandler = (imageArrayBuffer) => {
     if (!imageArrayBuffer) return;
     const blob = new Blob([imageArrayBuffer], { type: "image/*" });
     return URL.createObjectURL(blob);
   };
+
+  useEffect(() => {
+    dispatch(updateAddRoomStage(4));
+
+    return () => {
+      clearRoomImages();
+    };
+  }, []);
 
   return (
     <Fragment>
