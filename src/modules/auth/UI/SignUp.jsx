@@ -71,7 +71,7 @@ export const SignUp = () => {
     <Fragment>
       <Modal
         openModalElement={<span className="cursor-pointer">SignUp</span>}
-        className="fixed top-1/5 left-1/2 -translate-x-1/2 -translate-y-1/2
+        className="fixed top-[15vh] left-1/2 -translate-x-1/2 -translate-y-1/2
         w-[540px] md:left-[15%] md:w-[540px] xl:left-[20%] xl:w-[540px]"
       >
         <div className="sm:w-full relative">

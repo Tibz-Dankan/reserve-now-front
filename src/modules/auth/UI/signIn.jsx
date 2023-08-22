@@ -60,14 +60,13 @@ export const SignIn = () => {
     <Fragment>
       <Modal
         openModalElement={<span className="cursor-pointer">SignIn</span>}
-        // className="w-auto fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-        className="fixed top-1/5 left-1/2 -translate-x-1/2 -translate-y-1/2
+        className="fixed top-[15vh] left-1/2 -translate-x-1/2 -translate-y-1/2
         w-[540px] md:left-[15%] md:w-[540px] xl:left-[20%] xl:w-[540px]"
       >
         <div className="sm:w-full relative">
           <form
             onSubmit={(event) => signInHandler(event)}
-            className="min-w-[300px] p-4 sm:p-8 sm:w-3/5"
+            className="p-4 sm:p-8 sm:w-3/5"
           >
             <div className="mb-6">
               <h1 className="font-bold text-3xl text-gray-dark-3">
@@ -80,8 +79,9 @@ export const SignIn = () => {
                 Email
               </label>
               <input
-                className="border-[1px] border-gray-400 focus:border-primary focus:bg-gray-200 transition-all outline-none 
-                p-2  rounded bg-gray-light-1 text-sm"
+                className="border-[1px] border-gray-400 focus:border-primary
+                 focus:bg-gray-200 transition-all outline-none p-2  rounded
+                 bg-gray-light-1 text-sm"
                 type="email"
                 ref={emailRef}
                 placeholder="Enter your email"
@@ -94,13 +94,15 @@ export const SignIn = () => {
               </label>
               <Link
                 to="/forgot-password"
-                className="text-sm text-primary-dark hover:underline focus:underline absolute right-0 top-[-2px] outline-none"
+                className="text-sm text-primary-dark hover:underline focus:underline
+                absolute right-0 top-[-2px] outline-none"
               >
                 Forgot password?
               </Link>
               <input
-                className="border-[1px] border-gray-400 focus:border-primary focus:bg-gray-200 transition-all outline-none 
-                p-2 rounded bg-gray-light-1 text-sm"
+                className="border-[1px] border-gray-400 focus:border-primary
+               focus:bg-gray-200 transition-all outline-none  p-2 rounded
+               bg-gray-light-1 text-sm"
                 type="password"
                 ref={passwordRef}
                 placeholder="Enter your password"

@@ -18,10 +18,10 @@ const ModalContent = ({ content, onClose, className }) => {
           bg-gray-light-1 shadow-2xl animate-slideDown`}
     >
       <svg
-        className="w-3 h-3 fill-gray-dark-2 absolute right-2 top-2 z-100"
+        className="w-[20px] h-[20px] fill-gray-dark-2 absolute right-4 top-4 z-[2000]"
         onClick={() => onClose()}
       >
-        <use href={`${sprite}#icon-cross`}></use>
+        <use href={`${sprite}#icon-cross-small`}></use>
       </svg>
       {content}
     </div>
