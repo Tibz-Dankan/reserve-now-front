@@ -6,6 +6,7 @@ import { Footer } from "../../shared/layouts/Footer";
 import { ScrollToTop } from "../../shared/UI/ScrollToTop";
 import { Link } from "react-router-dom";
 import { SignIn } from "../../modules/auth/UI/signIn";
+import { SignUp } from "../../modules/auth/UI/SignUp";
 
 export const Home = () => {
   return (
@@ -25,7 +26,8 @@ export const Home = () => {
                 <Link to="#">About</Link>
               </li>
               <li>
-                <Link to="signup">SignUp</Link>
+                {/* <Link to="signup">SignUp</Link> */}
+                <SignUp />
               </li>
               <li>
                 {/* <Link to="signin">SignIn</Link> */}
