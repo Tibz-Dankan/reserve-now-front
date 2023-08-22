@@ -11,6 +11,7 @@ import {
 import { Loader } from "../../../shared/UI/Loader";
 import { Button } from "../../../shared/UI/Button";
 import { Modal } from "../../../shared/UI/Modal";
+import { SignIn } from "./signIn";
 import sprite from "../../../assets/icons/sprite.svg";
 import personPlaceHolder from "../../../assets/Images/person.png";
 import countryList from "react-select-country-list";
@@ -171,30 +172,25 @@ export const SignUp = () => {
               )}
               {isLoading && <Loader label="Signing up" className="w-40" />}
             </div>
-            <div className="w-full mt-4">
+            <div className="w-full mt-4 flex items-center justify-start gap-x-1">
               <span>Already have an account?</span>
-              <span
-                className="cursor-pointer focus:underline hover:underline
-                  text-primary ml-2"
-              >
-                Sign in
-              </span>
+              <SignIn />
             </div>
           </form>
           <div
-            className="sm:w-2/5 h-full bg-primary flex items-center 
+            className="w-0 h-0 sm:w-2/5 sm:h-full bg-primary  sm:flex items-center 
             justify-center absolute top-0 right-0 z-0 rounded-br-lg rounded-tr-lg"
           >
             <div className="relative">
               <div
-                className="w-48 h-48 border-[38px] border-primary rounded-[50%]
+                className="w-0 h-0 sm:w-48 sm:h-48 sm:border-[38px] border-primary rounded-[50%]
                  absolute"
               ></div>
-              <div className="w-48 h-48 flex items-center justify-center">
+              <div className="w-0 h-0 sm:w-48 sm:h-48 flex items-center justify-center">
                 <img
                   src={personPlaceHolder}
                   alt="person-placeholder"
-                  className="w-32 h-32"
+                  className="w-0 h-0 sm:w-32 sm:h-32"
                 />
               </div>
             </div>
