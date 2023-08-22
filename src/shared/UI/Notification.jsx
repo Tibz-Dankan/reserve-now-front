@@ -26,7 +26,8 @@ export const Notification = (props) => {
 
   return (
     <Card
-      className={`${bgColor} text-lg z-50 fixed top-5  right-5 flex items-center rounded w-72 animate-moveInRight`}
+      className={`${bgColor} text-lg fixed top-5  right-5 flex 
+      items-center rounded w-72 animate-moveInRight z-[10000]`}
     >
       <svg
         className="w-3 h-3 fill-white absolute right-2 top-2"
@@ -39,7 +40,10 @@ export const Notification = (props) => {
           <use href={`${sprite}#icon-${icon}`}></use>
         </svg>
       </div>
-      <div className="flex flex-col items-center p-[2px] mt-[2px] ml-2 max-w-[230px] text-white">
+      <div
+        className="flex flex-col items-center p-[2px] mt-[2px] ml-2 
+          max-w-[230px] text-white"
+      >
         <span>{props.title}</span>
         <span className="text-sm"> {props.message}</span>
       </div>
