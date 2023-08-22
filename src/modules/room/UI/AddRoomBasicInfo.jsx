@@ -11,7 +11,7 @@ import { addRoom } from "../API";
 import { updateAddRoomStage } from "../../../store/actions/room";
 import { updateNewRoom } from "../../../store/actions/room";
 
-export const AddRoomForm = () => {
+export const AddRoomBasicInfo = () => {
   const roomNameRef = useRef(null);
   const roomTypeRef = useRef(null);
   const capacityOfAdultsRef = useRef(null);

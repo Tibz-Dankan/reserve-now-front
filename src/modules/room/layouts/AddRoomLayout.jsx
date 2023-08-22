@@ -3,8 +3,8 @@ import { Modal } from "../../../shared/UI/Modal";
 import { Button } from "../../../shared/UI/Button";
 import { ProgressBar } from "../../../shared/UI/ProgressBar";
 import { useSelector, useDispatch } from "react-redux";
-import { AddRoomForm } from "../UI/AddRoomForm";
-import { AddRoomBedForm } from "../UI/AddRoomBedForm";
+import { AddRoomBasicInfo } from "../UI/AddRoomBasicInfo";
+import { AddRoomBeds } from "../UI/AddRoomBeds";
 import { AddRoomImages } from "../UI/AddRoomImages";
 import { AddRoomPublicity } from "../UI/AddRoomPublicity";
 
@@ -58,8 +58,8 @@ export const AddRoomLayout = () => {
             stageLabelList={stageLabelList}
             currentStage={addRoomStage}
           />
-          {addRoomStage === 1 && <AddRoomForm />}
-          {addRoomStage === 2 && <AddRoomBedForm />}
+          {addRoomStage === 1 && <AddRoomBasicInfo />}
+          {addRoomStage === 2 && <AddRoomBeds />}
           {addRoomStage === 3 && <AddRoomImages />}
           {addRoomStage === 4 && <AddRoomPublicity />}
         </Modal>

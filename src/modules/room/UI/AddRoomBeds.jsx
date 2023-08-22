@@ -13,7 +13,7 @@ import beds from "../data/beds.json";
 import { LabelTag } from "../../../shared/UI/LabelTag";
 import sprite from "../../../assets/icons/sprite.svg";
 
-export const AddRoomBedForm = () => {
+export const AddRoomBeds = () => {
   const [selectedBeds, setSelectedBeds] = useState([]);
   const [bed, setBed] = useState("");
   const [capacityError, setCapacityError] = useState("");
