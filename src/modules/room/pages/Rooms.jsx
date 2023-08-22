@@ -7,7 +7,7 @@ import {
   showCardNotification,
 } from "../../../store/actions/notification";
 import { MasterLayout } from "../../../shared/layouts/MasterLayout";
-import { AddRoomLayout } from "../UI/AddRoomLayout";
+import { AddRoomLayout } from "../layouts/AddRoomLayout";
 import { UpdateRoom } from "../UI/UpdateRoom";
 import { updateAddRoomStage, updateNewRoom } from "../../../store/actions/room";
 

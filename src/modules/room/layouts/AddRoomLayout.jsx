@@ -3,10 +3,10 @@ import { Modal } from "../../../shared/UI/Modal";
 import { Button } from "../../../shared/UI/Button";
 import { ProgressBar } from "../../../shared/UI/ProgressBar";
 import { useSelector, useDispatch } from "react-redux";
-import { AddRoomForm } from "./AddRoomForm";
-import { AddRoomBedForm } from "./AddRoomBedForm";
-import { AddRoomImages } from "./AddRoomImages";
-import { AddRoomPublicity } from "./AddRoomPublicity";
+import { AddRoomForm } from "../UI/AddRoomForm";
+import { AddRoomBedForm } from "../UI/AddRoomBedForm";
+import { AddRoomImages } from "../UI/AddRoomImages";
+import { AddRoomPublicity } from "../UI/AddRoomPublicity";
 
 export const AddRoomLayout = () => {
   const addRoomStage = useSelector((state) => state.room.addRoomStage);
