@@ -8,7 +8,7 @@ import { AddRoomBedForm } from "./AddRoomBedForm";
 import { AddRoomImages } from "./AddRoomImages";
 import { AddRoomPublicity } from "./AddRoomPublicity";
 
-export const AddRoomOperations = () => {
+export const AddRoomLayout = () => {
   const addRoomStage = useSelector((state) => state.room.addRoomStage);
   const room = useSelector((state) => state.room.newRoom);
 

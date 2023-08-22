@@ -7,7 +7,7 @@ import {
   showCardNotification,
 } from "../../../store/actions/notification";
 import { MasterLayout } from "../../../shared/layouts/MasterLayout";
-import { AddRoomOperations } from "../UI/AddRoomOperations";
+import { AddRoomLayout } from "../UI/AddRoomLayout";
 import { UpdateRoom } from "../UI/UpdateRoom";
 import { updateAddRoomStage, updateNewRoom } from "../../../store/actions/room";
 
@@ -51,7 +51,7 @@ export const Rooms = () => {
     <Fragment>
       <MasterLayout title="Rooms">
         <div className="w-full p-4">
-          <AddRoomOperations />
+          <AddRoomLayout />
           {rooms.map((room) => {
             return (
               <div key={room.id}>
