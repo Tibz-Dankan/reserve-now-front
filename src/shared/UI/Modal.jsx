@@ -10,15 +10,15 @@ const ModalOverlay = ({ onClose }) => {
     />
   );
 };
-const ModalContent = ({ content, onClose }) => {
+const ModalContent = ({ content, onClose, className }) => {
   return (
     <div
-      className="fixed top-[10vh] left-[5%] w-[90%] md:left-[15%] 
-          md:w-[70%] xl:left-[20%] xl:w-[60%] p-0  rounded-lg z-40 
-          bg-gray-light-1 shadow-2xl animate-slideDown"
+      className={`${className} fixed top-[10vh] left-[5%] w-[90%] md:left-[15%] 
+          md:w-[70%] xl:left-[20%] xl:w-[60%] p-0  rounded-lg z-[1000] 
+          bg-gray-light-1 shadow-2xl animate-slideDown`}
     >
       <svg
-        className="w-3 h-3 fill-gray-dark-2 absolute right-2 top-2"
+        className="w-3 h-3 fill-gray-dark-2 absolute right-2 top-2 z-100"
         onClick={() => onClose()}
       >
         <use href={`${sprite}#icon-cross`}></use>
@@ -53,6 +53,7 @@ export const Modal = (props) => {
           <ModalContent
             content={props.children}
             onClose={() => onCloseHandler()}
+            className={props?.className}
           />
         </div>,
         document.getElementById("portal")

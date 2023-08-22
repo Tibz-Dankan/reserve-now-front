@@ -5,6 +5,7 @@ import { Reviews } from "../../modules/review/UI/Reviews";
 import { Footer } from "../../shared/layouts/Footer";
 import { ScrollToTop } from "../../shared/UI/ScrollToTop";
 import { Link } from "react-router-dom";
+import { SignIn } from "../../modules/auth/UI/signIn";
 
 export const Home = () => {
   return (
@@ -27,7 +28,8 @@ export const Home = () => {
                 <Link to="signup">SignUp</Link>
               </li>
               <li>
-                <Link to="signin">SignIn</Link>
+                {/* <Link to="signin">SignIn</Link> */}
+                <SignIn />
               </li>
             </ul>
           </nav>
@@ -37,7 +39,7 @@ export const Home = () => {
         <UniqueRoomTypes />
         <Reviews />
         <Footer />
-        <ScrollToTop/>
+        <ScrollToTop />
       </div>
     </Fragment>
   );
