@@ -10,6 +10,7 @@ import { MasterLayout } from "../../../shared/layouts/MasterLayout";
 import { AddRoomLayout } from "../layouts/AddRoomLayout";
 import { UpdateRoom } from "../UI/UpdateRoom";
 import { updateAddRoomStage, updateNewRoom } from "../../../store/actions/room";
+import { RoomList } from "../UI/RoomList";
 
 export const Rooms = () => {
   const dispatch = useDispatch();
@@ -47,26 +48,15 @@ export const Rooms = () => {
 
   const rooms = data.data;
 
+  console.log("rooms");
+  console.log(rooms);
+
   return (
     <Fragment>
       <MasterLayout title="Rooms">
         <div className="w-full p-4">
           <AddRoomLayout />
-          {rooms.map((room) => {
-            return (
-              <div key={room.id}>
-                <span> Room {room.roomNumber} </span>
-                <UpdateRoom
-                  id={room.id}
-                  roomNumber={room.roomNumber}
-                  roomType={room.roomType}
-                  capacity={room.capacity}
-                  price={room.price}
-                  priceCurrency={room.priceCurrency}
-                />
-              </div>
-            );
-          })}
+          <RoomList rooms={rooms} />
         </div>
       </MasterLayout>
     </Fragment>
