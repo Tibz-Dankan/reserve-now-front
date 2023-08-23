@@ -7,6 +7,7 @@ import { ScrollToTop } from "../../shared/UI/ScrollToTop";
 import { Link } from "react-router-dom";
 import { SignIn } from "../../modules/auth/UI/signIn";
 import { SignUp } from "../../modules/auth/UI/SignUp";
+import { AuthLayout } from "../../modules/auth/layouts/AuthLayout";
 
 export const Home = () => {
   return (
@@ -26,12 +27,10 @@ export const Home = () => {
                 <Link to="#">About</Link>
               </li>
               <li>
-                {/* <Link to="signup">SignUp</Link> */}
-                <SignUp />
+                <AuthLayout label="signup" />
               </li>
               <li>
-                {/* <Link to="signin">SignIn</Link> */}
-                <SignIn />
+                <AuthLayout label="signin" />
               </li>
             </ul>
           </nav>
