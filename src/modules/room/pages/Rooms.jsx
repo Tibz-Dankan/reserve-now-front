@@ -1,14 +1,7 @@
 import React, { Fragment, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useQuery } from "@tanstack/react-query";
-import { getAllRooms } from "../API";
-import {
-  hideCardNotification,
-  showCardNotification,
-} from "../../../store/actions/notification";
+import { useDispatch } from "react-redux";
 import { MasterLayout } from "../../../shared/layouts/MasterLayout";
 import { AddRoomLayout } from "../layouts/AddRoomLayout";
-import { UpdateRoom } from "../UI/UpdateRoom";
 import { updateAddRoomStage, updateNewRoom } from "../../../store/actions/room";
 import { RoomList } from "../UI/RoomList";
 
@@ -33,30 +26,12 @@ export const Rooms = () => {
     tryUpdateRoom();
   }, [dispatch]);
 
-  const { isLoading, data } = useQuery({
-    queryKey: ["rooms"],
-    queryFn: getAllRooms,
-    onError: (error) => {
-      dispatch(showCardNotification({ type: "error", message: error.message }));
-      setTimeout(() => {
-        dispatch(hideCardNotification());
-      }, 5000);
-    },
-  });
-
-  if (isLoading) return <p>Loading...</p>;
-
-  const rooms = data.data;
-
-  console.log("rooms");
-  console.log(rooms);
-
   return (
     <Fragment>
       <MasterLayout title="Rooms">
         <div className="w-full p-4">
           <AddRoomLayout />
-          <RoomList rooms={rooms} />
+          <RoomList />
         </div>
       </MasterLayout>
     </Fragment>
