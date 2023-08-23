@@ -4,10 +4,7 @@ import { authenticate } from "./store/actions/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { notificationActions } from "./store";
 import { io } from "socket.io-client";
-// import { Alert } from "@mui/material";
 import { Home } from "./common/pages/Home";
-import { SignIn } from "./modules/auth/pages/SignIn";
-import { SignUp } from "./modules/auth/pages/SignUp";
 import { Booking } from "./modules/booking/Pages/Booking";
 import { Notification } from "./shared/UI/Notification";
 import { Rooms } from "./modules/room/pages/Rooms";
@@ -86,17 +83,7 @@ export const App = () => {
               )}
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/home" element={<SignUp />} />
-                <Route path="signup" element={<SignUp />} />
-                <Route path="signin" element={<SignIn />} />
-                <Route
-                  path="register"
-                  element={<Navigate to="/signup" replace />}
-                />
-                <Route
-                  path="login"
-                  element={<Navigate to="/signin" replace />}
-                />
+                {/* TODO: build logic to cater to for login and signup */}
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </Fragment>
