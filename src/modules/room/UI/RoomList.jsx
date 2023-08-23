@@ -51,6 +51,7 @@ export const RoomList = () => {
                 images={room.images}
                 beds={room.beds}
                 price={room.price}
+                room={room}
               />
             </div>
           );

@@ -1,12 +1,21 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { Button } from "../../../shared/UI/Button";
 import { Card } from "../../../shared/UI/Card";
 import { LabelTag } from "../../../shared/UI/LabelTag";
 import sprite from "../../../assets/icons/sprite.svg";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { RoomMenuList } from "./RoomMenuList";
+import { updateEditRoom } from "../../../store/actions/room";
 
 export const RoomCard = (props) => {
   const user = useSelector((state) => state.auth.user);
+  const [showMenu, setShowMenu] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const dispatchEditRoom = (editRoom) => {
+    dispatch(updateEditRoom(editRoom));
+  };
 
   return (
     <Fragment>
@@ -19,16 +28,20 @@ export const RoomCard = (props) => {
           alt={`${props?.roomName} ${props?.images[0].viewType} view`}
           className="bg-gray-light-3 w-full h-[220px] rounded-lg"
         />
-        <div className="w-full flex items-center justify-between">
+        <div className="w-full flex items-center justify-between relative">
           <span>{props?.roomName}</span>
           {/* {user.role === "admin" && ( */}
           <svg
             className="w-[24px] h-[24px] fill-gray-dark-3 rotate-[90deg]
             cursor-pointer hover:bg-gray-light-3 rounded-[50%] hover:border-[1px]
             hover:border-gray-light-4"
+            onClick={() => {
+              setShowMenu(!showMenu), dispatchEditRoom(props.room);
+            }}
           >
             <use href={`${sprite}#icon-dots-y`}></use>
           </svg>
+          {showMenu && <RoomMenuList />}
           {/* )} */}
         </div>
         <div className="flex items-center justify-start w-full gap-x-1">
