@@ -5,8 +5,6 @@ import { Reviews } from "../../modules/review/UI/Reviews";
 import { Footer } from "../../shared/layouts/Footer";
 import { ScrollToTop } from "../../shared/UI/ScrollToTop";
 import { Link } from "react-router-dom";
-import { SignIn } from "../../modules/auth/UI/signIn";
-import { SignUp } from "../../modules/auth/UI/SignUp";
 import { AuthLayout } from "../../modules/auth/layouts/AuthLayout";
 
 export const Home = () => {
