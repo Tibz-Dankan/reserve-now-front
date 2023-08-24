@@ -1,51 +1,51 @@
 [
   {
-    "bedType": "King Bed",
+    "bedType": "King",
     "capacity": 2,
     "additionalInfo": "A large bed suitable for couples or those who prefer extra space."
   },
   {
-    "bedType": "Queen Bed",
+    "bedType": "Queen",
     "capacity": 2,
     "additionalInfo": "A popular choice for couples or solo travelers, providing a comfortable sleep area."
   },
   {
-    "bedType": "Double Bed",
+    "bedType": "Double",
     "capacity": 2,
     "additionalInfo": "A smaller bed suitable for individuals or couples who prefer a bit less space."
   },
   {
-    "bedType": "Single Bed",
+    "bedType": "Single",
     "capacity": 1,
     "additionalInfo": "A standard single bed typically used for individual sleepers."
   },
   {
-    "bedType": "Twin Bed",
+    "bedType": "Twin",
     "capacity": 1,
     "additionalInfo": "A single bed often used in children's rooms, guest rooms, or single occupancy rooms."
   },
   {
-    "bedType": "Bunk Bed",
+    "bedType": "Bunk",
     "capacity": 2,
     "additionalInfo": "Beds stacked vertically, often seen in shared rooms or accommodations for families."
   },
   {
-    "bedType": "Sofa Bed",
+    "bedType": "Sofa",
     "capacity": 1,
     "additionalInfo": "A couch that can be converted into a bed, offering versatility."
   },
   {
-    "bedType": "Futon Bed",
+    "bedType": "Futon",
     "capacity": 1,
     "additionalInfo": "A multipurpose piece that can serve as a couch during the day and a bed at night."
   },
   {
-    "bedType": "Daybed",
+    "bedType": "Day",
     "capacity": 1,
     "additionalInfo": "Similar to a futon, designed to function as a seating area during the day and a bed at night."
   },
   {
-    "bedType": "Trundle Bed",
+    "bedType": "Trundle",
     "capacity": 1,
     "additionalInfo": "A bed stored beneath another bed, often pulled out when needed for an additional sleeper."
   },

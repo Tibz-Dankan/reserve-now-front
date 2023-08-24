@@ -4,7 +4,7 @@ export const LabelTag = (props) => {
   return (
     <Fragment>
       <div
-        className={`${props.className}first-letter:bg-primary-dark text-gray-light-2 inline-block
+        className={`${props.className} text-gray-light-2 inline-block
          px-4 py-2 text-sm rounded-3xl`}
       >
         {props.children}
