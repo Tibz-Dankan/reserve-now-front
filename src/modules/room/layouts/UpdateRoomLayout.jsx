@@ -4,7 +4,7 @@ import { Modal } from "../../../shared/UI/Modal";
 import { Button } from "../../../shared/UI/Button";
 import { AppDate } from "../../../shared/utils/appDate";
 
-export const UpdateRoomLayout = () => {
+export const UpdateRoomLayout = (props) => {
   const room = useSelector((state) => state.room.editRoom);
 
   const [label, setLabel] = useState("basic info");
@@ -32,7 +32,7 @@ export const UpdateRoomLayout = () => {
     },
   ];
 
-  const createdAt = new AppDate(room.createdAt);
+  const createdAt = new AppDate(room?.createdAt);
 
   return (
     <Fragment>
@@ -54,22 +54,23 @@ export const UpdateRoomLayout = () => {
           </div>
           <div className="p-4 sm:pl-8 flex items-start">
             <img
-              src={room.images[0].url}
-              alt={room.roomName}
+              src={room?.images[0].url}
+              alt={room?.roomName}
               className="w-24 h-20 bg-gray-light-3 rounded-lg"
             />
-            <div className="flex flex-col justify-center px-2">
+            <div className="flex flex-col justify-center px-4">
               <span className="text-lg font-semibold">{room.roomName}</span>
               <div
                 className="flex flex-col justify-center gap-y-[-8px]
-                    text-sm"
+                    text-[12px]"
               >
+                <span>Added on</span>
                 <span>{createdAt.day()}</span>
                 <span>{createdAt.time()}</span>
               </div>
             </div>
           </div>
-          <div className="p-4 sm:pl-8 flex items-center justify-start">
+          <div className="px-4 sm:pl-8 flex items-center justify-start">
             <ul className="space-y-4">
               <li>Basic Info</li>
               <li>Beds</li>
