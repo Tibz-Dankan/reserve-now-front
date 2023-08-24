@@ -3,12 +3,19 @@ import { Button } from "../../../shared/UI/Button";
 import { Card } from "../../../shared/UI/Card";
 import { LabelTag } from "../../../shared/UI/LabelTag";
 import sprite from "../../../assets/icons/sprite.svg";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RoomMenuList } from "./RoomMenuList";
+import { updateEditRoom } from "../../../store/actions/room";
 
 export const RoomCard = (props) => {
   const user = useSelector((state) => state.auth.user);
   const [showMenu, setShowMenu] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const dispatchEditRoom = (editRoom) => {
+    dispatch(updateEditRoom(editRoom));
+  };
 
   return (
     <Fragment>
@@ -29,7 +36,7 @@ export const RoomCard = (props) => {
             cursor-pointer hover:bg-gray-light-3 rounded-[50%] hover:border-[1px]
             hover:border-gray-light-4"
             onClick={() => {
-              setShowMenu(!showMenu);
+              setShowMenu(!showMenu), dispatchEditRoom(props.room);
             }}
           >
             <use href={`${sprite}#icon-dots-y`}></use>

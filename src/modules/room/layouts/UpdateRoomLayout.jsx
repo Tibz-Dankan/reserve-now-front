@@ -3,36 +3,45 @@ import { useSelector } from "react-redux";
 import { Modal } from "../../../shared/UI/Modal";
 import { Button } from "../../../shared/UI/Button";
 import { AppDate } from "../../../shared/utils/appDate";
+import { UpdateRoomBasicInfo } from "../UI/UpdateRoomBasicInfo";
+import { UpdateRoomBeds } from "../UI/UpdateRoomBeds";
+import { UpdateRoomImages } from "../UI/UpdateRoomImages";
+import { UpdateRoomPublicity } from "../UI/UpdateRoomPublicity";
 
-export const UpdateRoomLayout = (props) => {
+export const UpdateRoomLayout = () => {
   const room = useSelector((state) => state.room.editRoom);
 
   const [label, setLabel] = useState("basic info");
 
-  const labelHandler = (label) => {
-    setLabel(label);
-  };
+  const isBasicInfo = label === "basic info";
+  const isBeds = label === "beds";
+  const isImages = label === "images";
+  const isPublicity = label === "publicity";
 
-  const edits = [
+  const editComponents = [
     {
       label: "basic info",
-      component: <span>Basic info</span>,
+      component: <UpdateRoomBasicInfo />,
     },
     {
       label: "beds",
-      component: <span>Beds</span>,
+      component: <UpdateRoomBeds />,
     },
     {
       label: "images",
-      component: <span>Images</span>,
+      component: <UpdateRoomImages />,
     },
     {
       label: "publicity",
-      component: <span>Publicity</span>,
+      component: <UpdateRoomPublicity />,
     },
   ];
 
   const createdAt = new AppDate(room?.createdAt);
+
+  const activeLabelStyles = `bg-gray-light-3 rounded-md relative before:absolute 
+                             before:w-2 before:h-full before:top-0 before:-left-4 
+                             before:bg-primary before:rounded`;
 
   return (
     <Fragment>
@@ -45,7 +54,7 @@ export const UpdateRoomLayout = (props) => {
             className="flex items-center justify-start border-b-[1px]
            border-gray-opacity"
           >
-            <p className="text-gray-dark-3  text-xl p-4 sm:pl-8 self-start">
+            <p className="text-gray-dark-3 text-xl p-4 sm:pl-8 self-start">
               <span> Edit room</span>
               {room?.roomName && (
                 <span className="ml-1">({room?.roomName})</span>
@@ -62,7 +71,7 @@ export const UpdateRoomLayout = (props) => {
               <span className="text-lg font-semibold">{room.roomName}</span>
               <div
                 className="flex flex-col justify-center gap-y-[-8px]
-                    text-[12px]"
+                text-[12px]"
               >
                 <span>Added on</span>
                 <span>{createdAt.day()}</span>
@@ -70,14 +79,50 @@ export const UpdateRoomLayout = (props) => {
               </div>
             </div>
           </div>
-          <div className="px-4 sm:pl-8 flex items-center justify-start">
-            <ul className="space-y-4">
-              <li>Basic Info</li>
-              <li>Beds</li>
-              <li>Images</li>
-              <li>Publicity</li>
+          <div className="px-4 sm:pl-8 flex items-start">
+            <ul className="space-y-4 mr-4 p-4">
+              <li
+                className={`${
+                  isBasicInfo && activeLabelStyles
+                } px-2 py-1 cursor-pointer hover:bg-gray-light-3 rounded`}
+                onClick={() => setLabel("basic info")}
+              >
+                Basic Info
+              </li>
+              <li
+                className={`${
+                  isBeds && activeLabelStyles
+                } px-2 py-1 cursor-pointer hover:bg-gray-light-3 rounded`}
+                onClick={() => setLabel("beds")}
+              >
+                Beds
+              </li>
+              <li
+                className={`${
+                  isImages && activeLabelStyles
+                } px-2 py-1 cursor-pointer hover:bg-gray-light-3 rounded`}
+                onClick={() => setLabel("images")}
+              >
+                Images
+              </li>
+              <li
+                className={`${
+                  isPublicity && activeLabelStyles
+                } px-2 py-1 cursor-pointer hover:bg-gray-light-3 rounded`}
+                onClick={() => setLabel("publicity")}
+              >
+                Publicity
+              </li>
             </ul>
-            <div>The current component</div>
+            <div className="flex-1">
+              {editComponents.map((editComponent) => {
+                return (
+                  <div key={editComponent.label}>
+                    {editComponent.label === label && editComponent.component}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </Modal>
       </div>
