@@ -172,8 +172,8 @@ export const unPublishRoom = async ({ roomId, token }) => {
   return await response.json();
 };
 
-export const deleteRoom = async ({ id, token }) => {
-  const response = await fetch(`${url}/rooms/delete-room/${id}`, {
+export const deleteRoom = async ({ roomId, token }) => {
+  const response = await fetch(`${url}/rooms/delete-room/${roomId}`, {
     method: "DELETE",
     headers: {
       "Content-type": "application/json",

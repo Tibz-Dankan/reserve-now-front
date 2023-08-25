@@ -1,13 +1,17 @@
 import React, { Fragment } from "react";
 import { UpdateRoomLayout } from "../layouts/UpdateRoomLayout";
+import { DeleteRoomLayout } from "../layouts/DeleteRoomLayout";
 import { useDispatch } from "react-redux";
-import { updateEditRoom } from "../../../store/actions/room";
+import { updateEditRoom, updateDeleteRoom } from "../../../store/actions/room";
 
 export const RoomMenuList = (props) => {
   const dispatch = useDispatch();
 
   const dispatchEditRoom = (editRoom) => {
     dispatch(updateEditRoom(editRoom));
+  };
+  const dispatchDeleteRoom = (deleteRoom) => {
+    dispatch(updateDeleteRoom(deleteRoom));
   };
   return (
     <Fragment>
@@ -19,7 +23,9 @@ export const RoomMenuList = (props) => {
         <li onClick={() => dispatchEditRoom(props.room)}>
           <UpdateRoomLayout />
         </li>
-        <li>Delete room</li>
+        <li onClick={() => dispatchDeleteRoom(props.room)}>
+          <DeleteRoomLayout />
+        </li>
       </ul>
     </Fragment>
   );

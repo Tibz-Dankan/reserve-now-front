@@ -20,6 +20,12 @@ export const updateEditRoom = (editRoomObj) => {
   };
 };
 
+export const updateDeleteRoom = (deleteRoomObj) => {
+  return (dispatch) => {
+    dispatch(roomActions.updateDeleteRoom({ deleteRoom: deleteRoomObj }));
+  };
+};
+
 export const clearAddRoomStage = () => {
   localStorage.removeItem("addRoomStage");
   return (dispatch) => {

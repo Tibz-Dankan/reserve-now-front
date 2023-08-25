@@ -4,6 +4,7 @@ const theInitialState = {
   addRoomStage: 1,
   newRoom: {},
   editRoom: {},
+  deleteRoom: {},
 };
 export const roomSlice = createSlice({
   name: "room",
@@ -24,10 +25,15 @@ export const roomSlice = createSlice({
       state.editRoom = action.payload.editRoom;
       return;
     },
+    updateDeleteRoom(state, action) {
+      state.deleteRoom = action.payload.deleteRoom;
+      return;
+    },
     clearRoom(state) {
       state.addRoomStage = 1;
       state.newRoom = {};
       state.editRoom = {};
+      state.deleteRoom = {};
     },
   },
 });

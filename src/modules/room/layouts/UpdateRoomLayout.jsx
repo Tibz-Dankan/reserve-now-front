@@ -68,7 +68,7 @@ export const UpdateRoomLayout = () => {
               className="w-24 h-20 bg-gray-light-3 rounded-lg"
             />
             <div className="flex flex-col justify-center px-4">
-              <span className="text-lg font-semibold">{room.roomName}</span>
+              <span className="text-lg font-semibold">{room?.roomName}</span>
               <div
                 className="flex flex-col justify-center gap-y-[-8px]
                 text-[12px]"
