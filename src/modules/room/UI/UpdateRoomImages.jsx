@@ -122,7 +122,7 @@ export const UpdateRoomImages = () => {
               >
                 <div className="relative group">
                   <svg
-                    className="w-[18px] h-[18px] fill-gray-dark-3 cursor-pointer 
+                    className="w-4 h-4 fill-gray-dark-3 cursor-pointer 
                    group-hover:fill-gray-400"
                   >
                     <use href={`${sprite}#icon-info`}></use>
@@ -136,7 +136,7 @@ export const UpdateRoomImages = () => {
                     {image.additionalInfo}
                   </span>
                 </div>
-                <span className="text-lg bg-green-400s w-[140px]">
+                <span className="font-light text-lg bg-green-400s w-[140px]">
                   {image.viewType} image
                 </span>
                 {image.src && (
