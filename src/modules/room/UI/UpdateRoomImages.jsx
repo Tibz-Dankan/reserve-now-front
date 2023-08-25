@@ -106,6 +106,14 @@ export const UpdateRoomImages = () => {
     return URL.createObjectURL(blob);
   };
 
+  const capitalizeFirstLetter = (word) => {
+    if (!word) return;
+    if (typeof word !== "string" || word?.length === 0) {
+      throw new Error("Input must be a non-empty string");
+    }
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  };
+
   return (
     <Fragment>
       <div>
@@ -137,7 +145,7 @@ export const UpdateRoomImages = () => {
                   </span>
                 </div>
                 <span className="font-light text-lg bg-green-400s w-[140px]">
-                  {image.viewType} image
+                  {capitalizeFirstLetter(image.viewType)} image
                 </span>
                 {image.src && (
                   <img
