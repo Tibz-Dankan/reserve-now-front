@@ -9,7 +9,7 @@ import { ImagePicker } from "../../../shared/UI/ImagePicker";
 import { Button } from "../../../shared/UI/Button";
 import { Loader } from "../../../shared/UI/Loader";
 import { updateAddRoomStage } from "../../../store/actions/room";
-import { updateRoomImage } from "../API";
+import { addRoomImage } from "../API";
 import sprite from "../../../assets/icons/sprite.svg";
 
 export const AddRoomImages = () => {
@@ -61,7 +61,7 @@ export const AddRoomImages = () => {
   const dispatch = useDispatch();
 
   const { isLoading, data, mutate } = useMutation({
-    mutationFn: updateRoomImage,
+    mutationFn: addRoomImage,
     onSuccess: (data) => {
       dispatch(
         showCardNotification({ type: "success", message: data.message })
