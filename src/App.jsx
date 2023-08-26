@@ -10,6 +10,8 @@ import { Notification } from "./shared/UI/Notification";
 import { Rooms } from "./modules/room/pages/Rooms";
 import { Chat } from "./modules/chat/pages/Chat";
 import { socketUrl } from "./store";
+// import { useDetectReload } from "./hooks/useDetectReload";
+// import { useRedirectPrev } from "./hooks/useRedirectPrev";
 import "./App.css";
 
 export const App = () => {
@@ -17,6 +19,12 @@ export const App = () => {
   const isLoggedIn = auth.isLoggedIn;
   const socket = io.connect(socketUrl);
   const dispatch = useDispatch();
+
+  // const { isReload } = useDetectReload();
+  // console.log("isReload");
+  // console.log(isReload);
+  // const { redirectPrev } = useRedirectPrev();
+  // redirectPrev();
 
   const notification = useSelector((state) => state.notification);
 
