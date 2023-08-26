@@ -184,7 +184,7 @@ export const AddRoomImages = () => {
           {!isLoading && (
             <Button
               type="submit"
-              className="bg-gray-light-1 rounded-md px-4 font-bold"
+              className="rounded-md px-4 font-bold"
               onClick={() => uploadImages()}
             >
               Upload

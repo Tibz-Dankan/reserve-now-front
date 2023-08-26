@@ -6,40 +6,58 @@ export const RoomsTable = (props) => {
   const roomsArrayLength = rooms?.length;
   return (
     <Fragment>
-      <div className="table-container">
-        <table className="border-collapse">
+      <div className="table-container w-full flex items-center justify-center">
+        <table className="border-collapse w-full ">
           <caption>All available rooms</caption>
           <thead>
             <tr>
-              <th className="p-[4px] border border-primary-light text-gray-light-1 bg-primary-dark">
+              <th
+                className="px-2 py-4 border border-primary-light
+               text-gray-light-1 bg-primary-dark"
+              >
                 Room Type
               </th>
-              <th className="p-[4px] border border-primary-light text-gray-light-1 bg-primary-dark">
+              <th
+                className="px-2 py-4 border border-primary-light
+               text-gray-light-1 bg-primary-dark"
+              >
                 Number of guests
               </th>
-              <th className="p-[4px] border border-primary-light text-gray-light-1 bg-primary-dark">
+              <th
+                className="px-2 py-4 border border-primary-light
+               text-gray-light-1 bg-primary-dark"
+              >
                 Price for 4 days
               </th>
-              <th className="p-[4px] border border-primary-light text-gray-light-1 bg-primary-dark">
+              <th
+                className="px-2 py-4 border border-primary-light
+               text-gray-light-1 bg-primary-dark"
+              >
                 Your Choices
               </th>
-              <th className="p-[4px] border border-primary-light text-gray-light-1 bg-primary-dark">
+              <th
+                className="px-2 py-4 border border-primary-light
+               text-gray-light-1 bg-primary-dark"
+              >
                 Select Rooms
               </th>
-              <th className="p-[4px] border border-primary-light text-gray-light-1 bg-primary-dark">
+              <th
+                className="px-2 py-4 border border-primary-light
+               text-gray-light-1 bg-primary-dark"
+              >
                 {"     empty   "}
               </th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="border p-[2px] border-primary-light" rowSpan="3">
+            <tr className="h-24 ">
+              <td className="border p-2 border-primary-light " rowSpan="3">
                 Cottage King bed
               </td>
-              <td className="border p-[2px] border-primary-light">
+              <td className="border p-2 border-primary-light">
                 Number of guests
               </td>
-              <td className="border p-[2px] border-primary-light">
+              <td className="border p-2 border-primary-light">
                 Price for 4 days
               </td>
               <td className="border p-[2px] border-primary-light">
@@ -50,34 +68,6 @@ export const RoomsTable = (props) => {
               </td>
               <td className="border p-[2px] border-primary-light" rowSpan="3">
                 Reserve
-              </td>
-            </tr>
-            <tr>
-              <td className="border p-[2px] border-primary-light">
-                Number of guests
-              </td>
-              <td className="border p-[2px] border-primary-light">
-                Price for 4 days
-              </td>
-              <td className="border p-[2px] border-primary-light">
-                Your Choices
-              </td>
-              <td className="border p-[2px] border-primary-light">
-                Select Rooms
-              </td>
-            </tr>
-            <tr>
-              <td className="border p-[2px] border-primary-light">
-                Number of guests
-              </td>
-              <td className="border p-[2px] border-primary-light">
-                Price for 4 days
-              </td>
-              <td className="border p-[2px] border-primary-light">
-                Your Choices
-              </td>
-              <td className="border p-[2px] border-primary-light">
-                Select Rooms
               </td>
             </tr>
           </tbody>

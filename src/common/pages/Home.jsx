@@ -6,6 +6,7 @@ import { Footer } from "../../shared/layouts/Footer";
 import { ScrollToTop } from "../../shared/UI/ScrollToTop";
 import { Link } from "react-router-dom";
 import { AuthLayout } from "../../modules/auth/layouts/AuthLayout";
+import { RoomsTable } from "../../modules/room/UI/RoomsTable";
 
 export const Home = () => {
   return (
@@ -35,6 +36,7 @@ export const Home = () => {
           <div className="bg-gray-light-2 h-[70vh]"></div>
         </header>
         <SearchRooms />
+        <RoomsTable />
         <UniqueRoomTypes />
         <Reviews />
         <Footer />

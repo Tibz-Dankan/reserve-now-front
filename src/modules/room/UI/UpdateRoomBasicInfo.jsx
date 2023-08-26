@@ -219,10 +219,7 @@ export const UpdateRoomBasicInfo = (props) => {
             right-0 left-0 z-50 bg-gray-light-1 rounded-bl-lg rounded-br-lg"
         >
           {!isLoading && (
-            <Button
-              type="submit"
-              className="bg-gray-light-1 rounded-md font-bold"
-            >
+            <Button type="submit" className="rounded-md font-bold">
               Edit Room
             </Button>
           )}

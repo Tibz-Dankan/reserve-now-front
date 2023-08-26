@@ -165,7 +165,7 @@ export const UpdateRoomImages = () => {
                 {!isLoading && image.src && (
                   <Button
                     type="submit"
-                    className="bg-gray-light-1 rounded-md px-4 font-bold"
+                    className="rounded-md px-4 font-bold"
                     onClick={() => {
                       uploadRoomImageHandler(image.src, image.viewType),
                         setCurrentViewType(image.viewType);
