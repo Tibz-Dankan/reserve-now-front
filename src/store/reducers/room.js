@@ -5,6 +5,7 @@ const theInitialState = {
   newRoom: {},
   editRoom: {},
   deleteRoom: {},
+  searchRoomResults: { rooms: [], bookingNumberOfDays: null },
 };
 export const roomSlice = createSlice({
   name: "room",
@@ -27,6 +28,10 @@ export const roomSlice = createSlice({
     },
     updateDeleteRoom(state, action) {
       state.deleteRoom = action.payload.deleteRoom;
+      return;
+    },
+    updateSearchRoomResults(state, action) {
+      state.searchRoomResults = action.payload.searchRoomResults;
       return;
     },
     clearRoom(state) {

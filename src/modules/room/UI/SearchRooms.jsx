@@ -8,6 +8,7 @@ import {
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { searchRooms } from "../API";
+import { updateSearchRoomResults } from "../../../store/actions/room";
 import { Button } from "../../../shared/UI/Button";
 import { Loader } from "../../../shared/UI/Loader";
 import sprite from "../../../assets/icons/sprite.svg";
@@ -153,6 +154,9 @@ export const SearchRooms = () => {
 
   const { isLoading, data, mutate } = useMutation({
     mutationFn: searchRooms,
+    onSuccess: (data) => {
+      dispatch(updateSearchRoomResults(data.data));
+    },
     onError: (error) => {
       dispatch(showCardNotification({ type: "error", message: error.message }));
       setTimeout(() => {
@@ -171,8 +175,6 @@ export const SearchRooms = () => {
   };
 
   const availableRooms = data?.data;
-  console.log("rooms");
-  console.log(availableRooms);
 
   return (
     <Fragment>

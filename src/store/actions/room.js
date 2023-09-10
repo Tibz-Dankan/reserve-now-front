@@ -40,3 +40,13 @@ export const clearRoom = () => {
     dispatch(roomActions.clearRoom());
   };
 };
+
+export const updateSearchRoomResults = (searchRoomResults) => {
+  return (dispatch) => {
+    dispatch(
+      roomActions.updateSearchRoomResults({
+        searchRoomResults: searchRoomResults,
+      })
+    );
+  };
+};
