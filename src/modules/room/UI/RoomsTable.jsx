@@ -5,6 +5,7 @@ import sprite from "../../../assets/icons/sprite.svg";
 import { useSelector } from "react-redux";
 import { Button } from "../../../shared/UI/Button";
 import { IconButton } from "../../../shared/UI/IconButton";
+import { addCommasToNumber } from "../../../shared/utils/addCommasToNumber";
 
 export const RoomsTable = (props) => {
   const rooms = useSelector((state) => state.room.searchRoomResults?.rooms);
@@ -58,8 +59,6 @@ export const RoomsTable = (props) => {
     return children;
   };
 
-  // TODO: check login status onClicking the 'Book' button
-  // and display or redirect accordingly to status found
   return (
     <Fragment>
       <div
@@ -186,7 +185,7 @@ export const RoomsTable = (props) => {
                     <div>
                       <span>
                         {room.price.currency + " "}
-                        {room.price.total}
+                        {addCommasToNumber(room.price.total)}
                       </span>
                     </div>
                   </td>
@@ -244,7 +243,7 @@ export const RoomsTable = (props) => {
                         </span>
                         <span>
                           {rooms[0].price.currency + " "}{" "}
-                          {overallTotal(selectedRooms)}
+                          {addCommasToNumber(overallTotal(selectedRooms))}
                         </span>
                         {!!overallTotal(selectedRooms) && (
                           <Button className="font-bold">Book</Button>
