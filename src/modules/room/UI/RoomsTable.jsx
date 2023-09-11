@@ -3,6 +3,8 @@ import { LabelTag } from "../../../shared/UI/LabelTag";
 import { StarRating } from "../../review/UI/StarRating";
 import sprite from "../../../assets/icons/sprite.svg";
 import { useSelector } from "react-redux";
+import { Button } from "../../../shared/UI/Button";
+import { IconButton } from "../../../shared/UI/IconButton";
 
 export const RoomsTable = (props) => {
   const rooms = useSelector((state) => state.room.searchRoomResults?.rooms);
@@ -15,18 +17,26 @@ export const RoomsTable = (props) => {
   if (!rooms[0]) return;
 
   const removeFromSelectedRooms = (roomIndex) => {
-    setSelectedBeds((selectedRooms) => {
-      return selectedRooms.filter((bed, index) => index !== roomIndex);
+    setSelectedRooms((selectedRooms) => {
+      return selectedRooms.filter((room, index) => index !== roomIndex);
     });
   };
 
-  const onSelectRoomHandler = (event) => {
-    setSelectedRooms((rooms) => [...rooms, JSON.parse(event.target.value)]);
+  const onSelectRoomHandler = (room) => {
+    setSelectedRooms((rooms) => [...rooms, room]);
+  };
+
+  const hasRoomBeenSelected = (candidateRoom) => {
+    const room = selectedRooms.find((room) => {
+      return room.id === candidateRoom.id;
+    });
+    if (room?.id) return true;
+    return false;
   };
 
   const overallTotal = (selectRooms) => {
     const selectedTotalPrice = selectRooms.reduce(
-      (overallTotal, room) => overallTotal + room.total,
+      (overallTotal, room) => overallTotal + room.price?.total,
       0
     );
     return selectedTotalPrice;
@@ -48,6 +58,8 @@ export const RoomsTable = (props) => {
     return children;
   };
 
+  // TODO: check login status onClicking the 'Book' button
+  // and display or redirect accordingly to status found
   return (
     <Fragment>
       <div
@@ -59,7 +71,7 @@ export const RoomsTable = (props) => {
           <thead>
             <tr>
               <th
-                className="px-2 py-4 border border-primary-light
+                className="px-2 py-4 border border-primary
                text-gray-light-1 bg-primary-dark"
               >
                 Room Type
@@ -98,7 +110,7 @@ export const RoomsTable = (props) => {
             {rooms.map((room, index) => {
               return (
                 <tr className="h-24" key={index}>
-                  <td className="border  border-primary-light">
+                  <td className="border  border-primary">
                     <div className="flex flex-col items-start">
                       <div className="p-2 flex flex-col items-start gap-y-2">
                         <span className="font-semibold text-lg text-gray-dark-2">
@@ -116,7 +128,7 @@ export const RoomsTable = (props) => {
                             </div>
                           );
                         })}
-                        <span>Free wifi, slippers, TV</span>
+                        <span>{room.amenities}</span>
                         <div className="flex items-center gap-x-2 p-2 rounded bg-gray-light-4">
                           <span
                             className="bg-primary text-gray-light-1 flex items-center
@@ -174,7 +186,7 @@ export const RoomsTable = (props) => {
                     <div>
                       <span>
                         {room.price.currency + " "}
-                        {room.price.amount}
+                        {room.price.total}
                       </span>
                     </div>
                   </td>
@@ -195,34 +207,51 @@ export const RoomsTable = (props) => {
                     </ul>
                   </td>
                   <td className="border px-2 border-primary-light">
-                    <select
-                      value={"room object"}
-                      onChange={(event) => onSelectRoomHandler(event)}
-                      className="border-[1px] border-gray-400 focus:border-primary
-                     first-letter:focus:bg-gray-200 transition-all outline-none p-2 rounded-lg
-                     bg-gray-light-1 text-sm"
-                    >
-                      {/* <option value={JSON.stringify("room")}> */}
-                      <option>{"---select room---"}</option>
-                      <option value={JSON.stringify("room")}>
-                        {"Room total price"}
-                      </option>
-                    </select>
-                  </td>
-                  <td className="border px-2 border-primary-light">
-                    <div className="flex flex-col items-center">
-                      <span
-                        className="px-2 py-1 bg-green-700 text-gray-light-1 rounded
-                         w-full"
+                    {selectedRooms.map((selectedRoom, index) => {
+                      if (selectedRoom.id === room.id) {
+                        return (
+                          <div key={index}>
+                            <IconButton
+                              icon="cross"
+                              onClick={() => removeFromSelectedRooms(index)}
+                              label="Unselect"
+                              iconClass="w-3 h-3 fill-gray-light-2 font-bold"
+                            />
+                          </div>
+                        );
+                      }
+                    })}
+                    {!hasRoomBeenSelected(room) && (
+                      <Button
+                        className="font-bold"
+                        onClick={() => onSelectRoomHandler(room)}
                       >
-                        I'll reserve
-                      </span>
-                      {/* <span>{rooms[0].price.currency+ " "} {overallTotal(selectedRooms)}</span> */}
-                      <span>
-                        {"UGX" + " "} {"245,000"}
-                      </span>
-                    </div>
+                        Select
+                      </Button>
+                    )}
                   </td>
+                  {index === 0 && (
+                    <td
+                      className="border px-2 border-primary-light w-36 relative"
+                      rowSpan={rooms.length}
+                    >
+                      <div
+                        className="flex flex-col items-start h-full w-full gap-y-2
+                                  absolute top-2 left-2"
+                      >
+                        <span className="px-2 py-1 bg-green-700 text-gray-light-1 rounded">
+                          I'll reserve
+                        </span>
+                        <span>
+                          {rooms[0].price.currency + " "}{" "}
+                          {overallTotal(selectedRooms)}
+                        </span>
+                        {!!overallTotal(selectedRooms) && (
+                          <Button className="font-bold">Book</Button>
+                        )}
+                      </div>
+                    </td>
+                  )}
                 </tr>
               );
             })}
