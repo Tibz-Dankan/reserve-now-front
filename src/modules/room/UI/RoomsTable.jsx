@@ -2,20 +2,26 @@ import React, { Fragment, useState } from "react";
 import { LabelTag } from "../../../shared/UI/LabelTag";
 import { StarRating } from "../../review/UI/StarRating";
 import sprite from "../../../assets/icons/sprite.svg";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Button } from "../../../shared/UI/Button";
 import { IconButton } from "../../../shared/UI/IconButton";
 import { addCommasToNumber } from "../../../shared/utils/addCommasToNumber";
 import { AuthLayout } from "../../auth/layouts/AuthLayout";
 import { useNavigate, Link } from "react-router-dom";
+import { BookingLayout } from "../../booking/layout/BookingLayout";
+import { updateNewBooking } from "../../../store/actions/booking";
 
 export const RoomsTable = (props) => {
   const rooms = useSelector((state) => state.room.searchRoomResults?.rooms);
   const bookingNumberOfDays = useSelector(
     (state) => state.room.searchRoomResults?.bookingDates?.numberOfDays
   );
+  const bookingDates = useSelector(
+    (state) => state.room.searchRoomResults?.bookingDates
+  );
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [selectedRooms, setSelectedRooms] = useState([]);
   const roomsArrayLength = rooms?.length;
 
@@ -63,8 +69,17 @@ export const RoomsTable = (props) => {
     return children;
   };
 
-  const navigateToMakeBooking = () => {
-    navigate("/make-booking", { replace: true });
+  const bookingObject = {
+    checkInDate: bookingDates.checkInDate,
+    checkOutDate: bookingDates.checkOutDate,
+    numOfGuests: { children: 1, adults: 2 },
+    rooms: selectedRooms,
+    totalPrice: overallTotal(selectedRooms),
+    priceCurrency: rooms[0].price.currency,
+  };
+
+  const updateNewBookingHandler = () => {
+    dispatch(updateNewBooking(bookingObject));
   };
 
   return (
@@ -254,12 +269,9 @@ export const RoomsTable = (props) => {
                           {addCommasToNumber(overallTotal(selectedRooms))}
                         </span>
                         {!!overallTotal(selectedRooms) && isLoggedIn && (
-                          <Button
-                            className="font-bold"
-                            onClick={() => navigateToMakeBooking()}
-                          >
-                            Continue
-                          </Button>
+                          <div onClick={() => updateNewBookingHandler()}>
+                            <BookingLayout />
+                          </div>
                         )}
                         {!!overallTotal(selectedRooms) && !isLoggedIn && (
                           <div className="bg-primary-dark text-gray-200 font-bold py-1 p-2 rounded">

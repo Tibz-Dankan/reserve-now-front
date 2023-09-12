@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { twMerge } from "tailwind-merge";
 
 export const ProgressBar = (props) => {
   const generateStagesArray = () => {
@@ -34,7 +35,12 @@ export const ProgressBar = (props) => {
 
   return (
     <Fragment>
-      <div className="w-full flex items-center justify-center mb-4 mt-12">
+      <div
+        className={twMerge(
+          "w-full flex items-center justify-center mb-4 mt-12",
+          props.className
+        )}
+      >
         {stages.map((stage, index) => {
           return (
             <div key={stage}>
