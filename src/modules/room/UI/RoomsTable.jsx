@@ -10,7 +10,7 @@ import { addCommasToNumber } from "../../../shared/utils/addCommasToNumber";
 export const RoomsTable = (props) => {
   const rooms = useSelector((state) => state.room.searchRoomResults?.rooms);
   const bookingNumberOfDays = useSelector(
-    (state) => state.room.searchRoomResults?.bookingNumberOfDays
+    (state) => state.room.searchRoomResults?.bookingDates?.numberOfDays
   );
   const [selectedRooms, setSelectedRooms] = useState([]);
   const roomsArrayLength = rooms?.length;
