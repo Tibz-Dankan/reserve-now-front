@@ -6,12 +6,16 @@ import { useSelector } from "react-redux";
 import { Button } from "../../../shared/UI/Button";
 import { IconButton } from "../../../shared/UI/IconButton";
 import { addCommasToNumber } from "../../../shared/utils/addCommasToNumber";
+import { AuthLayout } from "../../auth/layouts/AuthLayout";
+import { useNavigate, Link } from "react-router-dom";
 
 export const RoomsTable = (props) => {
   const rooms = useSelector((state) => state.room.searchRoomResults?.rooms);
   const bookingNumberOfDays = useSelector(
     (state) => state.room.searchRoomResults?.bookingDates?.numberOfDays
   );
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const navigate = useNavigate();
   const [selectedRooms, setSelectedRooms] = useState([]);
   const roomsArrayLength = rooms?.length;
 
@@ -57,6 +61,10 @@ export const RoomsTable = (props) => {
       children.push(i);
     }
     return children;
+  };
+
+  const navigateToMakeBooking = () => {
+    navigate("/make-booking", { replace: true });
   };
 
   return (
@@ -245,8 +253,18 @@ export const RoomsTable = (props) => {
                           {rooms[0].price.currency + " "}{" "}
                           {addCommasToNumber(overallTotal(selectedRooms))}
                         </span>
-                        {!!overallTotal(selectedRooms) && (
-                          <Button className="font-bold">Book</Button>
+                        {!!overallTotal(selectedRooms) && isLoggedIn && (
+                          <Button
+                            className="font-bold"
+                            onClick={() => navigateToMakeBooking()}
+                          >
+                            Continue
+                          </Button>
+                        )}
+                        {!!overallTotal(selectedRooms) && !isLoggedIn && (
+                          <div className="bg-primary-dark text-gray-200 font-bold py-1 p-2 rounded">
+                            <AuthLayout label="continue" />
+                          </div>
                         )}
                       </div>
                     </td>
