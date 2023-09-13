@@ -37,6 +37,10 @@ export const Modal = (props) => {
     return <div onClick={() => onOpenHandler()}>{props.openModalElement}</div>;
   }
 
+  const onModalClose = () => {
+    props.onModalClose(true);
+  };
+
   const createAppendPortalElement = () => {
     const portalElement = document.createElement("div");
     portalElement.setAttribute("id", "portal");
@@ -49,10 +53,16 @@ export const Modal = (props) => {
     <Fragment>
       {ReactDOM.createPortal(
         <div>
-          <ModalOverlay onClose={() => onCloseHandler()} />
+          <ModalOverlay
+            onClose={() => {
+              onCloseHandler(), onModalClose();
+            }}
+          />
           <ModalContent
             content={props.children}
-            onClose={() => onCloseHandler()}
+            onClose={() => {
+              onCloseHandler(), onModalClose();
+            }}
             className={props?.className}
           />
         </div>,

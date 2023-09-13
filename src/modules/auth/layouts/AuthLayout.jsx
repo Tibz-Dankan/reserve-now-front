@@ -9,7 +9,15 @@ import { firstLetterToUppercase } from "../../../shared/utils/firstLetterToUpper
 export const AuthLayout = (props) => {
   const [label, setLabel] = useState(props?.label ? props.label : "signin");
 
+  const defaultLabel = props?.label;
   const [propsLabel, setPropsLabel] = useState(props?.label);
+  const [modalClosed, setModalClosed] = useState(false);
+
+  const modalCloseHandler = (modalState) => {
+    if (modalState) {
+      setModalClosed((modalState) => !modalState);
+    }
+  };
 
   const labelHandler = (label) => {
     console.log("Label updated from the child component");
@@ -32,14 +40,22 @@ export const AuthLayout = (props) => {
     },
   ];
 
+  // useEffect(() => {
+  //   return () => {
+  //     console.log("Unmounting");
+  //     console.log("label on closing the modal");
+  //     console.log(propsLabel);
+  //     setLabel(propsLabel);
+  //   };
+  // }, []);
+
   useEffect(() => {
+    setLabel(defaultLabel);
+
     return () => {
-      console.log("Unmounting");
-      console.log("label on closing the modal");
-      console.log(propsLabel);
-      setLabel(propsLabel);
+      setLabel(defaultLabel);
     };
-  }, []);
+  }, [modalClosed, setLabel, defaultLabel]);
 
   return (
     <Fragment>
@@ -49,6 +65,7 @@ export const AuthLayout = (props) => {
             {firstLetterToUppercase(label)}
           </span>
         }
+        onModalClose={modalCloseHandler}
         className="fixed top-[15vh] left-1/2 -translate-x-1/2 -translate-y-1/2
         w-[540px] md:left-[15%] md:w-[540px] xl:left-[20%] xl:w-[540px] transition-all"
       >
