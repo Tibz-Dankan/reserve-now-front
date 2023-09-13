@@ -40,6 +40,7 @@ export const AddRoomLayout = () => {
               New Room
             </Button>
           }
+          onModalClose={() => {}}
           className="top-8"
         >
           <div

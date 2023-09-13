@@ -10,6 +10,7 @@ export const DeleteRoomLayout = () => {
     <Fragment>
       <Modal
         openModalElement={<span className="cursor-pointer">Delete room</span>}
+        onModalClose={() => {}}
         className="top-8"
       >
         <div

@@ -48,6 +48,7 @@ export const UpdateRoomLayout = () => {
       <div>
         <Modal
           openModalElement={<span className="cursor-pointer">Edit room</span>}
+          onModalClose={() => {}}
           className="top-8"
         >
           <div

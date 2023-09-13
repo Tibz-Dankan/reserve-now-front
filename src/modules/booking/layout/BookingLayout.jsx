@@ -33,6 +33,7 @@ export const BookingLayout = () => {
               Continue
             </Button>
           }
+          onModalClose={() => {}}
           className="top-8"
         >
           <div
