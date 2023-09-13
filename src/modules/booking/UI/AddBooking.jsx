@@ -3,6 +3,7 @@ import { Button } from "../../../shared/UI/Button";
 import roomImage from "../../../assets/Images/room1.png";
 import { useSelector } from "react-redux";
 import { addCommasToNumber } from "../../../shared/utils/addCommasToNumber";
+import { timeToCome } from "../../../shared/utils/timeToCome";
 
 export const AddBooking = () => {
   const booking = useSelector((state) => state.booking.newBooking);
@@ -21,8 +22,9 @@ export const AddBooking = () => {
               font-normal border-[1px] border-gray-opacity shadow-sm"
         >
           <p>
-            <span>Starts in</span>
-            <span className="ml-2">{"2"} days</span>
+            <span>Starts</span>
+            {/* <span className="ml-2">{"2"} days</span> */}
+            <span className="ml-2">{timeToCome(booking.checkInDate)}</span>
           </p>
           <p>
             <span>Check-in :</span>

@@ -12,7 +12,7 @@ import { updateSearchRoomResults } from "../../../store/actions/room";
 import { Button } from "../../../shared/UI/Button";
 import { Loader } from "../../../shared/UI/Loader";
 import sprite from "../../../assets/icons/sprite.svg";
-import { RoomsTable } from "./RoomsTable";
+import { AppDate } from "../../../shared/utils/appDate";
 
 export const SearchRooms = () => {
   let [checkInDate, setCheckInDate] = useState(new Date());
@@ -152,7 +152,7 @@ export const SearchRooms = () => {
     }
   };
 
-  const { isLoading, data, mutate } = useMutation({
+  const { isLoading, mutate } = useMutation({
     mutationFn: searchRooms,
     onSuccess: (data) => {
       dispatch(updateSearchRoomResults(data.data));
@@ -169,12 +169,10 @@ export const SearchRooms = () => {
     event.preventDefault();
     dateErrorHandler();
     guestErrorHandler();
-    checkInDate = new Date(checkInDate).toISOString();
-    checkOutDate = new Date(checkOutDate).toISOString();
+    checkInDate = new AppDate(checkInDate).construct();
+    checkOutDate = new AppDate(checkOutDate).construct();
     mutate({ checkInDate, checkOutDate, adults, children, childAge, rooms });
   };
-
-  const availableRooms = data?.data;
 
   return (
     <Fragment>
@@ -365,7 +363,6 @@ export const SearchRooms = () => {
             </div>
           )}
         </div>
-        {/* <RoomsTable /> */}
       </div>
     </Fragment>
   );
