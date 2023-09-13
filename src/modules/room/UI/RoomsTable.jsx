@@ -75,11 +75,12 @@ export const RoomsTable = (props) => {
   const bookingObject = {
     checkInDate: bookingDates.checkInDate,
     checkOutDate: bookingDates.checkOutDate,
-    // numOfGuests: { children: 1, adults: 2 },
     numOfGuests: numOfGuests,
     rooms: selectedRooms,
-    totalPrice: overallTotal(selectedRooms),
-    priceCurrency: rooms[0].price.currency,
+    price: {
+      total: overallTotal(selectedRooms),
+      currency: rooms[0].price.currency,
+    },
   };
 
   const updateNewBookingHandler = () => {
