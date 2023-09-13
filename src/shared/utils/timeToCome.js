@@ -37,7 +37,6 @@ export const timeToCome = (dateStr) => {
   }
 
   if (millSecDiff < oneWeekMillSec) {
-    console.log("days(millSecDiff)", days(millSecDiff));
     if (days(millSecDiff) === 1) {
       return new AppDate(dateStr).day();
     }

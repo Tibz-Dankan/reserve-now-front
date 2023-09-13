@@ -18,7 +18,6 @@ export const AddBooking = () => {
   const userId = useSelector((state) => state.auth.user.id);
   const token = useSelector((state) => state.auth.token);
   const booking = useSelector((state) => state.booking.newBooking);
-  console.log("booking", booking);
   const dispatch = useDispatch();
 
   const date = (date) => new Date(date).toDateString();
