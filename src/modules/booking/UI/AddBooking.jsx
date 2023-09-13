@@ -11,7 +11,8 @@ export const AddBooking = () => {
 
   const date = (date) => new Date(date).toDateString();
   const numOfGuests =
-    booking.numOfGuests?.adults + booking.numOfGuests?.children;
+    parseInt(booking.numOfGuests?.adults) +
+    parseInt(booking.numOfGuests?.children);
 
   // making request here
   return (

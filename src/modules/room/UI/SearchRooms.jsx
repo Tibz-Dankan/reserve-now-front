@@ -20,7 +20,7 @@ export const SearchRooms = () => {
   const [adults, setAdults] = useState(1);
   const [children, setChildren] = useState(0);
   const [childrenArray, setChildrenArray] = useState([]);
-  const [childAge, setChildAge] = useState([]);
+  const [childrenAge, setChildrenAge] = useState([]);
   const [rooms, setRooms] = useState(1);
   const [showCheckInPlaceholder, setShowCheckInPlaceholder] = useState(true);
   const [showCheckOutPlaceholder, setShowCheckOutPlaceholder] = useState(true);
@@ -79,9 +79,9 @@ export const SearchRooms = () => {
     const removeLastChildAge = () => {
       const newChildAge = [];
       for (let index = 0; index < children; index++) {
-        newChildAge.push(childAge[index]);
+        newChildAge.push(childrenAge[index]);
       }
-      setChildAge(newChildAge);
+      setChildrenAge(newChildAge);
     };
     removeLastChildAge();
   }, [isRemoveLastAge]);
@@ -92,14 +92,14 @@ export const SearchRooms = () => {
     const selectedValue = event.target.value;
     eachChildAge[`${selectedId}`] = selectedValue;
 
-    if (!childAge[0]) {
-      setChildAge([eachChildAge]);
+    if (!childrenAge[0]) {
+      setChildrenAge([eachChildAge]);
       return;
     }
     let childAgeArr = [];
     let isChildAgePresent = false;
 
-    childAge.map((childAg) => {
+    childrenAge.map((childAg) => {
       const currProp = Object.keys(childAg)[0];
       if (currProp === selectedId) {
         childAg[currProp] = selectedValue;
@@ -109,7 +109,7 @@ export const SearchRooms = () => {
     });
     if (isChildAgePresent) return;
     childAgeArr.push(eachChildAge);
-    setChildAge(childAgeArr);
+    setChildrenAge(childAgeArr);
   };
 
   const dateErrorHandler = () => {
@@ -135,7 +135,7 @@ export const SearchRooms = () => {
     let error = null;
     if (adults < 1) error = "Adults must at least be 1";
     if (rooms < 1) error = "Rooms must at least be 1";
-    if (children >= 1 && childAge === null) {
+    if (children >= 1 && childrenAge === null) {
       error = "Child's age must be provided";
     }
     if (error) {
@@ -152,7 +152,7 @@ export const SearchRooms = () => {
     }
   };
 
-  const { isLoading, mutate } = useMutation({
+  const { isLoading, mutate, data } = useMutation({
     mutationFn: searchRooms,
     onSuccess: (data) => {
       dispatch(updateSearchRoomResults(data.data));
@@ -171,7 +171,14 @@ export const SearchRooms = () => {
     guestErrorHandler();
     checkInDate = new AppDate(checkInDate).construct();
     checkOutDate = new AppDate(checkOutDate).construct();
-    mutate({ checkInDate, checkOutDate, adults, children, childAge, rooms });
+    mutate({
+      checkInDate: checkInDate,
+      checkOutDate: checkOutDate,
+      adults: adults,
+      children: children,
+      childrenAge: JSON.stringify(childrenAge),
+      rooms: rooms,
+    });
   };
 
   return (
@@ -309,8 +316,8 @@ export const SearchRooms = () => {
                     <div key={index} className="w-full">
                       <select
                         onChange={(event) => childAgeHandler(event)}
-                        value={childAge[index + 1]}
-                        defaultValue={childAge[index + 1]}
+                        value={childrenAge[index + 1]}
+                        defaultValue={childrenAge[index + 1]}
                         id={`child${index + 1}`}
                       >
                         <option>Age is needed</option>

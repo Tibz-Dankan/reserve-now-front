@@ -207,12 +207,12 @@ export const searchRooms = async ({
   checkOutDate,
   adults,
   children,
-  childAge,
+  childrenAge,
   rooms,
 }) => {
   const response = await fetch(
     `${url}/rooms/search-rooms?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}
-    &adults=${adults}&children=${children}&childAge=${childAge}&rooms=${rooms}`,
+    &adults=${adults}&children=${children}&childrenAge=${childrenAge}&rooms=${rooms}`,
     {
       method: "GET",
       headers: {

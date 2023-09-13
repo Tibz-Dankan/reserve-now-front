@@ -19,6 +19,9 @@ export const RoomsTable = (props) => {
   const bookingDates = useSelector(
     (state) => state.room.searchRoomResults?.bookingDates
   );
+  const numOfGuests = useSelector(
+    (state) => state.room.searchRoomResults?.numOfGuests
+  );
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -72,7 +75,8 @@ export const RoomsTable = (props) => {
   const bookingObject = {
     checkInDate: bookingDates.checkInDate,
     checkOutDate: bookingDates.checkOutDate,
-    numOfGuests: { children: 1, adults: 2 },
+    // numOfGuests: { children: 1, adults: 2 },
+    numOfGuests: numOfGuests,
     rooms: selectedRooms,
     totalPrice: overallTotal(selectedRooms),
     priceCurrency: rooms[0].price.currency,
@@ -81,6 +85,8 @@ export const RoomsTable = (props) => {
   const updateNewBookingHandler = () => {
     dispatch(updateNewBooking(bookingObject));
   };
+
+  // TODO: validate the number of guests against room capacity of selected rooms
 
   return (
     <Fragment>
