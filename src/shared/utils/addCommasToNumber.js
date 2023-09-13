@@ -2,8 +2,6 @@ export const addCommasToNumber = (number) => {
   const numberString = number.toString();
 
   const numberArray = numberString.split("");
-  console.log("numberArray");
-  console.log(numberArray);
 
   let formattedNumber = "";
 
