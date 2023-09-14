@@ -4,6 +4,7 @@ import { Button } from "../../../shared/UI/Button";
 import { ProgressBar } from "../../../shared/UI/ProgressBar";
 import { useSelector, useDispatch } from "react-redux";
 import { AddBooking } from "../UI/AddBooking";
+import { BillingAggregator } from "../../billing/UI/BillingAggregator";
 
 export const BookingLayout = () => {
   const bookingStage = useSelector((state) => state.booking.bookingStage);
@@ -50,10 +51,13 @@ export const BookingLayout = () => {
           <ProgressBar
             stageNum={3}
             stageLabelList={stageLabelList}
-            currentStage={bookingStage}
+            // currentStage={bookingStage}
+            currentStage={2}
             className="mt-8 mb-0 bg-green-500s"
           />
-          {bookingStage === 1 && <AddBooking />}
+          {bookingStage === 4 && <AddBooking />}
+          {/* {bookingStage === 2 && <BillingAggregator />} */}
+          {2 === 2 && <BillingAggregator />}
         </Modal>
       </div>
     </Fragment>
