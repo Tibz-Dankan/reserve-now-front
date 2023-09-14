@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { CreditCardBilling } from "./CreditCardBilling";
+import { MobileMoneyBilling } from "./MobileMoneyBilling";
 
 export const BillingAggregator = () => {
   const [label, setLabel] = useState("");
@@ -17,7 +18,7 @@ export const BillingAggregator = () => {
     },
     {
       label: "mobilemoney",
-      component: <div>Money money billing form</div>,
+      component: <MobileMoneyBilling onUpdateLabel={labelHandler} />,
     },
     {
       label: "onsite",
