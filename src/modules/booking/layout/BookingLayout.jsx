@@ -51,13 +51,12 @@ export const BookingLayout = () => {
           <ProgressBar
             stageNum={3}
             stageLabelList={stageLabelList}
-            // currentStage={bookingStage}
-            currentStage={2}
+            currentStage={bookingStage}
             className="mt-8 mb-0 bg-green-500s"
           />
-          {bookingStage === 4 && <AddBooking />}
-          {/* {bookingStage === 2 && <BillingAggregator />} */}
-          {2 === 2 && <BillingAggregator />}
+          {bookingStage === 1 && <AddBooking />}
+          {bookingStage === 2 && <BillingAggregator />}
+          {bookingStage === 3 && <div>Confirm booking</div>}
         </Modal>
       </div>
     </Fragment>

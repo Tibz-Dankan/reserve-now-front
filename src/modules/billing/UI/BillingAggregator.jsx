@@ -1,6 +1,8 @@
 import React, { Fragment, useState } from "react";
 import { CreditCardBilling } from "./CreditCardBilling";
 import { MobileMoneyBilling } from "./MobileMoneyBilling";
+import { useDispatch } from "react-redux";
+import { updateBookingStage } from "../../../store/actions/booking";
 
 export const BillingAggregator = () => {
   const [label, setLabel] = useState("");
@@ -25,6 +27,13 @@ export const BillingAggregator = () => {
       component: <div>pay onsite</div>,
     },
   ];
+
+  const dispatch = useDispatch();
+
+  const updateBooingStageHandler = () => {
+    dispatch(updateBookingStage(3));
+  };
+
   return (
     <Fragment>
       <div>
@@ -53,7 +62,7 @@ export const BillingAggregator = () => {
             <div className="bg-gray-light-3 p-4 rounded-md">
               <div
                 className="space-x-4 cursor-pointer"
-                onClick={() => labelHandler("onsite")}
+                onClick={() => updateBooingStageHandler()}
               >
                 <input type="radio" className="cursor-pointer" />
                 <label htmlFor="payOnSite" className="cursor-pointer">
